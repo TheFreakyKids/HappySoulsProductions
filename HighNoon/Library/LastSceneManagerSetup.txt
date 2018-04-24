@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/NotJesusProject/Scenes/Main.unity
+- path: Assets/JesusStuff/AltDemo.unity
   isLoaded: 1
   isActive: 1

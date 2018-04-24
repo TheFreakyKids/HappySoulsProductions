@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class SixShooter : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class SixShooter : MonoBehaviour
     {
         shotTimer += Time.deltaTime;
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f);
-        if (Input.GetKeyDown(KeyCode.R))
+        if (CrossPlatformInputManager.GetButtonDown("Fire2"))//xbutton
         {
             Reload();
         }
@@ -26,7 +27,7 @@ public class SixShooter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetAxis("Fire1") == -1) //right trigger
         {
             Shoot();
         }
@@ -34,7 +35,9 @@ public class SixShooter : MonoBehaviour
 
     private void Reload()
     {
+        Debug.Log("reloading");
         ammoCount = 6;
+        Debug.Log("loaded");
     }
 
     private void Shoot()
@@ -54,6 +57,10 @@ public class SixShooter : MonoBehaviour
 
             ammoCount -= 1;
             shotTimer = 0f;
+        }
+        if (ammoCount == 0)
+        {
+            Debug.Log("gun empty");
         }
     }
 }

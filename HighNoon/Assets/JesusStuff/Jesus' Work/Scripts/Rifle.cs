@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Rifle : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Rifle : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if(CrossPlatformInputManager.GetButtonDown("Fire2"))//xbutton
         {
             Reload();
         }
@@ -20,7 +21,7 @@ public class Rifle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetAxis("Fire1") == -1)
         {
             Shoot();
         }
