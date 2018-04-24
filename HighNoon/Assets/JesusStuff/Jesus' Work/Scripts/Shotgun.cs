@@ -46,6 +46,7 @@ public class Shotgun : MonoBehaviour
         if (shotTimer == shotWaitPeriod && ammoCount > 0)
         {
             gunFX.Play();
+            //SoundManager.instance.Play(shotgun fire, "sfx");
             int i = 0;
             foreach (Quaternion quat in pellets)
             {
@@ -63,6 +64,7 @@ public class Shotgun : MonoBehaviour
 
     private void Reload()
     {
+        //SoundManager.instance.Play(shotgun load, "sfx");
         ammoCount = 2;
     }
 }

@@ -36,6 +36,7 @@ public class SixShooter : MonoBehaviour
     private void Reload()
     {
         Debug.Log("reloading");
+        //SoundManager.instance.Play(revolver load, "sfx");
         ammoCount = 6;
         Debug.Log("loaded");
     }
@@ -48,7 +49,7 @@ public class SixShooter : MonoBehaviour
             //bullet.GetComponent<Rigidbody>().AddForce(barrelExit.transform.forward * shotVelocity);
 
             gunFX.Play();
-
+            //SoundManager.instance.Play(revolver fire, "sfx");
             RaycastHit hit;
             if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {

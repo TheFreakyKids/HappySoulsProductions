@@ -29,6 +29,7 @@ public class Rifle : MonoBehaviour
 
     private void Reload()
     {
+        //SoundManager.instance.Play(rifle load, "sfx");
         ammoCount = 1;
     }
 
@@ -37,7 +38,7 @@ public class Rifle : MonoBehaviour
         if (ammoCount > 0)
         {
             gunFX.Play();
-
+            //SoundManager.instance.Play(rifle fire, "sfx");
             RaycastHit hit;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
