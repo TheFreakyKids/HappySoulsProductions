@@ -10,6 +10,9 @@ public class SixShooter : MonoBehaviour
     public float shotTimer = .5f;
     public float shotWaitPeriod = .5f;
 
+    public AudioClip revolverShot;
+    public AudioClip revolverLoad;
+    public AudioClip revolverDryFire;
     //public GameObject revolverBullet;
     //public Transform barrelExit;
     public Camera fpsCam;
@@ -35,10 +38,8 @@ public class SixShooter : MonoBehaviour
 
     private void Reload()
     {
-        Debug.Log("reloading");
-        //SoundManager.instance.Play(revolver load, "sfx");
+        SoundManager.instance.Play(revolverLoad, "sfx");
         ammoCount = 6;
-        Debug.Log("loaded");
     }
 
     private void Shoot()
@@ -49,7 +50,7 @@ public class SixShooter : MonoBehaviour
             //bullet.GetComponent<Rigidbody>().AddForce(barrelExit.transform.forward * shotVelocity);
 
             gunFX.Play();
-            //SoundManager.instance.Play(revolver fire, "sfx");
+            SoundManager.instance.Play(revolverShot, "sfx");
             RaycastHit hit;
             if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
@@ -59,8 +60,9 @@ public class SixShooter : MonoBehaviour
             ammoCount -= 1;
             shotTimer = 0f;
         }
-        if (ammoCount == 0)
+        else if (shotTimer == shotWaitPeriod && ammoCount == 0)
         {
+            SoundManager.instance.Play(revolverDryFire, "sfx");
             Debug.Log("gun empty");
         }
     }

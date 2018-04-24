@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DoorOpening : MonoBehaviour
 {
-    [SerializeField] private float doorOpenAngle = 90.0f;
+    [SerializeField] private float doorOpenAngle = -90.0f;
     [SerializeField] private float doorCloseAngle = 0.0f;
     [SerializeField] private float doorAnimSpeed = 4.0f;
     [SerializeField] private Quaternion doorOpen;
@@ -23,7 +23,7 @@ public class DoorOpening : MonoBehaviour
     void Update()
     {
         //If press F key on keyboard
-        if (Input.GetKeyDown(KeyCode.E) && !doorIsMoving)
+        if (Input.GetButtonDown("Interact") && !doorIsMoving)
         {
             //Calculate distance between player and door
             if (Vector3.Distance(playerTrans.position, transform.position) < 4f)

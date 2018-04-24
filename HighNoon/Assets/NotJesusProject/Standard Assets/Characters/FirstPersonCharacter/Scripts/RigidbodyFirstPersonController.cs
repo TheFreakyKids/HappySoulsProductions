@@ -43,8 +43,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					CurrentTargetSpeed = ForwardSpeed;
 				}
 #if !MOBILE_INPUT
-	            if (CrossPlatformInputManager.GetButton("Fire3"))//click left stick
+	            if (CrossPlatformInputManager.GetButton("Cancel"))//click left stick
 	            {
+                    Debug.Log("im fast as fuck boi");
 		            CurrentTargetSpeed *= RunMultiplier;
 		            m_Running = true;
 	            }

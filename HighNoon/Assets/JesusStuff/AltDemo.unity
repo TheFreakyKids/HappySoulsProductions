@@ -10409,7 +10409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorOpenAngle: 90
+  doorOpenAngle: -90
   doorCloseAngle: 0
   doorAnimSpeed: 3
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
@@ -103631,6 +103631,9 @@ MonoBehaviour:
   shotVelocity: 1
   shotTimer: 0.5
   shotWaitPeriod: 0.5
+  revolverShot: {fileID: 8300000, guid: 6bfccd1f5ddcdab4ca6f06a396be70c7, type: 3}
+  revolverLoad: {fileID: 8300000, guid: ba6bc5444f870a642bb00b2b6c0f2bbb, type: 3}
+  revolverDryFire: {fileID: 8300000, guid: 2f54f11b0e0a16b41a6b0d3640a62b9e, type: 3}
   fpsCam: {fileID: 448468398}
   gunFX: {fileID: 593827245}
 --- !u!1001 &2045941892
