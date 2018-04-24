@@ -10,6 +10,11 @@ public class Shotgun : MonoBehaviour
     public float pelletVelocity = 1f;
     public float shotTimer = .5f;
     public float shotWaitPeriod = .5f;
+    public bool triggerPulled = false;
+
+    public AudioClip shotgunShot;
+    public AudioClip shotgunLoad;
+    public AudioClip shotgunDryFire;
 
     public GameObject pellet;
     public Transform barrelExit;
@@ -27,8 +32,16 @@ public class Shotgun : MonoBehaviour
 	
 	private void FixedUpdate ()
     {
-		if(Input.GetAxis("Fire1") == -1)
+		if(Input.GetAxis("Fire1") == -1 && triggerPulled == false)
+        {
+            triggerPulled = true;
             Shoot();
+        }
+        if(Input.GetAxis("Fire1") == 0)
+        {
+            triggerPulled = false;
+        }
+            
 	}
 
     private void Update()
@@ -46,7 +59,7 @@ public class Shotgun : MonoBehaviour
         if (shotTimer == shotWaitPeriod && ammoCount > 0)
         {
             gunFX.Play();
-            //SoundManager.instance.Play(shotgun fire, "sfx");
+            SoundManager.instance.Play(shotgunShot, "sfx");
             int i = 0;
             foreach (Quaternion quat in pellets)
             {
@@ -60,11 +73,15 @@ public class Shotgun : MonoBehaviour
             ammoCount -= 1;
             shotTimer = 0f;
         }
+        if(ammoCount == 0)
+        {
+            SoundManager.instance.Play(shotgunDryFire, "sfx");
+        }
     }
 
     private void Reload()
     {
-        //SoundManager.instance.Play(shotgun load, "sfx");
+        SoundManager.instance.Play(shotgunLoad, "sfx");
         ammoCount = 2;
     }
 }

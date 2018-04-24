@@ -9,7 +9,7 @@ public class SixShooter : MonoBehaviour
     public float shotVelocity = 1f;
     public float shotTimer = .5f;
     public float shotWaitPeriod = .5f;
-
+    public bool triggerPulled = false;
     public AudioClip revolverShot;
     public AudioClip revolverLoad;
     public AudioClip revolverDryFire;
@@ -30,9 +30,14 @@ public class SixShooter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetAxis("Fire1") == -1) //right trigger
+        if (Input.GetAxis("Fire1") == -1 && triggerPulled == false) //right trigger
         {
+            triggerPulled = true;
             Shoot();
+        }
+        if (Input.GetAxis("Fire1") == 0)
+        {
+            triggerPulled = false;
         }
     }
 
