@@ -26565,6 +26565,82 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &511342045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 511342046}
+  - component: {fileID: 511342048}
+  - component: {fileID: 511342047}
+  m_Layer: 5
+  m_Name: Disclaimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &511342046
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 511342045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2085831150}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 40, y: 176}
+  m_SizeDelta: {x: 459.8, y: 54.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &511342047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 511342045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 1, b: 0.13103461, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 22
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Sound effects are placeholder for debugging
+
+    Animations not done yet'
+--- !u!222 &511342048
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 511342045}
 --- !u!1001 &511532212
 Prefab:
   m_ObjectHideFlags: 0
@@ -42524,6 +42600,25 @@ GameObject:
   m_PrefabParentObject: {fileID: 1510298145654636, guid: b32c7959973c2cc489a5a0fcec92c87a,
     type: 2}
   m_PrefabInternal: {fileID: 2137711617}
+--- !u!114 &832741752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832741750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!54 &832741754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58166,6 +58261,25 @@ GameObject:
   m_PrefabParentObject: {fileID: 1600642932227374, guid: b32c7959973c2cc489a5a0fcec92c87a,
     type: 2}
   m_PrefabInternal: {fileID: 2137711617}
+--- !u!114 &1144238305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1144238303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!54 &1144238307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -59821,8 +59935,20 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &1170667035
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1170667030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3198127, y: 2.1254704, z: 0.18666258}
+  m_Center: {x: -0.6599067, y: 1.062735, z: 0.00000008568168}
 --- !u!1 &1172028236 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1150975052104182, guid: 827cdc91ce656b54e907953e440024d0,
@@ -106133,6 +106259,7 @@ RectTransform:
   m_Children:
   - {fileID: 921123471}
   - {fileID: 1046877221}
+  - {fileID: 511342046}
   m_Father: {fileID: 1783218850}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

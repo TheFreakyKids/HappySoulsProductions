@@ -18,7 +18,7 @@ public class Rifle : MonoBehaviour
 
     private void Update()
     {
-        if(CrossPlatformInputManager.GetButtonDown("Fire2"))//xbutton
+        if(CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount == 0)//xbutton
         {
             Reload();
         }

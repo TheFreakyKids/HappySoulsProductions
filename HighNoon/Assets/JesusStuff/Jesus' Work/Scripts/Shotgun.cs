@@ -48,7 +48,7 @@ public class Shotgun : MonoBehaviour
     {
         shotTimer += Time.deltaTime;
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f);
-        if (CrossPlatformInputManager.GetButtonDown("Fire2"))//xbutton
+        if (CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount == 0)//xbutton
         {
             Reload();
         }
