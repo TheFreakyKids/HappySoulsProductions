@@ -26,7 +26,7 @@ public class DoorOpening : MonoBehaviour
         if (Input.GetButtonDown("Interact") && !doorIsMoving)
         {
             //Calculate distance between player and door
-            if (Vector3.Distance(playerTrans.position, transform.position) < 4f)
+            if (Vector3.Distance(playerTrans.position, transform.position) < 2f)
             {
                 if (isClosed)
                 { //close door

@@ -5645,6 +5645,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &135356417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 135356412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &136021726 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1944271604671112, guid: e72121a7df4802c4ab486fd94cb370ed,
@@ -10116,6 +10135,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &235362558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235362553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &235533470 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1693800019329136, guid: 13d19b99c4efdfb428c9da6581814044,
@@ -13872,6 +13910,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &318644031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 318644026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &318918530 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1100369024477680, guid: 4cc83654552e4a44d8e806ac44a804b9,
@@ -20489,6 +20546,16 @@ Prefab:
     - target: {fileID: 4834610953218608, guid: 4c0a6c32046ed854ba3a479b3cb5b830, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64296296546588930, guid: 4c0a6c32046ed854ba3a479b3cb5b830,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64296296546588930, guid: 4c0a6c32046ed854ba3a479b3cb5b830,
+        type: 2}
+      propertyPath: m_InflateMesh
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c0a6c32046ed854ba3a479b3cb5b830, type: 2}
@@ -27976,6 +28043,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &555343890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 555343885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1001 &556764557
 Prefab:
   m_ObjectHideFlags: 0
@@ -29589,6 +29675,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &593829846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593829841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1001 &594453085
 Prefab:
   m_ObjectHideFlags: 0
@@ -32661,6 +32766,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &644549132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 644549127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &646769776 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1129877470084354, guid: 67ad500920d899f4a8b4ac0b7cab9eee,
@@ -38587,6 +38711,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &752456876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 752456871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &753528689 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1667497959741122, guid: e7578350df46f804b815d550b0b861bf,
@@ -39092,6 +39235,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &763036659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763036654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1001 &763110697
 Prefab:
   m_ObjectHideFlags: 0
@@ -43862,6 +44024,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &866707212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 866707207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &867369417 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1044860746762504, guid: d17cbb77ffadd914aaed38b8e3c3037d,
@@ -47896,6 +48077,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 64294223105637600, guid: 6030f1470716fd647a84adb4933d4518,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6030f1470716fd647a84adb4933d4518, type: 2}
   m_IsPrefabParent: 0
@@ -48412,6 +48598,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &958748033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 958748028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &960065988 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1818209262835300, guid: 27359732a6cf128469a884754abfa7ae,
@@ -49484,6 +49689,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &984477733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 984477728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &984860979 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1992941925808308, guid: e3dc28775b6601d4db8b54c23e2cfcf7,
@@ -51588,6 +51812,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1022660068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022660063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1001 &1023390325
 Prefab:
   m_ObjectHideFlags: 0
@@ -58286,6 +58529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedWeapon: 0
+  hasSwitched: 0
 --- !u!1001 &1151176426
 Prefab:
   m_ObjectHideFlags: 0
@@ -65181,6 +65425,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1301246316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1301246311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &1301275713 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1194512102497620, guid: ffa07e3583b855246941e709137f6eea,
@@ -73973,6 +74236,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1469381563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469381558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1001 &1470267812
 Prefab:
   m_ObjectHideFlags: 0
@@ -90603,6 +90885,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1767995148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1767995143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1001 &1768414101
 Prefab:
   m_ObjectHideFlags: 0
@@ -92648,6 +92949,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1799754633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1799754628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &1800151667 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1749112667620164, guid: 1a2959501c5209447801528087b46ffc,
@@ -94519,6 +94839,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1844345724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844345719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &1844743020 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1325221812228552, guid: 374dab7bf8d35714d995d7ae3744728b,
@@ -108494,6 +108833,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2139553418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139553413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
 --- !u!1 &2139829426 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1491101567614540, guid: e35b608308de57746b8a7cea43fc068a,

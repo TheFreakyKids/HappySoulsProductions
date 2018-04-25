@@ -3,6 +3,7 @@
 public class WeaponSwapping : MonoBehaviour
 {
     [SerializeField] private int selectedWeapon = 0;
+    public bool hasSwitched = false;
 
 	void Start ()
     {
@@ -13,19 +14,36 @@ public class WeaponSwapping : MonoBehaviour
     {
         int previousSelectedWeapon = selectedWeapon;
 
-        if (Input.GetAxis("WeaponSwitch") > 0f)
+        if (Input.GetAxis("WeaponSwitch") > 0f && hasSwitched == false)
         {
             if (selectedWeapon >= transform.childCount - 1)
+            {
+                hasSwitched = true;
                 selectedWeapon = 0;
+            }
             else
+            {
+                hasSwitched = true;
                 selectedWeapon++;
+            }
         }
-        if (Input.GetAxis("WeaponSwitch") < 0f)
+        
+        if (Input.GetAxis("WeaponSwitch") < 0f && hasSwitched == false)
         {
             if (selectedWeapon <= 0)
+            {
+                hasSwitched = true;
                 selectedWeapon = transform.childCount - 1;
+            }
             else
+            {
+                hasSwitched = true;
                 selectedWeapon--;
+            }
+        }
+        else if (Input.GetAxis("WeaponSwitch") == 0)
+        {
+            hasSwitched = false;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
