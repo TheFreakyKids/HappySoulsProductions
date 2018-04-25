@@ -76935,6 +76935,14 @@ Prefab:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19885060, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19885060, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
+      propertyPath: moveWithCustomTransform
+      value: 
+      objectReference: {fileID: 2043193354}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
   m_IsPrefabParent: 0
