@@ -3,72 +3,84 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class SixShooter : MonoBehaviour
 {
+    public int totalAmmo;
+    public int magSize = 6;
+    public int currentAmmoInMag;
     public float damage = 35f;
     public float range = 50f;
-    public int ammoCount = 6;
-    public float shotVelocity = 1f;
     public float shotTimer = .5f;
     public float shotWaitPeriod = .5f;
     public bool triggerPulled = false;
+
     public AudioClip revolverShot;
     public AudioClip revolverLoad;
     public AudioClip revolverDryFire;
-    //public GameObject revolverBullet;
-    //public Transform barrelExit;
     public Camera fpsCam;
     public ParticleSystem gunFX;
+
+    private void Awake()
+    {
+        totalAmmo = magSize * 2;
+        currentAmmoInMag = magSize;
+    }
 	
 	private void Update ()
     {
         shotTimer += Time.deltaTime;
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f);
-        if (CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount == 0)//xbutton
-        {
-            Reload();
-        }
-	}
 
-    private void FixedUpdate()
-    {
-        if (Input.GetAxis("Fire1") == -1 && triggerPulled == false) //right trigger
+        if (CrossPlatformInputManager.GetAxis("Fire1") == -1 && triggerPulled == false) //Right Trigger
         {
             triggerPulled = true;
             Shoot();
         }
-        if (Input.GetAxis("Fire1") == 0)
-        {
+        if (CrossPlatformInputManager.GetAxis("Fire1") == 0)
             triggerPulled = false;
+
+        if (CrossPlatformInputManager.GetButtonDown("Fire2") && currentAmmoInMag < magSize && totalAmmo > 0) //X Button
+            Reload();
+    }
+
+    private void Shoot()
+    {
+        if (shotTimer == shotWaitPeriod && currentAmmoInMag > 0)
+        {
+            gunFX.Play();
+            SoundManager.instance.Play(revolverShot, "sfx");
+            RaycastHit hit;
+            if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+                print(hit.transform.name);
+
+            currentAmmoInMag -= 1;
+            totalAmmo -= 1;
+
+            shotTimer = 0f;
+        }
+        else if (shotTimer == shotWaitPeriod && currentAmmoInMag == 0)
+        {
+            SoundManager.instance.Play(revolverDryFire, "sfx");
+            Debug.Log("Revolver is empty.");
         }
     }
 
     private void Reload()
     {
         SoundManager.instance.Play(revolverLoad, "sfx");
-        ammoCount = 6;
+
+        if (totalAmmo > magSize)
+        {
+            currentAmmoInMag = magSize;
+            totalAmmo -= magSize;
+        }
+        else
+        {
+            currentAmmoInMag = totalAmmo;
+            totalAmmo -= totalAmmo;
+        }
     }
 
-    private void Shoot()
+    public void AddAmmo(int outsideAmmo)
     {
-        if (shotTimer == shotWaitPeriod && ammoCount > 0)
-        {
-            //GameObject bullet = Instantiate(revolverBullet, barrelExit.position, barrelExit.rotation);
-            //bullet.GetComponent<Rigidbody>().AddForce(barrelExit.transform.forward * shotVelocity);
-
-            gunFX.Play();
-            SoundManager.instance.Play(revolverShot, "sfx");
-            RaycastHit hit;
-            if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-            {
-                print(hit.transform.name);
-            }
-
-            ammoCount -= 1;
-            shotTimer = 0f;
-        }
-        else if (shotTimer == shotWaitPeriod && ammoCount == 0)
-        {
-            SoundManager.instance.Play(revolverDryFire, "sfx");
-            Debug.Log("gun empty");
-        }
+        totalAmmo += outsideAmmo;
     }
 }

@@ -4,84 +4,78 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Shotgun : MonoBehaviour
 {
-    public int ammoCount = 2;
-    public int pelletCount;
-    public float spreadAngle;
-    public float pelletVelocity = 1f;
+    public int totalAmmo;
+    public int magSize = 2;
+    public int currentAmmoInMag;
     public float shotTimer = .5f;
     public float shotWaitPeriod = .5f;
+    public float damage = 85f;
+    public float range = 25f;
     public bool triggerPulled = false;
 
     public AudioClip shotgunShot;
     public AudioClip shotgunLoad;
     public AudioClip shotgunDryFire;
-
-    public GameObject pellet;
-    public Transform barrelExit;
-    List<Quaternion> pellets;
+    public Camera fpsCam;
     public ParticleSystem gunFX;
 
-    private void Awake ()
+    private void Awake()
     {
-        pellets = new List<Quaternion>(pelletCount);
-        for (int i = 0; i < pelletCount; i++)
-        {
-            pellets.Add(Quaternion.Euler(Vector3.zero));
-        }
-	}
-	
-	private void FixedUpdate ()
-    {
-		if(Input.GetAxis("Fire1") == -1 && triggerPulled == false)
-        {
-            triggerPulled = true;
-            Shoot();
-        }
-        if(Input.GetAxis("Fire1") == 0)
-        {
-            triggerPulled = false;
-        }
-            
-	}
+        totalAmmo = magSize * 2;
+        currentAmmoInMag = magSize;
+    }
 
     private void Update()
     {
         shotTimer += Time.deltaTime;
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f);
-        if (CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount == 0)//xbutton
+
+        if (CrossPlatformInputManager.GetAxis("Fire1") == -1 && triggerPulled == false)
         {
-            Reload();
+            triggerPulled = true;
+            Shoot();
         }
+        if (CrossPlatformInputManager.GetAxis("Fire1") == 0)
+            triggerPulled = false;
+
+        if (CrossPlatformInputManager.GetButtonDown("Fire2") && currentAmmoInMag < magSize && totalAmmo > 0) //X button
+            Reload();
     }
 
     private void Shoot()
     {
-        if (shotTimer == shotWaitPeriod && ammoCount > 0)
+        if (shotTimer == shotWaitPeriod && currentAmmoInMag > 0)
         {
             gunFX.Play();
             SoundManager.instance.Play(shotgunShot, "sfx");
-            int i = 0;
-            foreach (Quaternion quat in pellets)
+
+            RaycastHit hit;
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
-                pellets[i] = Random.rotation;
-                GameObject pell = Instantiate(pellet, barrelExit.position, barrelExit.rotation);
-                pell.transform.rotation = Quaternion.RotateTowards(pellet.transform.rotation, pellets[i], spreadAngle);
-                pell.GetComponent<Rigidbody>().AddForce(barrelExit.transform.forward * pelletVelocity);
-                Destroy(pell, .3f);
-                i++;
+                print(hit.transform.name);
             }
-            ammoCount -= 1;
+            currentAmmoInMag -= 1;
+            totalAmmo -= 1;
+
             shotTimer = 0f;
         }
-        if(ammoCount == 0)
-        {
+        if(shotTimer == shotWaitPeriod && currentAmmoInMag == 0)
             SoundManager.instance.Play(shotgunDryFire, "sfx");
-        }
     }
 
     private void Reload()
     {
         SoundManager.instance.Play(shotgunLoad, "sfx");
-        ammoCount = 2;
+
+        if (totalAmmo > magSize)
+        {
+            currentAmmoInMag = magSize;
+            totalAmmo -= magSize;
+        }
+        else
+        {
+            currentAmmoInMag = totalAmmo;
+            totalAmmo -= totalAmmo;
+        }
     }
 }

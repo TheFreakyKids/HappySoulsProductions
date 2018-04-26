@@ -45,6 +45,8 @@ public class WeaponSwapping : MonoBehaviour
         {
             hasSwitched = false;
         }
+
+        #region Keyboard Settings
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedWeapon = 0;
@@ -61,6 +63,8 @@ public class WeaponSwapping : MonoBehaviour
         {
             selectedWeapon = 3;
         }
+        #endregion
+
         if (previousSelectedWeapon != selectedWeapon)
         {
             SelectWeapon();

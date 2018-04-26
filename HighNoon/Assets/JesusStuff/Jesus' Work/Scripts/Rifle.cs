@@ -3,62 +3,77 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Rifle : MonoBehaviour
 {
+    public int totalAmmo;
+    public int currentAmmoInMag;
+    public int magSize = 1;
     public float damage = 65f;
     public float range = 100f;
-    public int ammoCount = 1;
-    public float shotVelocity = 1f;
     public bool triggerPulled = false;
 
     public AudioClip rifleShot;
     public AudioClip rifleLoad;
     public AudioClip rifleDryFire;
-
     public Camera fpsCam;
     public ParticleSystem gunFX;
 
-    private void Update()
+    private void Awake()
     {
-        if(CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount == 0)//xbutton
-        {
-            Reload();
-        }
+        totalAmmo = magSize * 4;
+        currentAmmoInMag = magSize;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (Input.GetAxis("Fire1") == -1 && triggerPulled == false)
+        if (CrossPlatformInputManager.GetAxis("Fire1") == -1 && triggerPulled == false)
         {
             triggerPulled = true;
             Shoot();
         }
-        if(Input.GetAxis("Fire1") == 0)
-        {
+
+        if (CrossPlatformInputManager.GetAxis("Fire1") == 0)
             triggerPulled = false;
+
+        if (CrossPlatformInputManager.GetButtonDown("Fire2") && currentAmmoInMag < magSize && totalAmmo > 0) //X button
+            Reload();
+    }
+
+    private void Shoot()
+    {
+        if (currentAmmoInMag > 0)
+        {
+            gunFX.Play();
+            SoundManager.instance.Play(rifleShot, "sfx");
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+            {
+                print(hit.transform.name);
+            }
+
+            currentAmmoInMag -= 1;
+            totalAmmo -= 1;
+        }
+
+        if (currentAmmoInMag == 0)
+        {
+            SoundManager.instance.Play(rifleDryFire, "sfx");
         }
     }
 
     private void Reload()
     {
         SoundManager.instance.Play(rifleLoad, "sfx");
-        ammoCount = 1;
-    }
 
-    private void Shoot()
-    {
-        if (ammoCount > 0)
+        if (totalAmmo > magSize)
         {
-            gunFX.Play();
-            SoundManager.instance.Play(rifleShot, "sfx");
-            RaycastHit hit;
-            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-            {
-                print(hit.transform.name);
-            }
-            ammoCount -= 1;
+            currentAmmoInMag = magSize;
+            totalAmmo -= magSize;
         }
-        if (ammoCount == 0)
+        else
         {
-            SoundManager.instance.Play(rifleDryFire, "sfx");
+            currentAmmoInMag = totalAmmo;
+            totalAmmo -= totalAmmo;
         }
     }
 }

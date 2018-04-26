@@ -4,55 +4,50 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float spawnTime = 4f;
+    [SerializeField] private float weaponSpawnTime = 1f;
+    [SerializeField] private GameObject player;
+
+    [SerializeField] private List<GameObject> Wspawns;
+
+    private void Awake()
+    {
+        Wspawns = new List<GameObject>();
+        foreach (Transform spawn in GameObject.Find("WeaponSpawns").transform)
+            Wspawns.Add(spawn.gameObject);
+
+        player = GameObject.Find("Player");
+    }
 
     private void Update()
     {
-        if ()
+        foreach (GameObject spawn in Wspawns)
         {
+            if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) < 1f && Input.GetKeyDown(KeyCode.E))
+            {
+                player.GetComponentInChildren<SixShooter>().AddAmmo(6);
+                spawn.gameObject.active = false;
+                Debug.Log("WEAPON GONE");
 
+                Debug.Log("BEGINNING SPAWNING");
+                StartCoroutine(WeaponRespawn(spawn));
+            }
         }
-        StartCoroutine(Respawn());
+
+        //Checks for empty spawns
+        foreach (GameObject spawn in Wspawns)
+        {
+            if (spawn.activeInHierarchy == false)
+            {
+
+            }
+        }
     }
 
-    public IEnumerator Respawn()
+    public IEnumerator WeaponRespawn(GameObject spawn)
     {
-        yield return new WaitForSecondsRealtime(spawnTime);
+        yield return new WaitForSeconds(weaponSpawnTime);
 
-        if (//something)
-        {
-            #region Spawning
-            int point = Random.Range(0, 7);
-
-            switch (point)
-            {
-                case 0:
-                    transform.position = GameObject.Find("SpawnPoint0").transform.position;
-                    break;
-                case 1:
-                    transform.position = GameObject.Find("SpawnPoint1").transform.position;
-                    break;
-                case 2:
-                    transform.position = GameObject.Find("SpawnPoint2").transform.position;
-                    break;
-                case 3:
-                    transform.position = GameObject.Find("SpawnPoint3").transform.position;
-                    break;
-                case 4:
-                    transform.position = GameObject.Find("SpawnPoint4").transform.position;
-                    break;
-                case 5:
-                    transform.position = GameObject.Find("SpawnPoint5").transform.position;
-                    break;
-                case 6:
-                    transform.position = GameObject.Find("SpawnPoint6").transform.position;
-                    break;
-                case 7:
-                    transform.position = GameObject.Find("SpawnPoint7").transform.position;
-                    break;
-            }
-            #endregion
-            print("respawned");
-        }
+        Debug.Log("SPAWNED");
+        spawn.gameObject.active = true;
     }
 }
