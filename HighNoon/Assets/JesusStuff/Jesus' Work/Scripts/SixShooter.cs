@@ -69,7 +69,6 @@ public class SixShooter : MonoBehaviour
         else if (shotTimer == shotWaitPeriod && ammoCount == 0)
         {
             SoundManager.instance.Play(revolverDryFire, "sfx");
-            Debug.Log("gun empty");
         }
     }
 }

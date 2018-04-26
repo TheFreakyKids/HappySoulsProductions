@@ -52,7 +52,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void Update()
         {
-            RotateView();
+            //RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -185,10 +185,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
         
-        private void RotateView()
+        /*private void RotateView()
         {
             m_MouseLook.LookRotation (transform, m_Camera.transform);
-        }
+        }*/
         
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
