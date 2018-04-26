@@ -44,6 +44,7 @@ public class SixShooter : MonoBehaviour
     private void Reload()
     {
         SoundManager.instance.Play(revolverLoad, "sfx");
+        //reload animation
         ammoCount = 6;
     }
 

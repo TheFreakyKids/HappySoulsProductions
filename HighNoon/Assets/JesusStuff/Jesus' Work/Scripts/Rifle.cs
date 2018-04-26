@@ -40,6 +40,7 @@ public class Rifle : MonoBehaviour
     private void Reload()
     {
         SoundManager.instance.Play(rifleLoad, "sfx");
+        //reload animation
         ammoCount = 1;
     }
 

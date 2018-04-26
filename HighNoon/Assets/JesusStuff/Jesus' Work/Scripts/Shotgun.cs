@@ -82,6 +82,7 @@ public class Shotgun : MonoBehaviour
     private void Reload()
     {
         SoundManager.instance.Play(shotgunLoad, "sfx");
+        //reload animation
         ammoCount = 2;
     }
 }
