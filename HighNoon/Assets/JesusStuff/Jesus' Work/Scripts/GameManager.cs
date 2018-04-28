@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float weaponSpawnTime = 1f;
-    [SerializeField] private GameObject player;
+    [SerializeField] private bool weaponIsRespawning = false;
+    [SerializeField] private float matchTime;
+    [SerializeField] private float minsLeft;
+    [SerializeField] private float secLeft;
 
+    [SerializeField] private GameObject player;
     [SerializeField] private List<GameObject> Wspawns;
+    public Text matchTimer;
 
     private void Awake()
     {
@@ -16,38 +22,58 @@ public class GameManager : MonoBehaviour
             Wspawns.Add(spawn.gameObject);
 
         player = GameObject.Find("Player");
+
+        matchTime = 300f;
     }
 
     private void Update()
     {
-        foreach (GameObject spawn in Wspawns)
+        matchTime -= Time.deltaTime;
+        matchTimer.text = Mathf.Round(matchTime).ToString();
+
+        foreach (GameObject spawn in Wspawns) //For weapon spawns
         {
-            if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) < 1f && Input.GetAxisRaw("X") == 1 && spawn.gameObject.active == true)
+            if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) <= 1f &&
+                Input.GetAxisRaw("X") == 1 && spawn.gameObject.active == true && weaponIsRespawning == false &&
+                player.GetComponent<Player>().isLookingAtWeaponSpawn == true)
             {
-                player.GetComponentInChildren<SixShooter>().AddAmmo(6);
-                spawn.gameObject.active = false;
-                Debug.Log("WEAPON GONE");
+                #region Weapon Differentiation
+                if (spawn.CompareTag("SixShooter") == true)
+                {
+                    print("Nabbed Sixshooter");
 
-                Debug.Log("BEGINNING SPAWNING");
-                StartCoroutine(WeaponRespawn(spawn));
-            }
-        }
+                    player.GetComponentInChildren<SixShooter>().AddAmmo(9);
+                    spawn.gameObject.active = false;
+                    StartCoroutine(WeaponRespawn(spawn));
+                }
+                if (spawn.CompareTag("Shotgun") == true)
+                {
+                    print("Nabbed Shotgun");
 
-        //Checks for empty spawns
-        foreach (GameObject spawn in Wspawns)
-        {
-            if (spawn.activeInHierarchy == false)
-            {
+                    player.GetComponentInChildren<Shotgun>().AddAmmo(4);
+                    spawn.gameObject.active = false;
+                    StartCoroutine(WeaponRespawn(spawn));
+                }
+                if (spawn.CompareTag("Rifle") == true)
+                {
+                    print("Nabbed Rifle");
 
+                    player.GetComponentInChildren<Rifle>().AddAmmo(2);
+                    spawn.gameObject.active = false;
+                    StartCoroutine(WeaponRespawn(spawn));
+                }
+                #endregion
             }
         }
     }
 
     public IEnumerator WeaponRespawn(GameObject spawn)
     {
+        weaponIsRespawning = true;
         yield return new WaitForSeconds(weaponSpawnTime);
 
-        Debug.Log("SPAWNED");
+        Debug.Log("WEAPON RESPAWNED");
         spawn.gameObject.active = true;
+        weaponIsRespawning = false;
     }
 }

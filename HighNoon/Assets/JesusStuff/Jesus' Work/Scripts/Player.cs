@@ -1,37 +1,61 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float health = 100;
+    public float maxHealth = 100;
+    public float currentHealth;
     public float stamina = 5f;
     public float spawnTime = 4f;
     public bool isRespawning = false;
+    public bool isLookingAtWeaponSpawn = false;
 
     public MonoBehaviour fpsCon;
+    public Camera fpsCam;
+    public Slider health;
+    public Text elims; //For elim count when we have that functionality
 
-	private void Update ()
+    private void Awake()
     {
-        StopCoroutine(Respawn());
-        Mathf.Clamp(health, 0, 100); //Keeps health in appropriate range
+        currentHealth = maxHealth;
+    }
 
-        if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) //kys xd
-        {
+    private void Update ()
+    {
+        health.value = currentHealth / 100; //Divide by 100 because Slider goes from 0-1 so w/o this Slider doesn't slide properly
+        Mathf.Clamp(currentHealth, 0, maxHealth); //Keeps health in appropriate range
+
+        if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) //For debugging purposes
             Suicide();
-        }
-
-        if (health == 0f)
+        if (Input.GetKeyDown(KeyCode.H) && isRespawning == false) //For debugging purposes
+            TakeDamage(25);
+        if (currentHealth == 0f && isRespawning == false) //If you have no health & you're not already respawning, then die
             Die();
 	}
 
+    public void FixedUpdate()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        {
+            if (hit.transform.CompareTag("WeaponSpawn") == true)
+                isLookingAtWeaponSpawn = true;
+            else
+                isLookingAtWeaponSpawn = false;
+        }
+    }
+
     public void TakeDamage(float dam)
     {
-        health -= dam;
+        currentHealth -= dam;
     }
 
     private void Die()
     {
         fpsCon.enabled = false;
+
         StartCoroutine(Respawn());
     }
 
@@ -42,7 +66,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(spawnTime);
 
-        if (health != 100f)
+        if (currentHealth != 100f)
         {
             #region Spawning
             int point = Random.Range(0, 7);
@@ -76,7 +100,7 @@ public class Player : MonoBehaviour
             }
             #endregion
 
-            health = 100f;
+            currentHealth = 100f;
             fpsCon.enabled = true;
         }
         isRespawning = false;
@@ -85,7 +109,7 @@ public class Player : MonoBehaviour
 
     private void Suicide ()
     {
-        health = 0f;
-        print("KYS");
+        currentHealth = 0f;
+        print("Ya KYS");
     }
 }

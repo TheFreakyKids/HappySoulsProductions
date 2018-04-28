@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Rifle : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class Rifle : MonoBehaviour
     public AudioClip rifleDryFire;
     public Camera fpsCam;
     public ParticleSystem gunFX;
+    public Text ammoInMag;
+    public Text ammoRes;
+    public Texture2D crosshairTexture;
+    [SerializeField] private float crosshairScale = 1;
 
     private void Awake()
     {
@@ -21,17 +26,28 @@ public class Rifle : MonoBehaviour
         currentAmmoInMag = magSize;
     }
 
+    private void OnGUI()
+    {
+        if (Time.timeScale != 0)
+        {
+            if (crosshairTexture != null)
+                GUI.DrawTexture(new Rect((Screen.width - crosshairTexture.width * crosshairScale) / 2, (Screen.height - crosshairTexture.height * crosshairScale)
+                    / 2, crosshairTexture.width * crosshairScale, crosshairTexture.height * crosshairScale), crosshairTexture);
+            else
+                Debug.Log("No crosshair texture set in the Inspector");
+        }
+    }
+
     private void Update()
     {
-        if (Input.GetAxis("Right Trigger") == 1 && triggerPulled == false)
-        {
-            Shoot();
-        }
+        ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
+        ammoRes.text = ammoReserves.ToString();
 
+        if (Input.GetAxis("Right Trigger") == 1 && triggerPulled == false)
+            Shoot();
         if (Input.GetAxis("Right Trigger") == 0)
             triggerPulled = false;
-
-        if (Input.GetButtonDown("Right Bumper") && currentAmmoInMag < magSize && ammoReserves > 0) //X button
+        if (Input.GetButtonDown("Right Bumper") && currentAmmoInMag < magSize && ammoReserves > 0) 
             Reload();
     }
 
@@ -50,12 +66,17 @@ public class Rifle : MonoBehaviour
 
             RaycastHit hit;
 
-            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-            {
-                print(hit.transform.name);
-            }
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        {
+            print(hit.transform.name);
 
-            currentAmmoInMag -= 1;
+            if (hit.transform.CompareTag("Player") == false)
+            {
+                hit.transform.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward * 750f);
+            }
+        }
+
+        currentAmmoInMag -= 1;
     }
 
     private void Reload()
@@ -70,5 +91,10 @@ public class Rifle : MonoBehaviour
             currentAmmoInMag++;
             ammoReserves--;
         }
+    }
+
+    public void AddAmmo(int outsideAmmo)
+    {
+        ammoReserves += outsideAmmo;
     }
 }
