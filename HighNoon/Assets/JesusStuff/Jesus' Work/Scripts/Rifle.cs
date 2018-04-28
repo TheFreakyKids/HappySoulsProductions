@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class Rifle : MonoBehaviour
 {
-    public int totalAmmo;
+    public int ammoReserves;
     public int currentAmmoInMag;
     public int magSize = 1;
     public float damage = 65f;
@@ -18,29 +17,34 @@ public class Rifle : MonoBehaviour
 
     private void Awake()
     {
-        totalAmmo = magSize * 4;
+        ammoReserves = magSize * 4;
         currentAmmoInMag = magSize;
     }
 
     private void Update()
     {
-        if (CrossPlatformInputManager.GetAxis("Fire1") == -1 && triggerPulled == false)
+        if (Input.GetAxis("Right Trigger") == 1 && triggerPulled == false)
         {
-            triggerPulled = true;
             Shoot();
         }
 
-        if (CrossPlatformInputManager.GetAxis("Fire1") == 0)
+        if (Input.GetAxis("Right Trigger") == 0)
             triggerPulled = false;
 
-        if (CrossPlatformInputManager.GetButtonDown("Fire2") && currentAmmoInMag < magSize && totalAmmo > 0) //X button
+        if (Input.GetButtonDown("Right Bumper") && currentAmmoInMag < magSize && ammoReserves > 0) //X button
             Reload();
     }
 
     private void Shoot()
     {
-        if (currentAmmoInMag > 0)
+        triggerPulled = true;
+
+        if (currentAmmoInMag == 0)
         {
+            SoundManager.instance.Play(rifleDryFire, "sfx");
+            return;
+        }
+
             gunFX.Play();
             SoundManager.instance.Play(rifleShot, "sfx");
 
@@ -52,28 +56,19 @@ public class Rifle : MonoBehaviour
             }
 
             currentAmmoInMag -= 1;
-            totalAmmo -= 1;
-        }
-
-        if (currentAmmoInMag == 0)
-        {
-            SoundManager.instance.Play(rifleDryFire, "sfx");
-        }
     }
 
     private void Reload()
     {
         SoundManager.instance.Play(rifleLoad, "sfx");
 
-        if (totalAmmo > magSize)
+        while (currentAmmoInMag < magSize)
         {
-            currentAmmoInMag = magSize;
-            totalAmmo -= magSize;
-        }
-        else
-        {
-            currentAmmoInMag = totalAmmo;
-            totalAmmo -= totalAmmo;
+            if (ammoReserves == 0)
+                break;
+
+            currentAmmoInMag++;
+            ammoReserves--;
         }
     }
 }

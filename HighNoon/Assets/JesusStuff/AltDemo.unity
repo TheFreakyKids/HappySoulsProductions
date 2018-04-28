@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44813693, g: 0.49814975, b: 0.5755494, a: 1}
+  m_IndirectSpecularColor: {r: 0.44813734, g: 0.49815017, b: 0.57555115, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -20513,6 +20513,7 @@ MonoBehaviour:
   health: 100
   stamina: 5
   spawnTime: 4
+  isRespawning: 0
   fpsCon: {fileID: 440820092}
 --- !u!114 &440820092 stripped
 MonoBehaviour:
@@ -34362,7 +34363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a91c4f0c5d7a224ca79951132fb195f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalAmmo: 0
+  ammoReserves: 0
   magSize: 2
   currentAmmoInMag: 0
   shotTimer: 0.5
@@ -34370,6 +34371,7 @@ MonoBehaviour:
   damage: 85
   range: 25
   triggerPulled: 0
+  isReloading: 0
   shotgunShot: {fileID: 8300000, guid: 1d94c00e8a5eedd408f31b5717e3df91, type: 3}
   shotgunLoad: {fileID: 8300000, guid: 5254406e731a45b44b7c74fa0e6b62d1, type: 3}
   shotgunDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}
@@ -72058,7 +72060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cd09d6bc104f4498c1e9913f6ebe9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalAmmo: 0
+  ammoReserves: 0
   currentAmmoInMag: 0
   magSize: 1
   damage: 65
@@ -98828,7 +98830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b87c2c2629ced47b3ff0e5e4258953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalAmmo: 0
+  ammoReserves: 0
   magSize: 6
   currentAmmoInMag: 0
   damage: 35
@@ -98836,11 +98838,12 @@ MonoBehaviour:
   shotTimer: 0.5
   shotWaitPeriod: 0.5
   triggerPulled: 0
-  revolverShot: {fileID: 0}
-  revolverLoad: {fileID: 0}
-  revolverDryFire: {fileID: 0}
-  fpsCam: {fileID: 0}
-  gunFX: {fileID: 0}
+  isReloading: 0
+  revolverShot: {fileID: 8300000, guid: 6bfccd1f5ddcdab4ca6f06a396be70c7, type: 3}
+  revolverLoad: {fileID: 8300000, guid: ba6bc5444f870a642bb00b2b6c0f2bbb, type: 3}
+  revolverDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}
+  fpsCam: {fileID: 448468398}
+  gunFX: {fileID: 593827245}
 --- !u!1 &1896133283 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1358722407381910, guid: a1ef1d012cb6db34b9666c8da15cf70a,
@@ -105034,7 +105037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b87c2c2629ced47b3ff0e5e4258953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalAmmo: 0
+  ammoReserves: 0
   magSize: 6
   currentAmmoInMag: 0
   damage: 35
@@ -105042,6 +105045,7 @@ MonoBehaviour:
   shotTimer: 0.5
   shotWaitPeriod: 0.5
   triggerPulled: 0
+  isReloading: 0
   revolverShot: {fileID: 8300000, guid: 6bfccd1f5ddcdab4ca6f06a396be70c7, type: 3}
   revolverLoad: {fileID: 8300000, guid: ba6bc5444f870a642bb00b2b6c0f2bbb, type: 3}
   revolverDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}

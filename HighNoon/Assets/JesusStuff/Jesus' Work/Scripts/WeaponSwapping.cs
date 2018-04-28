@@ -14,7 +14,7 @@ public class WeaponSwapping : MonoBehaviour
     {
         int previousSelectedWeapon = selectedWeapon;
 
-        if (Input.GetAxis("WeaponSwitch") > 0f && hasSwitched == false)
+        if (Input.GetAxis("DPAD Horizontal") > 0f && hasSwitched == false)
         {
             if (selectedWeapon >= transform.childCount - 1)
             {
@@ -28,7 +28,7 @@ public class WeaponSwapping : MonoBehaviour
             }
         }
         
-        if (Input.GetAxis("WeaponSwitch") < 0f && hasSwitched == false)
+        if (Input.GetAxis("DPAD Horizontal") < 0f && hasSwitched == false)
         {
             if (selectedWeapon <= 0)
             {
@@ -41,7 +41,7 @@ public class WeaponSwapping : MonoBehaviour
                 selectedWeapon--;
             }
         }
-        else if (Input.GetAxis("WeaponSwitch") == 0)
+        else if (Input.GetAxis("DPAD Horizontal") == 0)
         {
             hasSwitched = false;
         }

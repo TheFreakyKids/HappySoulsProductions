@@ -6,14 +6,16 @@ public class Player : MonoBehaviour
     public float health = 100;
     public float stamina = 5f;
     public float spawnTime = 4f;
+    public bool isRespawning = false;
 
     public MonoBehaviour fpsCon;
 
 	private void Update ()
     {
-        Mathf.Clamp(health, 0, 100);
+        StopCoroutine(Respawn());
+        Mathf.Clamp(health, 0, 100); //Keeps health in appropriate range
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) //kys xd
         {
             Suicide();
         }
@@ -35,6 +37,9 @@ public class Player : MonoBehaviour
 
     public IEnumerator Respawn ()
     {
+        isRespawning = true;
+        print("Respawning");
+
         yield return new WaitForSecondsRealtime(spawnTime);
 
         if (health != 100f)
@@ -73,13 +78,14 @@ public class Player : MonoBehaviour
 
             health = 100f;
             fpsCon.enabled = true;
-            print("respawned");
         }
+        isRespawning = false;
+        print("Respawned");
     }
 
     private void Suicide ()
     {
         health = 0f;
-        print("kys");
+        print("KYS");
     }
 }

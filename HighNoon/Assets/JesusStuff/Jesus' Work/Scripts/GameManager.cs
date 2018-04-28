@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject spawn in Wspawns)
         {
-            if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) < 1f && Input.GetKeyDown(KeyCode.E))
+            if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) < 1f && Input.GetAxisRaw("X") == 1 && spawn.gameObject.active == true)
             {
                 player.GetComponentInChildren<SixShooter>().AddAmmo(6);
                 spawn.gameObject.active = false;
