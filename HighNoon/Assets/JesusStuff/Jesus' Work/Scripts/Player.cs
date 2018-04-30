@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +16,35 @@ public class Player : MonoBehaviour
     public Camera fpsCam;
     public Slider health;
     public Text elims; //For elim count when we have that functionality
+    [SerializeField] private GameObject[] ragdollParts;
+
+    #region Ragdoll resetting vars
+    //[SerializeField] private Transform[] ragOGTrans;
+    //[SerializeField] private Transform[] ragColOGTrans;
+    #endregion
 
     private void Awake()
     {
         currentHealth = maxHealth;
+
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("RagdollPart");
+
+        ragdollParts = new GameObject[temp.Length];
+
+        #region Ragdoll vars
+        //ragOGTrans = new Transform[ragdollParts.Length];
+        //ragColOGTrans = new Transform[ragdollParts.Length];
+        #endregion
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            ragdollParts[i] = temp[i];
+
+            #region Ragdolling A1 stuf
+            //ragOGTrans[i] = ragdollParts[i].transform;
+            //ragColOGTrans[i] = ragdollParts[i].GetComponent<Collider>().transform;
+            #endregion
+        }
     }
 
     private void Update ()
@@ -56,13 +82,17 @@ public class Player : MonoBehaviour
     {
         fpsCon.enabled = false;
 
+        for (int i = 0; i < ragdollParts.Length; i++)
+        {
+            ragdollParts[i].GetComponent<Ragdoll>().TurnOnRagdoll();
+        }
+
         StartCoroutine(Respawn());
     }
 
     public IEnumerator Respawn ()
     {
         isRespawning = true;
-        print("Respawning");
 
         yield return new WaitForSecondsRealtime(spawnTime);
 
@@ -100,16 +130,37 @@ public class Player : MonoBehaviour
             }
             #endregion
 
+            #region Ragdolling Resetting Attempt Uno
+            //for (int i = 0; i < ragdollParts.Length; i++)
+            //{
+            //    ragdollParts[i].GetComponent<Ragdoll>().TurnOffRagdoll();
+
+            //    ragdollParts[i].transform.position = ragOGTrans[i].transform.position;
+            //    ragdollParts[i].transform.rotation = ragOGTrans[i].transform.rotation;
+            //    ragdollParts[i].transform.localPosition = ragOGTrans[i].transform.localPosition;
+            //    ragdollParts[i].transform.localRotation = ragOGTrans[i].transform.localRotation;
+
+            //    ragdollParts[i].GetComponent<Collider>().transform.position = ragColOGTrans[i].transform.position;
+            //    ragdollParts[i].GetComponent<Collider>().transform.rotation = ragColOGTrans[i].transform.rotation;
+            //    ragdollParts[i].GetComponent<Collider>().transform.localPosition = ragColOGTrans[i].transform.localPosition;
+            //    ragdollParts[i].GetComponent<Collider>().transform.localRotation = ragColOGTrans[i].transform.localRotation;
+            //}
+            #endregion
+
+
+            for (int i = 0; i < ragdollParts.Length; i++)
+            {
+                ragdollParts[i].GetComponent<Ragdoll>().TurnOffRagdoll();
+            }
+
             currentHealth = 100f;
             fpsCon.enabled = true;
         }
         isRespawning = false;
-        print("Respawned");
     }
 
     private void Suicide ()
     {
         currentHealth = 0f;
-        print("Ya KYS");
     }
 }

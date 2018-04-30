@@ -10,6 +10,7 @@ TagManager:
   - Shotgun
   - Rifle
   - WeaponSpawn
+  - RagdollPart
   layers:
   - Default
   - TransparentFX

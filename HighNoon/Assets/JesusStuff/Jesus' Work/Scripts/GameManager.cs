@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject spawn in Wspawns) //For weapon spawns
         {
             if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) <= 1f &&
-                Input.GetAxisRaw("X") == 1 && spawn.gameObject.active == true && weaponIsRespawning == false &&
+                Input.GetAxisRaw("X") == 1 && spawn.gameObject.activeSelf == true && weaponIsRespawning == false &&
                 player.GetComponent<Player>().isLookingAtWeaponSpawn == true)
             {
                 #region Weapon Differentiation
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
                     print("Nabbed Sixshooter");
 
                     player.GetComponentInChildren<SixShooter>().AddAmmo(9);
-                    spawn.gameObject.active = false;
+                    spawn.gameObject.SetActive(false);
                     StartCoroutine(WeaponRespawn(spawn));
                 }
                 if (spawn.CompareTag("Shotgun") == true)
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
                     print("Nabbed Shotgun");
 
                     player.GetComponentInChildren<Shotgun>().AddAmmo(4);
-                    spawn.gameObject.active = false;
+                    spawn.gameObject.SetActive(false);
                     StartCoroutine(WeaponRespawn(spawn));
                 }
                 if (spawn.CompareTag("Rifle") == true)
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
                     print("Nabbed Rifle");
 
                     player.GetComponentInChildren<Rifle>().AddAmmo(2);
-                    spawn.gameObject.active = false;
+                    spawn.gameObject.SetActive(false);
                     StartCoroutine(WeaponRespawn(spawn));
                 }
                 #endregion
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(weaponSpawnTime);
 
         Debug.Log("WEAPON RESPAWNED");
-        spawn.gameObject.active = true;
+        spawn.gameObject.SetActive(true);
         weaponIsRespawning = false;
     }
 }
