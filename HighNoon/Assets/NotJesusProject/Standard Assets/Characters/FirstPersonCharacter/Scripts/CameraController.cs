@@ -33,9 +33,9 @@ public partial class CameraController : MonoBehaviour {
     
 	private void MouseLook()
     {
-		float mouseInputX = Input.GetAxis("P1horiz");
+		float mouseInputX = Input.GetAxis("Mouse X");
 		transform.Rotate(new Vector3(0, mouseInputX * 2, 0));
-        float mouseInputY = Input.GetAxis("P1vert");
+        float mouseInputY = Input.GetAxis("Mouse Y");
         playerCamera.transform.Rotate(new Vector3(mouseInputY * -1, 0, 0));
         if(playerCamera.transform.rotation.x >= 80)
         {

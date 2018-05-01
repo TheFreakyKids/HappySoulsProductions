@@ -21053,6 +21053,18 @@ MonoBehaviour:
   runningMov: {x: 0, y: 0, z: 1}
   strafingMov: {x: 1, y: 0, z: 0}
   jumpMov: {x: 0, y: 1, z: 0}
+--- !u!114 &440820097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 440820089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d4a11025b718c4593d3f0fc571a5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1151129429}
 --- !u!1001 &442715797
 Prefab:
   m_ObjectHideFlags: 0
