@@ -111,7 +111,7 @@ public class Shotgun : MonoBehaviour
     {
         SoundManager.instance.Play(shotgunLoad, "sfx");
         //reload animation
-        ammoCount = 2;
+        currentAmmoInMag = 2;
         ammoReserves += outsideAmmo;
     }
 }

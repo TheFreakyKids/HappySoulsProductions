@@ -40,9 +40,9 @@ public class Rifle : MonoBehaviour
 
     private void Update()
     {
-        SoundManager.instance.Play(rifleLoad, "sfx");
+        
         //reload animation
-        ammoCount = 1;
+        
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
         ammoRes.text = ammoReserves.ToString();
 
@@ -66,7 +66,7 @@ public class Rifle : MonoBehaviour
 
             gunFX.Play();
             SoundManager.instance.Play(rifleShot, "sfx");
-
+            currentAmmoInMag -= 1;
             RaycastHit hit;
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
@@ -79,7 +79,7 @@ public class Rifle : MonoBehaviour
             }
         }
 
-        currentAmmoInMag -= 1;
+       
     }
 
     private void Reload()

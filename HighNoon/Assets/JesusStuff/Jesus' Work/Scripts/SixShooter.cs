@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using UnityStandardAssets;
 public class SixShooter : MonoBehaviour
 {
     public int ammoReserves;
@@ -27,13 +27,7 @@ public class SixShooter : MonoBehaviour
     {
         ammoReserves = magSize * 2;
         currentAmmoInMag = magSize;
-    }
-        shotTimer += Time.deltaTime;
-        shotTimer = Mathf.Clamp(shotTimer, 0f, shotWaitPeriod);
-        if (CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount < 6)//xbutton
-        {
-            Reload();
-        }
+        
 	}
 
     private void OnGUI()
@@ -50,9 +44,15 @@ public class SixShooter : MonoBehaviour
 
     private void Update ()
     {
-        SoundManager.instance.Play(revolverLoad, "sfx");
+        shotTimer += Time.deltaTime;
+        shotTimer = Mathf.Clamp(shotTimer, 0f, shotWaitPeriod);
+        if (Input.GetButtonDown("Fire2") && currentAmmoInMag < 6)//xbutton
+        {
+            Reload();
+        }
+        
         //reload animation
-        ammoCount = 6;
+        magSize = 6;
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
         ammoRes.text = ammoReserves.ToString();
 
@@ -118,9 +118,10 @@ public class SixShooter : MonoBehaviour
 
         while (currentAmmoInMag < magSize) //WHile the ammo in the mag is lower then it's size, reload
         {
-            SoundManager.instance.Play(revolverDryFire, "sfx");
-            if (ammoReserves == 0) //If you have no ammo to reload with, break
-                break;
+            if (ammoReserves == 0)
+            {
+                break;            //If you have no ammo to reload with, break
+            }
 
             currentAmmoInMag++; //Otherwise, put a bullet in
             ammoReserves--; //Take a bullet from the reserves

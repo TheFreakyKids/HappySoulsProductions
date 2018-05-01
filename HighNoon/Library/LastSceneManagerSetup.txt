@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/JesusStuff/AltDemo.unity
+- path: Assets/AltDemo.unity
   isLoaded: 1
   isActive: 1
