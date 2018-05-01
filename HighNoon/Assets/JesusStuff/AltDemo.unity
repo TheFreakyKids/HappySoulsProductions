@@ -71348,7 +71348,7 @@ MonoBehaviour:
   ammoCount: 1
   shotVelocity: 1
   triggerPulled: 0
-  rifleShot: {fileID: 8300000, guid: 219ad6383a7df2e45838395396325e08, type: 3}
+  rifleShot: {fileID: 8300000, guid: 3a4a911a62ea9a54991498d5606b5b0d, type: 3}
   rifleLoad: {fileID: 8300000, guid: 5254406e731a45b44b7c74fa0e6b62d1, type: 3}
   rifleDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}
   fpsCam: {fileID: 448468398}
@@ -104132,8 +104132,9 @@ MonoBehaviour:
   shotTimer: 0.5
   shotWaitPeriod: 0.5
   triggerPulled: 0
-  revolverShot: {fileID: 8300000, guid: 6bfccd1f5ddcdab4ca6f06a396be70c7, type: 3}
+  revolverShot: {fileID: 8300000, guid: 4bf1263141ba3f0478681fd9feec0077, type: 3}
   revolverLoad: {fileID: 8300000, guid: ba6bc5444f870a642bb00b2b6c0f2bbb, type: 3}
+  revolverLoad2: {fileID: 8300000, guid: f6f7f24c3c3ca014f996aa3a31a1bb49, type: 3}
   revolverDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}
   fpsCam: {fileID: 448468398}
   gunFX: {fileID: 593827245}
