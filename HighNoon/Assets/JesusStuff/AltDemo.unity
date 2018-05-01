@@ -18712,6 +18712,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114275248488918980, guid: 7dde413b1fa76bd47a7a3a4f2357f622,
+        type: 2}
+      propertyPath: audioItemH
+      value: 
+      objectReference: {fileID: 1878090014271588, guid: 1ccd61bb67e530348af2d20ffdbcb81a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dde413b1fa76bd47a7a3a4f2357f622, type: 2}
   m_IsPrefabParent: 0
@@ -46246,6 +46252,10 @@ Prefab:
       propertyPath: m_WalkSpeed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: tempMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 40e88dc798182e94d9007fc52db7e837, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -58673,6 +58683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedWeapon: 0
   hasSwitched: 0
+  swap: {fileID: 8300000, guid: 6b647e1d612b46549a0e5f5e9b03279c, type: 3}
 --- !u!1001 &1151176426
 Prefab:
   m_ObjectHideFlags: 0

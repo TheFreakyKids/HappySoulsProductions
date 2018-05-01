@@ -4,6 +4,7 @@ public class WeaponSwapping : MonoBehaviour
 {
     [SerializeField] private int selectedWeapon = 0;
     public bool hasSwitched = false;
+    public AudioClip swap;
 
 	void Start ()
     {
@@ -16,6 +17,7 @@ public class WeaponSwapping : MonoBehaviour
 
         if (Input.GetAxis("WeaponSwitch") > 0f && hasSwitched == false)
         {
+            SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon >= transform.childCount - 1)
             {
                 hasSwitched = true;
@@ -30,6 +32,7 @@ public class WeaponSwapping : MonoBehaviour
         
         if (Input.GetAxis("WeaponSwitch") < 0f && hasSwitched == false)
         {
+            SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon <= 0)
             {
                 hasSwitched = true;

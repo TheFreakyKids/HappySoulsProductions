@@ -36,6 +36,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
+        public AudioClip tempMusic;
         
         private void Start()
         {
@@ -48,6 +49,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
 			m_MouseLook.Init(transform , m_Camera.transform);
+            SoundManager.instance.Play(tempMusic, "mx");
         }
         
         private void Update()

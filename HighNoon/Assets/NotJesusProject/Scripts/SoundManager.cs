@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     public GameObject audioItemSFX;
     public GameObject audioItemVFX;
     public GameObject audioItemMX;
+    public GameObject audioItemH;
 
     private GameObject prefabBus;
 
@@ -36,11 +37,24 @@ public class SoundManager : MonoBehaviour
         {
             prefabBus = audioItemMX;
         }
+        else if (bus == "swap")
+        {
+            prefabBus = audioItemH;
+        }
 
         GameObject go = (GameObject)Instantiate(prefabBus);
         AudioSource src = go.GetComponent<AudioSource>();
         src.clip = clip;
+        RandomPitch();
         src.Play();
         Destroy(go, clip.length);
+    }
+    
+    public void RandomPitch()
+    {
+        if (prefabBus = audioItemH)
+        {
+            audioItemH.GetComponent<AudioSource>().pitch = (Random.Range(0.95f, 1.05f));
+        }
     }
 }
