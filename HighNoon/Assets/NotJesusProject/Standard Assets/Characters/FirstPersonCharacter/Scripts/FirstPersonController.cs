@@ -37,7 +37,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         public AudioClip tempMusic;
-        
+
+        public AudioClip tempKill;
+        public AudioClip tempAnnouncerKillStreak;
+
+
+
         private void Start()
         {
             m_CharacterController = GetComponent<CharacterController>();
@@ -54,6 +59,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                SoundManager.instance.Play(tempKill, "sfx");
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                SoundManager.instance.Play(tempAnnouncerKillStreak, "vfx");
+            }
             //RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)

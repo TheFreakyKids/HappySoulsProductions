@@ -7,8 +7,8 @@ public class SixShooter : MonoBehaviour
     public float range = 50f;
     public int ammoCount = 6;
     public float shotVelocity = 1f;
-    public float shotTimer = .5f;
-    public float shotWaitPeriod = .5f;
+    public float shotTimer;
+    public float shotWaitPeriod;
     public bool triggerPulled = false;
     public AudioClip revolverShot;
     public AudioClip revolverLoad;
@@ -22,8 +22,8 @@ public class SixShooter : MonoBehaviour
 	private void Update ()
     {
         shotTimer += Time.deltaTime;
-        shotTimer = Mathf.Clamp(shotTimer, 0f, .5f);
-        if (CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount == 0)//xbutton
+        shotTimer = Mathf.Clamp(shotTimer, 0f, shotWaitPeriod);
+        if (CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount < 6)//xbutton
         {
             Reload();
         }

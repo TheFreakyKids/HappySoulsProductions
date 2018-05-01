@@ -9119,6 +9119,10 @@ Prefab:
       propertyPath: m_Name
       value: GunShot_Smoke_FX (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 19856704, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
   m_IsPrefabParent: 0
@@ -46256,6 +46260,18 @@ Prefab:
       propertyPath: tempMusic
       value: 
       objectReference: {fileID: 8300000, guid: 40e88dc798182e94d9007fc52db7e837, type: 3}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: tempAnnouncerKill
+      value: 
+      objectReference: {fileID: 8300000, guid: 69009a2cf7fe9df47820cc32af92077a, type: 3}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: tempAnnouncerKillStreak
+      value: 
+      objectReference: {fileID: 8300000, guid: fd2ad3d50dac196489aa8a44f0d7a6fd, type: 3}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: tempKill
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a920f75a409bfc4abfd5a0944fb147f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -46911,31 +46927,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.25
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.20000005
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -17.77
+      value: -17.79
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.03970942
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.999871
+      value: 0.9990339
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.007368873
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.01606141
+      value: -0.01732443
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_RootOrder
@@ -47044,6 +47060,18 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5146a78f90d41354b9e048f81986a8f3, type: 2}
+    - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.92200005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -178.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 4.537
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
   m_IsPrefabParent: 0
@@ -58404,6 +58432,10 @@ Prefab:
     - target: {fileID: 157586, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
       propertyPath: m_Name
       value: GunShot_Smoke_FX (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 19856704, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
+      propertyPath: moveWithTransform
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
@@ -76966,11 +76998,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19885060, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
       propertyPath: randomSeed
-      value: 1932404144
+      value: -804450960
       objectReference: {fileID: 0}
     - target: {fileID: 19856704, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
       propertyPath: randomSeed
-      value: 373752917
+      value: 1830730848
       objectReference: {fileID: 0}
     - target: {fileID: 19856704, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
       propertyPath: playOnAwake
@@ -76988,6 +77020,10 @@ Prefab:
       propertyPath: moveWithCustomTransform
       value: 
       objectReference: {fileID: 2043193354}
+    - target: {fileID: 19856704, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2574ca206a571a342a7fab69fdfb87aa, type: 2}
   m_IsPrefabParent: 0
@@ -87314,11 +87350,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.02
+      value: -2.94
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.086
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalPosition.z
@@ -87326,19 +87362,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.00078244077
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.00216256
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.023329666
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9997252
       objectReference: {fileID: 0}
     - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_RootOrder
@@ -87431,6 +87467,18 @@ Prefab:
     - target: {fileID: 4470887761683652, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.08400001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996038569718162, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 2.674
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e72121a7df4802c4ab486fd94cb370ed, type: 2}
@@ -104140,8 +104188,8 @@ MonoBehaviour:
   range: 50
   ammoCount: 6
   shotVelocity: 1
-  shotTimer: 0.5
-  shotWaitPeriod: 0.5
+  shotTimer: 0.15
+  shotWaitPeriod: 0.15
   triggerPulled: 0
   revolverShot: {fileID: 8300000, guid: 4bf1263141ba3f0478681fd9feec0077, type: 3}
   revolverLoad: {fileID: 8300000, guid: ba6bc5444f870a642bb00b2b6c0f2bbb, type: 3}

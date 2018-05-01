@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     public GameObject audioItemVFX;
     public GameObject audioItemMX;
     public GameObject audioItemH;
-
+    private GameObject go;
     private GameObject prefabBus;
 
     // Use this for initialization
@@ -42,7 +42,7 @@ public class SoundManager : MonoBehaviour
             prefabBus = audioItemH;
         }
 
-        GameObject go = (GameObject)Instantiate(prefabBus);
+        go = (GameObject)Instantiate(prefabBus);
         AudioSource src = go.GetComponent<AudioSource>();
         src.clip = clip;
         RandomPitch();
@@ -56,5 +56,10 @@ public class SoundManager : MonoBehaviour
         {
             audioItemH.GetComponent<AudioSource>().pitch = (Random.Range(0.95f, 1.05f));
         }
+    }
+
+    public void StopClip()
+    {
+        Destroy(go);
     }
 }
