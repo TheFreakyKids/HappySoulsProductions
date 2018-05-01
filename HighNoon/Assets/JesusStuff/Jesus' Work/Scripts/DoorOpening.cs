@@ -28,8 +28,8 @@ public class DoorOpening : MonoBehaviour
 
     void Update()
     {
-        //If press F key on keyboard
-        if (Input.GetButtonDown("Interact") && !doorIsMoving)
+        //If press X key on Xbox One
+        if (Input.GetButtonDown("X") && !doorIsMoving)
         {
             //Calculate distance between player and door
             if (Vector3.Distance(playerTrans.position, transform.position) < 2f)
