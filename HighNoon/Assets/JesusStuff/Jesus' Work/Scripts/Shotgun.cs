@@ -1,88 +1,117 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 public class Shotgun : MonoBehaviour
 {
-    public int ammoCount = 2;
-    public int pelletCount;
-    public float spreadAngle;
-    public float pelletVelocity = 1f;
+    public int ammoReserves;
+    public int magSize = 2;
+    public int currentAmmoInMag;
     public float shotTimer = .5f;
     public float shotWaitPeriod = .5f;
+    public float damage = 85f;
+    public float range = 25f;
     public bool triggerPulled = false;
+    public bool isReloading = false;
 
     public AudioClip shotgunShot;
     public AudioClip shotgunLoad;
     public AudioClip shotgunDryFire;
-
-    public GameObject pellet;
-    public Transform barrelExit;
-    List<Quaternion> pellets;
+    public Camera fpsCam;
     public ParticleSystem gunFX;
+    public Text ammoInMag;
+    public Text ammoRes;
+    public Texture2D crosshairTexture;
+    [SerializeField] private float crosshairScale  = .5f;
 
-    private void Awake ()
+    private void Awake()
     {
-        pellets = new List<Quaternion>(pelletCount);
-        for (int i = 0; i < pelletCount; i++)
-        {
-            pellets.Add(Quaternion.Euler(Vector3.zero));
-        }
-	}
-	
-	private void FixedUpdate ()
-    {
-		if(Input.GetAxis("Fire1") == -1 && triggerPulled == false)
-        {
-            triggerPulled = true;
-            Shoot();
-        }
-        if(Input.GetAxis("Fire1") == 0)
-        {
-            triggerPulled = false;
-        }
-            
-	}
+        ammoReserves = magSize * 2;
+        currentAmmoInMag = magSize;
+    }
 
-    private void Update()
+    private void OnGUI()
     {
-        shotTimer += Time.deltaTime;
-        shotTimer = Mathf.Clamp(shotTimer, 0f, .5f);
-        if (CrossPlatformInputManager.GetButtonDown("Fire2") && ammoCount == 0)//xbutton
+        if (Time.timeScale != 0)
         {
-            Reload();
+            if (crosshairTexture != null)
+                GUI.DrawTexture(new Rect((Screen.width - crosshairTexture.width * crosshairScale) / 2, (Screen.height - crosshairTexture.height * crosshairScale)
+                    / 2, crosshairTexture.width * crosshairScale, crosshairTexture.height * crosshairScale), crosshairTexture);
+            else
+                Debug.Log("No crosshair texture set in the Inspector");
         }
     }
 
+    private void Update()
+    {
+        ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
+        ammoRes.text = ammoReserves.ToString();
+
+        shotTimer += Time.deltaTime; //Gun can't be laser
+        shotTimer = Mathf.Clamp(shotTimer, 0f, .5f); //Keeps timer in appropriate range
+
+        if (Input.GetAxis("Right Trigger") == 1 && triggerPulled == false && shotTimer == shotWaitPeriod) //If you pressed RT, the trigger is not already pulled                                                                                                
+            Shoot();                                                                                      //and the timer is set, shoot
+        if (Input.GetAxis("Right Trigger") == 0) //If RT is not pushed, trigger is not pulled
+            triggerPulled = false;
+        if (Input.GetButtonDown("Right Bumper") == true && currentAmmoInMag < magSize && ammoReserves > 0 && isReloading == false) //If RB is pushed, you actually
+            Reload();                                                                                                              //need to reload, you have ammo
+    }                                                                                                                              //to reload with & you're not
+                                                                                                                                   //already reloading, reload
     private void Shoot()
     {
-        if (shotTimer == shotWaitPeriod && ammoCount > 0)
-        {
-            gunFX.Play();
-            SoundManager.instance.Play(shotgunShot, "sfx");
-            int i = 0;
-            foreach (Quaternion quat in pellets)
-            {
-                pellets[i] = Random.rotation;
-                GameObject pell = Instantiate(pellet, barrelExit.position, barrelExit.rotation);
-                pell.transform.rotation = Quaternion.RotateTowards(pellet.transform.rotation, pellets[i], spreadAngle);
-                pell.GetComponent<Rigidbody>().AddForce(barrelExit.transform.forward * pelletVelocity);
-                Destroy(pell, .3f);
-                i++;
-            }
-            ammoCount -= 1;
-            shotTimer = 0f;
-        }
-        if(ammoCount == 0)
+        triggerPulled = true; //The trigger is pulled
+
+        if (currentAmmoInMag == 0) //If you have no ammo, you fire nothing
         {
             SoundManager.instance.Play(shotgunDryFire, "sfx");
+            return;
         }
+
+        gunFX.Play(); //Otherwise, you fire
+        SoundManager.instance.Play(shotgunShot, "sfx");
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) //Fire a bullet
+        {
+            print(hit.transform.name);
+
+            if (hit.transform.CompareTag("Player") == false)
+            {
+                hit.transform.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward * 1000f);
+            }
+        }
+
+        currentAmmoInMag -= 1; //Remove a bullet from mag
+        shotTimer = 0f; //Reset shot timer
     }
 
     private void Reload()
     {
+        print("Reloading Shotgun");
+        isReloading = true; //You're reloading
+
+        SoundManager.instance.Play(shotgunLoad, "sfx"); //Hear reload noise
+
+        while (currentAmmoInMag < magSize) //While the mag is not full, reload
+        {
+            if (ammoReserves == 0) //If you can't reload, don't
+                break;
+
+            currentAmmoInMag++; //Put a bullet in
+            ammoReserves--; //Take a bullet from the reserves
+        }
+
+        isReloading = false; //Done reloading
+        print("Reloaded Shotgun");
+    }
+
+    public void AddAmmo(int outsideAmmo)
+    {
         SoundManager.instance.Play(shotgunLoad, "sfx");
         //reload animation
         ammoCount = 2;
+        ammoReserves += outsideAmmo;
     }
 }

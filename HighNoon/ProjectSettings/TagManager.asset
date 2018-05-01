@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Player1
   - Player2
+  - SixShooter
+  - Shotgun
+  - Rifle
+  - WeaponSpawn
+  - RagdollPart
   layers:
   - Default
   - TransparentFX

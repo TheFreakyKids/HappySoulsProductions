@@ -11,7 +11,7 @@ public class DoorOpening : MonoBehaviour
     [SerializeField] private Transform playerTrans;
     [SerializeField] private bool isClosed = true; //false is close, true is open
     [SerializeField] private bool doorIsMoving = false; //for Coroutine, when start only one
-    void Start()
+    void Awake()
     {
         isClosed = true; //door is open, maybe change
                             //Initialization your quaternions
@@ -20,6 +20,12 @@ public class DoorOpening : MonoBehaviour
         //Find only one time your player and get him reference
         playerTrans = GameObject.FindWithTag("Player").transform;
     }
+
+    void OnMouseEnter()
+    {
+
+    }
+
     void Update()
     {
         //If press F key on keyboard

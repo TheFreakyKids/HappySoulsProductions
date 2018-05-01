@@ -15,11 +15,14 @@ public class WeaponSwapping : MonoBehaviour
     {
         int previousSelectedWeapon = selectedWeapon;
 
-        if (Input.GetAxis("WeaponSwitch") > 0f && hasSwitched == false)
+        print(Input.GetAxis("DPAD Vertical"));
+
+        if (Input.GetAxis("DPAD Vertical") > 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon >= transform.childCount - 1)
             {
+                print("DPAD RIGHT");
                 hasSwitched = true;
                 selectedWeapon = 0;
             }
@@ -30,24 +33,28 @@ public class WeaponSwapping : MonoBehaviour
             }
         }
         
-        if (Input.GetAxis("WeaponSwitch") < 0f && hasSwitched == false)
+        if (Input.GetAxis("DPAD Vertical") < 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon <= 0)
             {
+                print("DPAD LEFT");
                 hasSwitched = true;
                 selectedWeapon = transform.childCount - 1;
             }
             else
             {
+                print("DPAD NULL");
                 hasSwitched = true;
                 selectedWeapon--;
             }
         }
-        else if (Input.GetAxis("WeaponSwitch") == 0)
+        if (Input.GetAxis("DPAD Vertical") == 0f)
         {
             hasSwitched = false;
         }
+
+        #region Keyboard Settings
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedWeapon = 0;
@@ -64,6 +71,8 @@ public class WeaponSwapping : MonoBehaviour
         {
             selectedWeapon = 3;
         }
+        #endregion
+
         if (previousSelectedWeapon != selectedWeapon)
         {
             SelectWeapon();
