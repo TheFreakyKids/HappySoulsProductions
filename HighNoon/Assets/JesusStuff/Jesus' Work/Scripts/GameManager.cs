@@ -23,12 +23,13 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.Find("Player");
 
-        matchTime = 300f;
+        matchTime = 180f;
     }
 
     private void Update()
     {
         matchTime -= Time.deltaTime;
+        matchTime = Mathf.Clamp(matchTime, 0, matchTime);
         matchTimer.text = Mathf.Round(matchTime).ToString();
 
         foreach (GameObject spawn in Wspawns) //For weapon spawns

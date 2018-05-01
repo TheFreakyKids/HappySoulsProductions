@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44813734, g: 0.49815017, b: 0.57555115, a: 1}
+  m_IndirectSpecularColor: {r: 0.44813693, g: 0.49814975, b: 0.5755494, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -19577,6 +19577,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64111853108794610, guid: f8179cff3ce8de647b569f1f9f134767,
+        type: 2}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8179cff3ce8de647b569f1f9f134767, type: 2}
   m_IsPrefabParent: 0
@@ -21024,18 +21029,24 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 440820089}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57a5794584acc2e4ba11a7ec1d58fd21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   isJumping: 0
+  isStrafing: 0
   isGrounded: 0
   isWalking: 0
   isRunning: 0
   walkingSpd: 0
   runningSpd: 0
+  jumpSpd: 0
+  walkingMov: {x: 0, y: 0, z: 1}
+  runningMov: {x: 0, y: 0, z: 1}
+  strafingMov: {x: 1, y: 0, z: 0}
+  jumpMov: {x: 0, y: 1, z: 0}
 --- !u!1001 &442715797
 Prefab:
   m_ObjectHideFlags: 0
@@ -27280,82 +27291,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &511342045
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 511342046}
-  - component: {fileID: 511342048}
-  - component: {fileID: 511342047}
-  m_Layer: 5
-  m_Name: Disclaimer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &511342046
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 511342045}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2085831150}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: 176}
-  m_SizeDelta: {x: 459.8, y: 54.1}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &511342047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 511342045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.13103461, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 22
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'Sound effects are placeholder for debugging
-
-    Animations not done yet'
---- !u!222 &511342048
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 511342045}
 --- !u!1001 &511532212
 Prefab:
   m_ObjectHideFlags: 0
@@ -34912,8 +34847,8 @@ MonoBehaviour:
   gunFX: {fileID: 1802099859}
   ammoInMag: {fileID: 1916521061}
   ammoRes: {fileID: 1851670705}
-  crosshairTexture: {fileID: 2800000, guid: b73f46e0fca23974b8ec87811e2902f0, type: 3}
-  crosshairScale: 0.25
+  crosshairTexture: {fileID: 2800000, guid: acdcb9ab204d5854cb8ce9402eb85fef, type: 3}
+  crosshairScale: 0.5
 --- !u!4 &676551016 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4689948150990014, guid: 4fb89eb4f1b977c469c69ede945c78c7,
@@ -47351,7 +47286,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_IsKinematic
@@ -47360,6 +47295,18 @@ Prefab:
     - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Center.z
       value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -63001,6 +62948,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 84f9d613a6aa6934d8510a542fadac39, type: 2}
+    - target: {fileID: 95217205003396926, guid: e169e4d9dbd157b498e582065a5f9302,
+        type: 2}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: e42d9259129992a4d95e0b320ca2a43d, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e169e4d9dbd157b498e582065a5f9302, type: 2}
   m_IsPrefabParent: 0
@@ -72770,6 +72722,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 64506821312843190, guid: 4fb89eb4f1b977c469c69ede945c78c7,
+        type: 2}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4fb89eb4f1b977c469c69ede945c78c7, type: 2}
   m_IsPrefabParent: 0
@@ -72991,8 +72948,8 @@ MonoBehaviour:
   gunFX: {fileID: 2080843950}
   ammoInMag: {fileID: 1916521061}
   ammoRes: {fileID: 1851670705}
-  crosshairTexture: {fileID: 0}
-  crosshairScale: 1
+  crosshairTexture: {fileID: 2800000, guid: d7973f07efab3e346b582866cd2d696f, type: 3}
+  crosshairScale: 0.2
 --- !u!1 &1420276749 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1751455378945396, guid: 64eca49761c272c47a1d5e7550322be9,
@@ -108531,7 +108488,6 @@ RectTransform:
   - {fileID: 1851670704}
   - {fileID: 2029703428}
   - {fileID: 1672521633}
-  - {fileID: 511342046}
   m_Father: {fileID: 1783218850}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

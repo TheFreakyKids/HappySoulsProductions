@@ -14,10 +14,13 @@ public class WeaponSwapping : MonoBehaviour
     {
         int previousSelectedWeapon = selectedWeapon;
 
-        if (Input.GetAxis("DPAD Horizontal") > 0f && hasSwitched == false)
+        print(Input.GetAxis("DPAD Vertical"));
+
+        if (Input.GetAxis("DPAD Vertical") > 0f && hasSwitched == false)
         {
             if (selectedWeapon >= transform.childCount - 1)
             {
+                print("DPAD RIGHT");
                 hasSwitched = true;
                 selectedWeapon = 0;
             }
@@ -28,20 +31,22 @@ public class WeaponSwapping : MonoBehaviour
             }
         }
         
-        if (Input.GetAxis("DPAD Horizontal") < 0f && hasSwitched == false)
+        if (Input.GetAxis("DPAD Vertical") < 0f && hasSwitched == false)
         {
             if (selectedWeapon <= 0)
             {
+                print("DPAD LEFT");
                 hasSwitched = true;
                 selectedWeapon = transform.childCount - 1;
             }
             else
             {
+                print("DPAD NULL");
                 hasSwitched = true;
                 selectedWeapon--;
             }
         }
-        else if (Input.GetAxis("DPAD Horizontal") == 0)
+        if (Input.GetAxis("DPAD Vertical") == 0f)
         {
             hasSwitched = false;
         }

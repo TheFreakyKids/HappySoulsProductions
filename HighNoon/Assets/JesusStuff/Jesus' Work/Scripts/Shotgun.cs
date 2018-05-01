@@ -22,7 +22,7 @@ public class Shotgun : MonoBehaviour
     public Text ammoInMag;
     public Text ammoRes;
     public Texture2D crosshairTexture;
-    [SerializeField] private float crosshairScale  = .25f;
+    [SerializeField] private float crosshairScale  = .5f;
 
     private void Awake()
     {

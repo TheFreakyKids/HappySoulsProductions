@@ -18,11 +18,6 @@ public class Player : MonoBehaviour
     public Text elims; //For elim count when we have that functionality
     [SerializeField] private GameObject[] ragdollParts;
 
-    #region Ragdoll resetting vars
-    //[SerializeField] private Transform[] ragOGTrans;
-    //[SerializeField] private Transform[] ragColOGTrans;
-    #endregion
-
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -31,19 +26,9 @@ public class Player : MonoBehaviour
 
         ragdollParts = new GameObject[temp.Length];
 
-        #region Ragdoll vars
-        //ragOGTrans = new Transform[ragdollParts.Length];
-        //ragColOGTrans = new Transform[ragdollParts.Length];
-        #endregion
-
         for (int i = 0; i < temp.Length; i++)
         {
             ragdollParts[i] = temp[i];
-
-            #region Ragdolling A1 stuf
-            //ragOGTrans[i] = ragdollParts[i].transform;
-            //ragColOGTrans[i] = ragdollParts[i].GetComponent<Collider>().transform;
-            #endregion
         }
     }
 
@@ -129,24 +114,6 @@ public class Player : MonoBehaviour
                     break;
             }
             #endregion
-
-            #region Ragdolling Resetting Attempt Uno
-            //for (int i = 0; i < ragdollParts.Length; i++)
-            //{
-            //    ragdollParts[i].GetComponent<Ragdoll>().TurnOffRagdoll();
-
-            //    ragdollParts[i].transform.position = ragOGTrans[i].transform.position;
-            //    ragdollParts[i].transform.rotation = ragOGTrans[i].transform.rotation;
-            //    ragdollParts[i].transform.localPosition = ragOGTrans[i].transform.localPosition;
-            //    ragdollParts[i].transform.localRotation = ragOGTrans[i].transform.localRotation;
-
-            //    ragdollParts[i].GetComponent<Collider>().transform.position = ragColOGTrans[i].transform.position;
-            //    ragdollParts[i].GetComponent<Collider>().transform.rotation = ragColOGTrans[i].transform.rotation;
-            //    ragdollParts[i].GetComponent<Collider>().transform.localPosition = ragColOGTrans[i].transform.localPosition;
-            //    ragdollParts[i].GetComponent<Collider>().transform.localRotation = ragColOGTrans[i].transform.localRotation;
-            //}
-            #endregion
-
 
             for (int i = 0; i < ragdollParts.Length; i++)
             {

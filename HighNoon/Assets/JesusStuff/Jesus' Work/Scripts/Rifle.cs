@@ -18,7 +18,7 @@ public class Rifle : MonoBehaviour
     public Text ammoInMag;
     public Text ammoRes;
     public Texture2D crosshairTexture;
-    [SerializeField] private float crosshairScale = 1;
+    [SerializeField] private float crosshairScale = .2f;
 
     private void Awake()
     {
