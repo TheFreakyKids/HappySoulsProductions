@@ -12,7 +12,6 @@ public class SixShooter : MonoBehaviour
     public bool triggerPulled = false;
     public AudioClip revolverShot;
     public AudioClip revolverLoad;
-    public AudioClip revolverLoad2;
     public AudioClip revolverDryFire;
     //public GameObject revolverBullet;
     //public Transform barrelExit;
@@ -44,7 +43,6 @@ public class SixShooter : MonoBehaviour
 
     private void Reload()
     {
-        SoundManager.instance.Play(revolverLoad2, "sfx");
         SoundManager.instance.Play(revolverLoad, "sfx");
         //reload animation
         ammoCount = 6;

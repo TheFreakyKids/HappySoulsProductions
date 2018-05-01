@@ -34044,9 +34044,9 @@ MonoBehaviour:
   shotTimer: 0.5
   shotWaitPeriod: 0.5
   triggerPulled: 0
-  shotgunShot: {fileID: 8300000, guid: 1d94c00e8a5eedd408f31b5717e3df91, type: 3}
+  shotgunShot: {fileID: 8300000, guid: 4c655ca63245a5f4386e4db955055bf8, type: 3}
   shotgunLoad: {fileID: 8300000, guid: 5254406e731a45b44b7c74fa0e6b62d1, type: 3}
-  shotgunDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}
+  shotgunDryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
   pellet: {fileID: 1907448707304208, guid: 82b8a6f88a36d8a43973036faea4c2af, type: 2}
   barrelExit: {fileID: 945754459}
   gunFX: {fileID: 1802099859}
@@ -58715,7 +58715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedWeapon: 0
   hasSwitched: 0
-  swap: {fileID: 8300000, guid: 6b647e1d612b46549a0e5f5e9b03279c, type: 3}
+  swap: {fileID: 8300000, guid: ccff20e4f583edc4a8448c33d4a0e89d, type: 3}
 --- !u!1001 &1151176426
 Prefab:
   m_ObjectHideFlags: 0
@@ -71391,9 +71391,9 @@ MonoBehaviour:
   ammoCount: 1
   shotVelocity: 1
   triggerPulled: 0
-  rifleShot: {fileID: 8300000, guid: 3a4a911a62ea9a54991498d5606b5b0d, type: 3}
-  rifleLoad: {fileID: 8300000, guid: 5254406e731a45b44b7c74fa0e6b62d1, type: 3}
-  rifleDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}
+  rifleShot: {fileID: 8300000, guid: 1d02448a7427533439eee92d63e2ddf3, type: 3}
+  rifleLoad: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
+  rifleDryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
   fpsCam: {fileID: 448468398}
   gunFX: {fileID: 2080843950}
 --- !u!1 &1420276749 stripped
@@ -104191,10 +104191,9 @@ MonoBehaviour:
   shotTimer: 0.15
   shotWaitPeriod: 0.15
   triggerPulled: 0
-  revolverShot: {fileID: 8300000, guid: 4bf1263141ba3f0478681fd9feec0077, type: 3}
-  revolverLoad: {fileID: 8300000, guid: ba6bc5444f870a642bb00b2b6c0f2bbb, type: 3}
-  revolverLoad2: {fileID: 8300000, guid: f6f7f24c3c3ca014f996aa3a31a1bb49, type: 3}
-  revolverDryFire: {fileID: 8300000, guid: f621c89f9b0dd044cbd8b129c76869be, type: 3}
+  revolverShot: {fileID: 8300000, guid: d2f786326ae6a3243ad314ce08c17491, type: 3}
+  revolverLoad: {fileID: 8300000, guid: 558ee41ce9f94e04491e1f05b7d42834, type: 3}
+  revolverDryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
   fpsCam: {fileID: 448468398}
   gunFX: {fileID: 593827245}
 --- !u!1001 &2045941892
