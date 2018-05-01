@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     [SerializeField] private float weaponSpawnTime = 1f;
     [SerializeField] private bool weaponIsRespawning = false;
     [SerializeField] private float matchTime;
@@ -17,6 +18,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+
         Wspawns = new List<GameObject>();
         foreach (Transform spawn in GameObject.Find("WeaponSpawns").transform)
             Wspawns.Add(spawn.gameObject);
@@ -35,7 +42,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject spawn in Wspawns) //For weapon spawns
         {
             if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) <= 1f &&
-                Input.GetAxisRaw("X") == 1 && spawn.gameObject.activeSelf == true && weaponIsRespawning == false &&
+                Input.GetButtonDown("X") && spawn.gameObject.activeSelf == true && weaponIsRespawning == false &&
                 player.GetComponent<Player>().isLookingAtWeaponSpawn == true)
             {
                 #region Weapon Differentiation
@@ -43,7 +50,7 @@ public class GameManager : MonoBehaviour
                 {
                     print("Nabbed Sixshooter");
 
-                    player.GetComponentInChildren<SixShooter>().AddAmmo(9);
+                    player.GetComponentInChildren<SixShooter>().AddAmmo(12);
                     spawn.gameObject.SetActive(false);
                     StartCoroutine(WeaponRespawn(spawn));
                 }

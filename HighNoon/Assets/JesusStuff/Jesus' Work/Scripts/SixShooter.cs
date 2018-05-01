@@ -46,11 +46,7 @@ public class SixShooter : MonoBehaviour
     {
         shotTimer += Time.deltaTime;
         shotTimer = Mathf.Clamp(shotTimer, 0f, shotWaitPeriod);
-        if (Input.GetButtonDown("Fire2") && currentAmmoInMag < 6)//xbutton
-        {
-            Reload();
-        }
-        
+       
         //reload animation
         magSize = 6;
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
