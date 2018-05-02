@@ -14,9 +14,6 @@ public class WeaponSwapping : MonoBehaviour
 	void Update ()
     {
         int previousSelectedWeapon = selectedWeapon;
-
-        print(Input.GetAxis("DPAD Vertical"));
-
         if (Input.GetAxis("DPAD Vertical") > 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");

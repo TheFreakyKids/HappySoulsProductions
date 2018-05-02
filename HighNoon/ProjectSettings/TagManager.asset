@@ -11,6 +11,11 @@ TagManager:
   - Rifle
   - WeaponSpawn
   - RagdollPart
+  - RootBeer
+  - Lemonade
+  - Fusion
+  - SpeedCola
+  - Brisk
   layers:
   - Default
   - TransparentFX

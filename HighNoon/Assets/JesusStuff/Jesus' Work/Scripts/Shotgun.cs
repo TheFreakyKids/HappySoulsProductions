@@ -13,7 +13,7 @@ public class Shotgun : MonoBehaviour
     public float range = 25f;
     public bool triggerPulled = false;
     public bool isReloading = false;
-
+    
     public AudioClip shotgunShot;
     public AudioClip shotgunLoad;
     public AudioClip shotgunDryFire;
@@ -70,7 +70,11 @@ public class Shotgun : MonoBehaviour
 
         gunFX.Play(); //Otherwise, you fire
         SoundManager.instance.Play(shotgunShot, "sfx");
-
+        if (this.GetComponentInParent<Player>().infiniteAmmo == false)
+        {
+            currentAmmoInMag -= 1;
+        }
+        shotTimer = 0f; //Reset shot timer
         RaycastHit hit;
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) //Fire a bullet
@@ -83,8 +87,7 @@ public class Shotgun : MonoBehaviour
             }
         }
 
-        currentAmmoInMag -= 1; //Remove a bullet from mag
-        shotTimer = 0f; //Reset shot timer
+        
     }
 
     private void Reload()

@@ -10,6 +10,8 @@ public class Rifle : MonoBehaviour
     public float range = 100f;
     public bool triggerPulled = false;
 
+    public GameObject player;
+
     public AudioClip rifleShot;
     public AudioClip rifleLoad;
     public AudioClip rifleDryFire;
@@ -57,18 +59,18 @@ public class Rifle : MonoBehaviour
     private void Shoot()
     {
         triggerPulled = true;
-
         if (currentAmmoInMag == 0)
         {
             SoundManager.instance.Play(rifleDryFire, "sfx");
             return;
         }
-
             gunFX.Play();
             SoundManager.instance.Play(rifleShot, "sfx");
+        if(this.GetComponentInParent<Player>().infiniteAmmo == false)
+        {
             currentAmmoInMag -= 1;
+        }
             RaycastHit hit;
-
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             print(hit.transform.name);
@@ -78,8 +80,6 @@ public class Rifle : MonoBehaviour
                 hit.transform.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward * 750f);
             }
         }
-
-       
     }
 
     private void Reload()

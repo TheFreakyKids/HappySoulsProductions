@@ -12,7 +12,7 @@ public class SixShooter : MonoBehaviour
     public float shotWaitPeriod;
     public bool triggerPulled = false;
     public bool isReloading = false;
-
+    
     public AudioClip revolverShot;
     public AudioClip revolverLoad;
     public AudioClip revolverDryFire;
@@ -87,6 +87,11 @@ public class SixShooter : MonoBehaviour
         gunFX.Play(); //Otherwise, see the gun smoke, hear a gunshot, fire a bullet
         SoundManager.instance.Play(revolverShot, "sfx");
 
+        if (this.GetComponentInParent<Player>().infiniteAmmo == false)
+        {
+            currentAmmoInMag -= 1;
+        }
+        shotTimer = 0f; //Reset shot timer
         RaycastHit hit;
 
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
@@ -99,8 +104,7 @@ public class SixShooter : MonoBehaviour
             }
         }
 
-            currentAmmoInMag -= 1; //Minus 1 from ammo in mag
-            shotTimer = 0f; //Reset shot timer
+            
 
         print("Fired Sixshooter");
     }
