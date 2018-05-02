@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/JesusStuff/RPG Character Animation Pack/Scenes/RPG-Character.unity
+- path: Assets/JesusStuff/AltDemo.unity
   isLoaded: 1
   isActive: 1

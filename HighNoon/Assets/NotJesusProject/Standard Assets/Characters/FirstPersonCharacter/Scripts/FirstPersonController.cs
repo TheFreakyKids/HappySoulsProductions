@@ -4,10 +4,10 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
 
-namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CONTROLLER
+namespace UnityStandardAssets.Characters.FirstPerson
 {
     [RequireComponent(typeof (CharacterController))]
-    public class FirstPersonController : MonoBehaviour
+    public class FirstPersonController : MonoBehaviour //CUSTOM FOR HIGH NOON
     {
         [SerializeField] private bool m_IsWalking; //Are we walking
         [SerializeField] private float m_WalkSpeed; //How fast we walk
@@ -43,6 +43,8 @@ namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CON
 
         //HIGH NOON VARS BUT FROM THE RPG CON
         private Vector3 targetDashDirection;
+        protected Animator animator;
+        public float rollduration;
 
 
         private void Start() //Initialization
@@ -56,6 +58,9 @@ namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CON
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            //HIGH NOON
+            animator = GetComponentInChildren<Animator>();
         }
         
         private void Update()
@@ -103,7 +108,6 @@ namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CON
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
 
-
             if (m_CharacterController.isGrounded) //If we're on the ground, apply the stick to ground force.
             {
                 m_MoveDir.y = -m_StickToGroundForce;
@@ -120,6 +124,39 @@ namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CON
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime; //Otherwise, do gravity stuff
             }
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime); //This is where we call to move
+
+            #region HIGH NOON MOVEMENT ANIM CALLS
+            if (Input.GetAxis("Left Stick Vertical") == -1) //For
+            {
+                animator.SetTrigger("Moving");
+                animator.SetBool("Strafing", false);
+                animator.SetBool("Relax", false);
+            }
+            if (Input.GetAxis("Left Stick Horizontal") == 1) //Right
+            {
+                animator.SetTrigger("Strafing");
+                animator.SetBool("Moving", false);
+                animator.SetBool("Relax", false);
+            }
+            if (Input.GetAxis("Left Stick Vertical") == 1) //Back
+            {
+                animator.SetTrigger("Moving");
+                animator.SetBool("Strafing", false);
+                animator.SetBool("Relax", false);
+            }
+            if (Input.GetAxis("Left Stick Horizontal") == -1) //Left
+            {
+                animator.SetTrigger("Strafing");
+                animator.SetBool("Moving", false);
+                animator.SetBool("Relax", false);
+            }
+            if (Input.GetAxis("Left Stick Horizontal") == 0 && Input.GetAxis("Left Stick Vertical") == 0)
+            {
+                animator.SetTrigger("Relax");
+                animator.SetBool("Moving", false);
+                animator.SetBool("Strafing", false);
+            }
+            #endregion
 
             ProgressStepCycle(speed); //Do the step cycle
             UpdateCameraPosition(speed); //Update the camera
@@ -200,13 +237,11 @@ namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CON
                 newCameraPosition = m_Camera.transform.localPosition;
                 newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
             }
-
-            //CROUCHING
-            if (Input.GetButton("B") == true && isCrouched == false)
+           
+            if (Input.GetButton("B") == true && isCrouched == false)  //CROUCHING
             {
                 newCameraPosition.y = (m_Camera.transform.localPosition.y / 2);
             }
-
             m_Camera.transform.localPosition = newCameraPosition;
         } //CROUCHING IS IN HERE
                    
@@ -229,51 +264,47 @@ namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CON
         private void CheckForRolling() //FOR HIGH NOON
         {
             if (Input.GetButtonDown("Left Bumper") == true)
-            {
-                if (Input.GetAxis("Left Stick Vertical") == -1)
-                {
-                    print("rolling");
-                    var targetPos = transform.position + (m_Camera.transform.forward * 100);
-                    transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 2);
-                }
-            }
+                Rolling();
         }
 
-        #region Rolling Functions
+        #region ROLLING FUNCTIONS
         void Rolling()
         {
             if (!isRolling && m_CharacterController.isGrounded == true /*isGrounded*/)
             {
-                if (Input.GetAxis("DashVertical") > .5 || Input.GetAxis("DashVertical") < -.5 || Input.GetAxis("DashHorizontal") > .5 || Input.GetAxis("DashHorizontal") < -.5)
+                //if (Input.GetAxis(/*"DashVertical"*/"Left Stick Horizontal") > .5 || Input.GetAxis(/*"DashVertical"*/"Left Stick Horizontal") > .5 ||
+                //    Input.GetAxis(/*"DashHorizontal"*/"Left Stick Vertical") > .5 || Input.GetAxis(/*"DashHorizontal"*/"Left Stick Vertical") < -.5)
                 {
-                    StartCoroutine(_DirectionalRoll(Input.GetAxis("DashVertical"), Input.GetAxis("DashHorizontal")));
+                    StartCoroutine(_DirectionalRoll(Input.GetAxis(/*"DashVertical"*/"Left Stick Vertical"), Input.GetAxis(/*"DashHorizontal"*/"Left Stick Horizontal")));
                 }
             }
         }
 
         public IEnumerator _DirectionalRoll(float x, float v)
         {
-            //check which way the dash is pressed relative to the character facing
-            float angle = Vector3.Angle(targetDashDirection, -transform.forward);
-            float sign = Mathf.Sign(Vector3.Dot(transform.up, Vector3.Cross(targetDashDirection, transform.forward)));
-            // angle in [-179,180]
-            float signed_angle = angle * sign;
-            //angle in 0-360
-            float angle360 = (signed_angle + 180) % 360;
-            //deternime the animation to play based on the angle
-            if (angle360 > 315 || angle360 < 45)
+            #region RPG ROLL LOGIC
+            ////check which way the dash is pressed relative to the character facing
+            //float angle = Vector3.Angle(targetDashDirection, -transform.forward);
+            //float sign = Mathf.Sign(Vector3.Dot(transform.up, Vector3.Cross(targetDashDirection, transform.forward)));
+            //// angle in [-179,180]
+            //float signed_angle = angle * sign;
+            ////angle in 0-360
+            //float angle360 = (signed_angle + 180) % 360;
+            #endregion           //deternime the animation to play based on the angle
+
+            if (/*angle360 > 315 || angle360 < 45*/Input.GetAxis(/*"DashVertical"*/"Left Stick Vertical") == -1)
             {
                 StartCoroutine(_Roll(1));
             }
-            if (angle360 > 45 && angle360 < 135)
+            if (/*angle360 > 45 && angle360 < 135*/Input.GetAxis(/*"DashVertical"*/"Left Stick Horizontal") == 1)
             {
                 StartCoroutine(_Roll(2));
             }
-            if (angle360 > 135 && angle360 < 225)
+            if (/*angle360 > 135 && angle360 < 225*/Input.GetAxis(/*"DashHorizontal"*/"Left Stick Vertical") == 1)
             {
                 StartCoroutine(_Roll(3));
             }
-            if (angle360 > 225 && angle360 < 315)
+            if (/*angle360 > 225 && angle360 < 315*/Input.GetAxis(/*"DashHorizontal"*/"Left Stick Horizontal") == -1)
             {
                 StartCoroutine(_Roll(4));
             }
@@ -284,22 +315,22 @@ namespace UnityStandardAssets.Characters.FirstPerson //SOON TO BE CUSTOMIZED CON
         {
             if (rollNumber == 1)
             {
-                //animator.SetTrigger("RollForwardTrigger");
+                animator.SetTrigger("RollForwardTrigger");
             }
             if (rollNumber == 2)
             {
-                //animator.SetTrigger("RollRightTrigger");
+                animator.SetTrigger("RollRightTrigger");
             }
             if (rollNumber == 3)
             {
-                //animator.SetTrigger("RollBackwardTrigger");
+                animator.SetTrigger("RollBackwardTrigger");
             }
             if (rollNumber == 4)
             {
-                //animator.SetTrigger("RollLeftTrigger");
+                animator.SetTrigger("RollLeftTrigger");
             }
             isRolling = true;
-            yield return new WaitForSeconds(/*rollduration*/3f);
+            yield return new WaitForSeconds(rollduration);
             isRolling = false;
         }
         #endregion
