@@ -40,8 +40,7 @@ public class Player : MonoBehaviour
         Mathf.Clamp(currentHealth, 0, maxHealth); //Keeps health in appropriate range
         if (infiniteAmmo == true)
         {
-            Debug.Log("go go timer");
-            InfiniteAmmoTimer();
+            StartCoroutine("InfiniteAmmoTimer");
         }
         if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) //For debugging purposes
             Suicide();
@@ -136,16 +135,10 @@ public class Player : MonoBehaviour
     {
         currentHealth = 0f;
     }
-    void InfiniteAmmoTimer()
+    private IEnumerator InfiniteAmmoTimer()
     {
-        float timer = 0;
-        float timeLimit = 5f;
-        timer += Time.deltaTime;
-        Debug.Log(timer + " infinite ammo time");
-        if (timer >= timeLimit)
-        {
-            infiniteAmmo = false;
-            timer = 0;
-        }
+        infiniteAmmo = true;
+        yield return new WaitForSeconds(10);
+        infiniteAmmo = false;
     }
 }

@@ -96,7 +96,7 @@ public class SixShooter : MonoBehaviour
 
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-            print(hit.transform.name);
+            //print(hit.transform.name);
 
             if (hit.transform.CompareTag("Player") == false)
             {

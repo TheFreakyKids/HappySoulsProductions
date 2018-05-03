@@ -79,7 +79,7 @@ public class Shotgun : MonoBehaviour
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) //Fire a bullet
         {
-            print(hit.transform.name);
+            //print(hit.transform.name);
 
             if (hit.transform.CompareTag("Player") == false)
             {

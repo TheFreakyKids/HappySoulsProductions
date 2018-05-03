@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class DesperadoDrinks : MonoBehaviour
 {
     public float healthAddition = 50;
+    
 
     public void OnCollisionEnter(Collision other)
     {
@@ -28,6 +30,8 @@ public class DesperadoDrinks : MonoBehaviour
             else if(this.tag =="Fusion")
             {
                 //player goes faster for 15 sec
+                //other.gameObject.GetComponent<>().
+                SpeedBooster(other);
             }
             else if(this.tag == "SpeedCola")
             {
@@ -42,6 +46,15 @@ public class DesperadoDrinks : MonoBehaviour
         {
             return;
         }
+    }
+
+    public IEnumerator SpeedBooster(Collision other)
+    {
+        other.gameObject.GetComponent<FirstPersonController>().m_WalkSpeed *= 2;
+        other.gameObject.GetComponent<FirstPersonController>().m_WalkSpeed *= 2;
+        yield return new WaitForSeconds(15);
+        other.gameObject.GetComponent<FirstPersonController>().m_WalkSpeed /= 2;
+        other.gameObject.GetComponent<FirstPersonController>().m_WalkSpeed /= 2;
     }
     
 }
