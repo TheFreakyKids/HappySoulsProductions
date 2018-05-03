@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public bool isLookingAtWeaponSpawn = false;
 
     public bool infiniteAmmo = false;
+    public bool invincible = false;
+    public bool speedLoader = false;
 
     public MonoBehaviour fpsCon;
     public Camera fpsCam;
@@ -38,10 +40,11 @@ public class Player : MonoBehaviour
     {
         health.value = currentHealth / 100; //Divide by 100 because Slider goes from 0-1 so w/o this Slider doesn't slide properly
         Mathf.Clamp(currentHealth, 0, maxHealth); //Keeps health in appropriate range
-        if (infiniteAmmo == true)
+        if (infiniteAmmo == true || invincible == true || speedLoader == true)
         {
-            StartCoroutine("InfiniteAmmoTimer");
+            StartCoroutine("PowerUpTimer");
         }
+
         if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) //For debugging purposes
             Suicide();
         if (Input.GetKeyDown(KeyCode.H) && isRespawning == false) //For debugging purposes
@@ -65,7 +68,10 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float dam)
     {
-        currentHealth -= dam;
+        if(invincible == false)
+        {
+            currentHealth -= dam;
+        }        
     }
 
     private void Die()
@@ -135,10 +141,11 @@ public class Player : MonoBehaviour
     {
         currentHealth = 0f;
     }
-    private IEnumerator InfiniteAmmoTimer()
+    private IEnumerator PowerUpTimer()
     {
-        infiniteAmmo = true;
         yield return new WaitForSeconds(10);
         infiniteAmmo = false;
+        invincible = false;
+        speedLoader = false;
     }
 }
