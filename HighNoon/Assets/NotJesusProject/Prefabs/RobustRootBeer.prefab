@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114211650439882654}
   m_Layer: 0
   m_Name: RobustRootBeer
-  m_TagString: Lemonade
+  m_TagString: RootBeer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1028870711277024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.37, y: 0.64, z: -0.82266}
+  m_LocalPosition: {x: -22.37, y: 0.64, z: 2.12}
   m_LocalScale: {x: 2.025324, y: 2.0253236, z: 2.0253236}
   m_Children: []
   m_Father: {fileID: 0}

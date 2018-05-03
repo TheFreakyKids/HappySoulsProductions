@@ -51,3 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea6e7fd2829b18489fa63101d377633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponSpawnTime: 5
+  weaponIsRespawning: 0
+  player: {fileID: 0}
+  Wspawns: []

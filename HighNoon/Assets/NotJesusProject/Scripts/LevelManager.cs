@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     [SerializeField]
-    private float weaponSpawnTime = 1f;
+    private float weaponSpawnTime = 5f;
     [SerializeField]
     private bool weaponIsRespawning = false;
 
@@ -35,8 +35,8 @@ public class LevelManager : MonoBehaviour
     {
         foreach (GameObject spawn in Wspawns) //For weapon spawns
         {
-            if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) <= 1f &&
-                Input.GetButtonDown("X") && spawn.gameObject.activeSelf == true && weaponIsRespawning == false &&
+            if (Vector3.Distance(player.transform.position, spawn.gameObject.transform.position) <= 2f &&
+                Input.GetButtonDown("X") && spawn.gameObject.activeSelf == true /*&& weaponIsRespawning == false*/ &&
                 player.GetComponent<Player>().isLookingAtWeaponSpawn == true)
             {
                 #region Weapon Differentiation
