@@ -126,7 +126,31 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime); //This is where we call to move
 
             #region HIGH NOON MOVEMENT ANIM CALLS
-            if (Input.GetAxis("Left Stick Vertical") == -1) //For
+
+            if (!m_IsWalking) //FOR RUNNING
+            {
+                animator.SetFloat("Velocity X", 1f);
+                animator.SetFloat("Velocity Z", 1f);
+            }
+
+            if (Input.GetButtonDown("A")) //FOR JUMPING
+            {
+                if (animator.GetBool("JumpTrigger") != true)
+                {
+                    animator.SetInteger("Jumping", 1);
+                    animator.SetTrigger("JumpTrigger");
+                }
+            }
+            if(!m_Jump)
+            {
+                animator.SetInteger("Jumping", 2);
+                if (m_CharacterController.isGrounded)
+                {
+                    animator.SetInteger("Jumping", 0);
+                }
+            }
+
+           if (Input.GetAxis("Left Stick Vertical") == -1) //For
             {
                 animator.SetTrigger("Moving");
                 animator.SetBool("Strafing", false);
@@ -141,7 +165,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (Input.GetAxis("Left Stick Vertical") == 1) //Back
             {
                 animator.SetTrigger("Moving");
-                animator.SetBool("Strafing", false);
+                animator.SetBool("Strafing", true);
                 animator.SetBool("Relax", false);
             }
             if (Input.GetAxis("Left Stick Horizontal") == -1) //Left
