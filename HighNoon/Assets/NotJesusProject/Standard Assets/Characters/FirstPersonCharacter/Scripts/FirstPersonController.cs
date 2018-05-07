@@ -159,7 +159,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (Input.GetAxis("Left Stick Horizontal") == 1) //Right
             {
                 animator.SetBool("Strafing", true);
-                animator.SetBool("Moving", false);
+                //animator.SetBool("Moving", false);
                 animator.SetBool("Relax", false);
             }
             if (Input.GetAxis("Left Stick Vertical") == 1) //Back
@@ -171,7 +171,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (Input.GetAxis("Left Stick Horizontal") == -1) //Left
             {
                 animator.SetBool("Strafing", true);
-                animator.SetBool("Moving", false);
+               // animator.SetBool("Moving", false);
                 animator.SetBool("Relax", false);
             }
             if (Input.GetAxis("Left Stick Horizontal") == 0 && Input.GetAxis("Left Stick Vertical") == 0)
