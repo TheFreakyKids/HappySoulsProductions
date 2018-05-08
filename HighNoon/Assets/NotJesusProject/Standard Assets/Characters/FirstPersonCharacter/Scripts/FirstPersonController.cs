@@ -129,56 +129,31 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (!m_IsWalking) //FOR RUNNING
             {
-                animator.SetFloat("Velocity X", 1f);
-                animator.SetFloat("Velocity Z", 1f);
+                animator.SetTrigger("RunFwd");
             }
-
             if (Input.GetButtonDown("A")) //FOR JUMPING
             {
-                if (animator.GetBool("JumpTrigger") != true)
-                {
-                    animator.SetInteger("Jumping", 1);
-                    animator.SetTrigger("JumpTrigger");
-                }
+                    animator.SetTrigger("Jump");
             }
-            if(!m_Jump)
+            if (Input.GetAxis("Left Stick Vertical") == -1) //For
             {
-                animator.SetInteger("Jumping", 2);
-                if (m_CharacterController.isGrounded)
-                {
-                    animator.SetInteger("Jumping", 0);
-                }
-            }
-
-           if (Input.GetAxis("Left Stick Vertical") == -1) //For
-            {
-                animator.SetTrigger("Moving");
-                animator.SetBool("Strafing", false);
-                animator.SetBool("Relax", false);
+                animator.SetTrigger("Walk");
             }
             if (Input.GetAxis("Left Stick Horizontal") == 1) //Right
             {
-                animator.SetBool("Strafing", true);
-                //animator.SetBool("Moving", false);
-                animator.SetBool("Relax", false);
+                animator.SetTrigger("StrafeRight");
             }
             if (Input.GetAxis("Left Stick Vertical") == 1) //Back
             {
-                animator.SetTrigger("Moving");
-                animator.SetBool("Strafing", true);
-                animator.SetBool("Relax", false);
+                animator.SetTrigger("StrafeBack");
             }
             if (Input.GetAxis("Left Stick Horizontal") == -1) //Left
             {
-                animator.SetBool("Strafing", true);
-               // animator.SetBool("Moving", false);
-                animator.SetBool("Relax", false);
+                animator.SetTrigger("StrafeLeft");
             }
             if (Input.GetAxis("Left Stick Horizontal") == 0 && Input.GetAxis("Left Stick Vertical") == 0)
             {
-                animator.SetTrigger("Relax");
-                animator.SetBool("Moving", false);
-                animator.SetBool("Strafing", false);
+                animator.SetTrigger("Idle");
             }
             #endregion
 
@@ -285,50 +260,34 @@ namespace UnityStandardAssets.Characters.FirstPerson
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
 
+        #region ROLLING FUNCTIONS
+
         private void CheckForRolling() //FOR HIGH NOON
         {
-            if (Input.GetButtonDown("Left Bumper") == true)
-                Rolling();
-        }
-
-        #region ROLLING FUNCTIONS
-        void Rolling()
-        {
-            if (!isRolling && m_CharacterController.isGrounded == true /*isGrounded*/)
+            if (Input.GetButtonDown("Left Bumper") == true && !isRolling && m_CharacterController.isGrounded == true)
             {
-                //if (Input.GetAxis(/*"DashVertical"*/"Left Stick Horizontal") > .5 || Input.GetAxis(/*"DashVertical"*/"Left Stick Horizontal") > .5 ||
-                //    Input.GetAxis(/*"DashHorizontal"*/"Left Stick Vertical") > .5 || Input.GetAxis(/*"DashHorizontal"*/"Left Stick Vertical") < -.5)
+                if (Input.GetAxis("Left Stick Vertical") == Mathf.Abs(1) || Input.GetAxis("Left Stick Horizontal") == Mathf.Abs(1))
                 {
-                    StartCoroutine(_DirectionalRoll(Input.GetAxis(/*"DashVertical"*/"Left Stick Vertical"), Input.GetAxis(/*"DashHorizontal"*/"Left Stick Horizontal")));
+                    StartCoroutine(_DirectionalRoll(Input.GetAxis("Left Stick Vertical"), Input.GetAxis("Left Stick Horizontal")));
                 }
             }
         }
 
         public IEnumerator _DirectionalRoll(float x, float v)
         {
-            #region RPG ROLL LOGIC
-            ////check which way the dash is pressed relative to the character facing
-            //float angle = Vector3.Angle(targetDashDirection, -transform.forward);
-            //float sign = Mathf.Sign(Vector3.Dot(transform.up, Vector3.Cross(targetDashDirection, transform.forward)));
-            //// angle in [-179,180]
-            //float signed_angle = angle * sign;
-            ////angle in 0-360
-            //float angle360 = (signed_angle + 180) % 360;
-            #endregion           //deternime the animation to play based on the angle
-
-            if (/*angle360 > 315 || angle360 < 45*/Input.GetAxis(/*"DashVertical"*/"Left Stick Vertical") == -1)
+            if (Input.GetAxis("Left Stick Vertical") == -1)
             {
                 StartCoroutine(_Roll(1));
             }
-            if (/*angle360 > 45 && angle360 < 135*/Input.GetAxis(/*"DashVertical"*/"Left Stick Horizontal") == 1)
+            if (Input.GetAxis("Left Stick Horizontal") == 1)
             {
                 StartCoroutine(_Roll(2));
             }
-            if (/*angle360 > 135 && angle360 < 225*/Input.GetAxis(/*"DashHorizontal"*/"Left Stick Vertical") == 1)
+            if (Input.GetAxis("Left Stick Vertical") == 1)
             {
                 StartCoroutine(_Roll(3));
             }
-            if (/*angle360 > 225 && angle360 < 315*/Input.GetAxis(/*"DashHorizontal"*/"Left Stick Horizontal") == -1)
+            if (Input.GetAxis("Left Stick Horizontal") == -1)
             {
                 StartCoroutine(_Roll(4));
             }
@@ -339,19 +298,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (rollNumber == 1)
             {
-                animator.SetTrigger("RollForwardTrigger");
+                animator.SetTrigger("RollFwd");
             }
             if (rollNumber == 2)
             {
-                animator.SetTrigger("RollRightTrigger");
+                animator.SetTrigger("RollRight");
             }
             if (rollNumber == 3)
             {
-                animator.SetTrigger("RollBackwardTrigger");
+                animator.SetTrigger("RollBack");
             }
             if (rollNumber == 4)
             {
-                animator.SetTrigger("RollLeftTrigger");
+                animator.SetTrigger("RollLeft");
             }
             isRolling = true;
             yield return new WaitForSeconds(rollduration);
