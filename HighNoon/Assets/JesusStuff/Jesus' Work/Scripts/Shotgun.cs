@@ -26,7 +26,7 @@ public class Shotgun : MonoBehaviour
 
     private void Awake()
     {
-        ammoReserves = magSize * 2;
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool;
         currentAmmoInMag = magSize;
     }
 
@@ -44,9 +44,10 @@ public class Shotgun : MonoBehaviour
 
     private void Update()
     {
+        
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
-        ammoRes.text = ammoReserves.ToString();
-
+        ammoRes.text = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool.ToString();
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool;
         shotTimer += Time.deltaTime; //Gun can't be laser
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f); //Keeps timer in appropriate range
 
@@ -103,7 +104,7 @@ public class Shotgun : MonoBehaviour
                 break;
 
             currentAmmoInMag++; //Put a bullet in
-            ammoReserves--; //Take a bullet from the reserves
+            this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool--; //Take a bullet from the reserves
         }
 
         isReloading = false; //Done reloading

@@ -3216,7 +3216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &71992021
@@ -17590,6 +17589,11 @@ Prefab:
       propertyPath: m_TagString
       value: Shotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 64323122274694856, guid: 724867558fdd66b4d9bf7a3472833194,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 724867558fdd66b4d9bf7a3472833194, type: 2}
   m_IsPrefabParent: 0
@@ -19121,7 +19125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &404592723
@@ -19933,6 +19936,11 @@ Prefab:
     - target: {fileID: 64111853108794610, guid: f8179cff3ce8de647b569f1f9f134767,
         type: 2}
       propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23572272548090796, guid: f8179cff3ce8de647b569f1f9f134767,
+        type: 2}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -21367,7 +21375,9 @@ MonoBehaviour:
   stamina: 5
   spawnTime: 4
   isRespawning: 0
-  isLookingAtWeaponSpawn: 0
+  revolverAmmoPool: 12
+  rifleAmmoPool: 4
+  shotgunAmmoPool: 4
   infiniteAmmo: 0
   invincible: 0
   speedLoader: 0
@@ -27916,6 +27926,11 @@ Prefab:
     - target: {fileID: 1240443396879416, guid: f92cd75e78671bb4683ee6443f681505, type: 2}
       propertyPath: m_TagString
       value: SixShooter
+      objectReference: {fileID: 0}
+    - target: {fileID: 64820924899587302, guid: f92cd75e78671bb4683ee6443f681505,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f92cd75e78671bb4683ee6443f681505, type: 2}
@@ -35660,6 +35675,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 64820924899587302, guid: f92cd75e78671bb4683ee6443f681505,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f92cd75e78671bb4683ee6443f681505, type: 2}
   m_IsPrefabParent: 0
@@ -39800,7 +39820,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &739739239
@@ -46325,7 +46344,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &877134892
@@ -63034,6 +63052,11 @@ Prefab:
       propertyPath: m_TagString
       value: SixShooter
       objectReference: {fileID: 0}
+    - target: {fileID: 64820924899587302, guid: f92cd75e78671bb4683ee6443f681505,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f92cd75e78671bb4683ee6443f681505, type: 2}
   m_IsPrefabParent: 0
@@ -65322,6 +65345,11 @@ Prefab:
     - target: {fileID: 1961716842929030, guid: 4e2f21af56007df44963aa28e1089ba9, type: 2}
       propertyPath: m_TagString
       value: Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 64275912691985368, guid: 4e2f21af56007df44963aa28e1089ba9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e2f21af56007df44963aa28e1089ba9, type: 2}
@@ -72154,7 +72182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &1377791702
@@ -74050,6 +74077,21 @@ Prefab:
     - target: {fileID: 64506821312843190, guid: 4fb89eb4f1b977c469c69ede945c78c7,
         type: 2}
       propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64506821312843190, guid: 4fb89eb4f1b977c469c69ede945c78c7,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23063650835260918, guid: 4fb89eb4f1b977c469c69ede945c78c7,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23358880463143926, guid: 4fb89eb4f1b977c469c69ede945c78c7,
+        type: 2}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -78209,7 +78251,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &1494094516
@@ -83588,6 +83629,11 @@ Prefab:
     - target: {fileID: 1961716842929030, guid: 4e2f21af56007df44963aa28e1089ba9, type: 2}
       propertyPath: m_TagString
       value: Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 64275912691985368, guid: 4e2f21af56007df44963aa28e1089ba9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e2f21af56007df44963aa28e1089ba9, type: 2}
@@ -96460,6 +96506,11 @@ Prefab:
       propertyPath: m_TagString
       value: Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 64275912691985368, guid: 4e2f21af56007df44963aa28e1089ba9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e2f21af56007df44963aa28e1089ba9, type: 2}
   m_IsPrefabParent: 0
@@ -105342,7 +105393,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &1985170020
@@ -106833,7 +106883,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
   meshRend: {fileID: 0}
-  childRend: {fileID: 0}
   boxCol: {fileID: 0}
   kids: []
 --- !u!65 &2019661967
@@ -113435,6 +113484,11 @@ Prefab:
     - target: {fileID: 1619754294737588, guid: 724867558fdd66b4d9bf7a3472833194, type: 2}
       propertyPath: m_TagString
       value: Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 64323122274694856, guid: 724867558fdd66b4d9bf7a3472833194,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 724867558fdd66b4d9bf7a3472833194, type: 2}

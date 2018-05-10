@@ -24,7 +24,7 @@ public class Rifle : MonoBehaviour
 
     private void Awake()
     {
-        ammoReserves = magSize * 4;
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().rifleAmmoPool;
         currentAmmoInMag = magSize;
     }
 
@@ -42,11 +42,11 @@ public class Rifle : MonoBehaviour
 
     private void Update()
     {
-        
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().rifleAmmoPool;
         //reload animation
-        
+
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
-        ammoRes.text = ammoReserves.ToString();
+        ammoRes.text = this.gameObject.GetComponentInParent<Player>().rifleAmmoPool.ToString();
 
         if (Input.GetAxis("Right Trigger") == 1 && triggerPulled == false)
             Shoot();
@@ -92,7 +92,7 @@ public class Rifle : MonoBehaviour
                 break;
 
             currentAmmoInMag++;
-            ammoReserves--;
+            this.gameObject.GetComponentInParent<Player>().rifleAmmoPool--;
         }
     }
 

@@ -10,7 +10,10 @@ public class Player : MonoBehaviour
     public float stamina = 5f;
     public float spawnTime = 4f;
     public bool isRespawning = false;
-    public bool isLookingAtWeaponSpawn = false;
+
+    public int revolverAmmoPool = 12;
+    public int rifleAmmoPool = 4;
+    public int shotgunAmmoPool = 4;
 
     public bool infiniteAmmo = false;
     public bool invincible = false;
@@ -55,15 +58,7 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
-        {
-            if (hit.transform.CompareTag("WeaponSpawn") == true)
-                isLookingAtWeaponSpawn = true;
-            else
-                isLookingAtWeaponSpawn = false;
-        }
+       
     }
 
     public void TakeDamage(float dam)

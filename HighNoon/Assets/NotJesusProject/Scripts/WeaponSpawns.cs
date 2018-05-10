@@ -7,7 +7,6 @@ public class WeaponSpawns : MonoBehaviour
     public bool weaponIsRespawning = false;
     float weaponSpawnTime = 10f;
     public MeshRenderer meshRend;
-    public MeshRenderer childRend;
     public BoxCollider boxCol;
     [SerializeField]
     public List<MeshRenderer> kids;
@@ -15,8 +14,6 @@ public class WeaponSpawns : MonoBehaviour
     {
         meshRend = this.gameObject.GetComponent<MeshRenderer>();
         boxCol = this.gameObject.GetComponent<BoxCollider>();
-        
-        
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -29,7 +26,7 @@ public class WeaponSpawns : MonoBehaviour
                 kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Sixshooter");
 
-                other.GetComponentInChildren<SixShooter>().AddAmmo(12);
+                other.GetComponent<Player>().revolverAmmoPool += 12;
                 meshRend.enabled = false;
                 boxCol.enabled = false;
                 foreach (MeshRenderer mRend in kids)
@@ -40,10 +37,11 @@ public class WeaponSpawns : MonoBehaviour
             }
             if (this.tag == "Shotgun")
             {
+                kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Shotgun");
 
-                other.GetComponentInChildren<Shotgun>().AddAmmo(4);
-                this.gameObject.SetActive(false);
+                other.GetComponent<Player>().shotgunAmmoPool += 4;
+               // this.gameObject.SetActive(false);
                 meshRend.enabled = false;
                 boxCol.enabled = false;
                 foreach (MeshRenderer mRend in kids)
@@ -54,10 +52,11 @@ public class WeaponSpawns : MonoBehaviour
             }
             if (this.tag == "Rifle")
             {
+                kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Rifle");
 
-                other.GetComponentInChildren<Rifle>().AddAmmo(2);
-                this.gameObject.SetActive(false);
+                other.GetComponent<Player>().rifleAmmoPool += 2;
+               // this.gameObject.SetActive(false);
                 meshRend.enabled = false;
                 boxCol.enabled = false;
                 foreach (MeshRenderer mRend in kids)
