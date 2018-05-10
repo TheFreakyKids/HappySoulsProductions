@@ -43,6 +43,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
 
+
+
+
+
+
+
+
+
         private void Start()
         {
             m_CharacterController = GetComponent<CharacterController>();
@@ -55,20 +63,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
 			m_MouseLook.Init(transform , m_Camera.transform);
             SoundManager.instance.Play(tempMusic, "mx");
+
+
         }
         
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                SoundManager.instance.Play(tempKill, "sfx");
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                SoundManager.instance.Play(tempAnnouncerKillStreak, "vfx");
-            }
             //RotateView();
-            // the jump state needs to read here to make sure it is not missed
+
             if (!m_Jump)
             {
                 if(this.gameObject.name == "Player1")
@@ -82,17 +84,87 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
+
             {
                 StartCoroutine(m_JumpBob.DoBobCycle());
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
             }
+
             if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
             {
                 m_MoveDir.y = 0f;
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
         
         public void FixedUpdate()
@@ -141,7 +213,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_MouseLook.UpdateCursorLock();
         }
-        
+
+        /*private void RotateView()
+        {
+            m_MouseLook.LookRotation (transform, m_Camera.transform);
+        }*/
+
         private void ProgressStepCycle(float speed)
         {
             if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
@@ -179,6 +256,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 newCameraPosition = m_Camera.transform.localPosition;
                 newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
             }
+
+
+
+
+
             m_Camera.transform.localPosition = newCameraPosition;
         }
         
@@ -246,10 +328,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-        /*private void RotateView()
-        {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
-        }*/
+        
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
@@ -266,5 +345,63 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
