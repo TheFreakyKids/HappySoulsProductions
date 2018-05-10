@@ -9,9 +9,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof (CharacterController))]
     public class FirstPersonController : MonoBehaviour //CUSTOM FOR HIGH NOON
     {
-        [SerializeField] private bool m_IsWalking; //Are we walking
-        [SerializeField] private float m_WalkSpeed; //How fast we walk
-        [SerializeField] private float m_RunSpeed; //How fast we run
+        [SerializeField] public bool m_IsWalking; //Are we walking
+        [SerializeField] public float m_WalkSpeed; //How fast we walk
+        [SerializeField] public float m_RunSpeed; //How fast we run
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten; //Length in between step
         [SerializeField] private float m_JumpSpeed; //How much to jump by
         [SerializeField] private float m_StickToGroundForce; //
@@ -40,35 +40,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float speed;
         public AudioClip tempKill;
         public AudioClip tempAnnouncerKillStreak;
-
-
-
-
-
-
-
-
-
-
-
-        private void Start()
-        private Camera m_Camera; //The camera
-        private bool m_Jump; //Cam you jump?
-        private float m_YRotation; //Y rotation
-        private Vector2 m_Input; //Our movement input
-        private Vector3 m_MoveDir = Vector3.zero; //Our move direction
-        private CharacterController m_CharacterController; //The Char Con that this works with
-        private CollisionFlags m_CollisionFlags; //bitmask returned by CharacterController.Move, gives you a broad overview of where your character collided with any other objects
-        private bool m_PreviouslyGrounded; //Were we grounded
-        private Vector3 m_OriginalCameraPosition; //OG Camera position
-        private float m_StepCycle; //
-        private float m_NextStep; //
-        private bool m_Jumping; //Are we jumping
-
-
-
-
-
         //HIGH NOON VARS
         private bool isCrouched = false;
         private bool isRolling = false;
@@ -198,7 +169,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             #endregion
         }
 
-        private void FixedUpdate()
+        public void FixedUpdate()
         {
             /*float speed;*/
             if (this.gameObject.name == "Player1")
@@ -294,19 +265,30 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             m_Camera.transform.localPosition = newCameraPosition;
         } //CROUCHING IS IN HERE
-                   
-        }
         
-        private void GetInput1(out float speed)
+        public void GetInput1(out float speed)
         {
 
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Left Stick Horizontal");
             float vertical = -CrossPlatformInputManager.GetAxis("Left Stick Vertical");
 
+            bool waswalking = m_IsWalking;
 
+#if !MOBILE_INPUT
+            // On standalone builds, walk/run speed is modified by a key press.
+            // keep track of whether or not the character is walking or running
+            m_IsWalking = !Input.GetButton("Left Stick Button"); //this one actually does the sprint(hold down L-Stick)
+#endif
+            // set the desired speed to be walking or running
+            speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+            m_Input = new Vector2(horizontal, vertical);
 
-
+            // normalize input if it exceeds 1 in combined length:
+            if (m_Input.sqrMagnitude > 1)
+            {
+                m_Input.Normalize();
+            }
             // handle speed change to give an fov kick
             // only if the player is going to a run, is running and the fovkick is to be used
             if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
@@ -315,7 +297,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
         }
-        private void GetInput2(out float speed)
+        public void GetInput2(out float speed)
         {
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -367,7 +349,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         #region ROLLING FUNCTIONS
 
-        private void CheckForRolling() //FOR HIGH NOON
+        public void CheckForRolling() //FOR HIGH NOON
         {
             if (Input.GetButtonDown("Left Bumper") == true && !isRolling && m_CharacterController.isGrounded == true)
             {
