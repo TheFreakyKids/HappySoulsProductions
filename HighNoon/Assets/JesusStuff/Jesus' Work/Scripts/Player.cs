@@ -73,6 +73,8 @@ public class Player : MonoBehaviour
     {
         fpsCon.enabled = false;
 
+        GetComponent<Animator>().enabled = false;
+
         for (int i = 0; i < ragdollParts.Length; i++)
         {
             ragdollParts[i].GetComponent<Ragdoll>().TurnOnRagdoll();
@@ -86,6 +88,8 @@ public class Player : MonoBehaviour
         isRespawning = true;
 
         yield return new WaitForSecondsRealtime(spawnTime);
+
+        GetComponent<Animator>().enabled = true;
 
         if (currentHealth != 100f)
         {

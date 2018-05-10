@@ -32,7 +32,6 @@ public class WeaponSwapping : MonoBehaviour
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon >= transform.childCount - 1)
             {
-                print("DPAD RIGHT");
                 hasSwitched = true;
                 selectedWeapon = 0;
             }
@@ -48,13 +47,11 @@ public class WeaponSwapping : MonoBehaviour
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon <= 0)
             {
-                print("DPAD LEFT");
                 hasSwitched = true;
                 selectedWeapon = transform.childCount - 1;
             }
             else
             {
-                print("DPAD NULL");
                 hasSwitched = true;
                 selectedWeapon--;
             }
