@@ -37,6 +37,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep; //
         private bool m_Jumping; //Are we jumping
 
+
+
+
+
         //HIGH NOON VARS
         private bool isCrouched = false;
         private bool isRolling = false;
@@ -69,7 +73,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
          
             if (!m_Jump) // the jump state needs to read here to make sure it is not missed || If we're not jumping, then see if there's input
             {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+
+
+
+
+
+
+
+
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded) //If we were in the air and now we're on the ground, do the jump bob, don't apply up force, 
@@ -158,8 +169,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
-            float speed; //Here a speed var
-            GetInput(out speed); //Go get our speed          
+            
+              
+            
+            
+            
+            
+            
+            
+            
+                   
             Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x; // always move along the camera forward as it is the direction that it being aimed at
 
             // get a normal for the surface that is being touched to move along it
@@ -170,6 +189,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
+
 
             if (m_CharacterController.isGrounded) //If we're on the ground, apply the stick to ground force.
             {
@@ -193,41 +213,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_MouseLook.UpdateCursorLock(); //Cursor locking stuff
         }
+
         private void RotateView()
         {
             m_MouseLook.LookRotation(transform, m_Camera.transform);
-        }
-
-        private void GetInput(out float speed)
-        {
-            // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Left Stick Horizontal");
-            float vertical = -CrossPlatformInputManager.GetAxis("Left Stick Vertical");
-
-            bool waswalking = m_IsWalking; 
-
-#if !MOBILE_INPUT
-            // On standalone builds, walk/run speed is modified by a key press.
-            // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetButton("Left Stick Button");                    //this one actually does the sprint(hold down L-Stick)
-#endif
-            // set the desired speed to be walking or running
-            speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
-            m_Input = new Vector2(horizontal, vertical);
-
-            // normalize input if it exceeds 1 in combined length:
-            if (m_Input.sqrMagnitude > 1)
-            {
-                m_Input.Normalize();
-            }
-
-            // handle speed change to give an fov kick
-            // only if the player is going to a run, is running and the fovkick is to be used
-            if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
-            {
-                StopAllCoroutines();
-                StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
-            }
         }
 
         private void ProgressStepCycle(float speed)
@@ -275,6 +264,72 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Camera.transform.localPosition = newCameraPosition;
         } //CROUCHING IS IN HERE
                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             Rigidbody body = hit.collider.attachedRigidbody;
