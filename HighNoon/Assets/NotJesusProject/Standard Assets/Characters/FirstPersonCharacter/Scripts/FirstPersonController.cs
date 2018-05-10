@@ -45,7 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 targetDashDirection;
         protected Animator animator;
         public float rollduration;
-
+        public Rigidbody rb;
 
         private void Start() //Initialization
         {
@@ -91,8 +91,71 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 CheckForRolling();
             }
+
+            #region HIGH NOON MOVEMENT ANIM CALLS
+
+            float velocityXel = transform.InverseTransformDirection(rb.velocity).x;
+            float velocityZel = transform.InverseTransformDirection(rb.velocity).z;
+
+            if (!m_IsWalking) //FOR RUNNING
+            {
+                animator.SetFloat("Velocity X", 1);
+                animator.SetFloat("Velocity Z", 1);
+                animator.SetBool("Moving", true); ;
+            }
+
+            else if (m_IsWalking)
+            {
+                animator.SetFloat("Velocity X", .5f);
+                animator.SetFloat("Velocity Z", .5f);
+                animator.SetBool("Moving", true); ;
+            }
+
+            if (Input.GetButtonDown("A")) //FOR JUMPING
+            {
+                animator.SetInteger("Jumping", 1);
+                animator.SetTrigger("JumpTrigger");
+                animator.SetInteger("Jumping", 2);
+                if (m_CharacterController.isGrounded == true)
+                {
+                    animator.SetInteger("Jumping", 0);
+                }
+            }
+
+            if (Input.GetAxis("Left Stick Vertical") == -1) //For
+            {
+                animator.SetFloat("Velocity X", 1);
+                animator.SetBool("Moving", true);
+            }
+            else if (Input.GetAxis("Left Stick Vertical") < 0 && Input.GetAxis("Left Stick Vertical") > -1) //For
+            {
+                animator.SetFloat("Velocity X", .5f);
+                animator.SetBool("Moving", true);
+            }
+
+            if (Input.GetAxis("Left Stick Horizontal") > 0) //Right
+            {
+                //animator.SetTrigger("StrafeRight");
+            }
+
+            if (Input.GetAxis("Left Stick Vertical") > 0) //Back
+            {
+                //animator.SetTrigger("StrafeBack");
+            }
+
+            if (Input.GetAxis("Left Stick Horizontal") < 0) //Left
+            {
+                //animator.SetTrigger("StrafeLeft");
+            }
+
+            if (Input.GetAxis("Left Stick Horizontal") == 0 && Input.GetAxis("Left Stick Vertical") == 0)
+            {
+                animator.SetFloat("Velocity X", 0);
+                animator.SetBool("Moving", false);
+            }
+            #endregion
         }
-        
+
         private void FixedUpdate()
         {
             float speed; //Here a speed var
@@ -124,38 +187,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime; //Otherwise, do gravity stuff
             }
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime); //This is where we call to move
-
-            #region HIGH NOON MOVEMENT ANIM CALLS
-
-            if (!m_IsWalking) //FOR RUNNING
-            {
-                animator.SetTrigger("RunFwd");
-            }
-            if (Input.GetButtonDown("A")) //FOR JUMPING
-            {
-                    animator.SetTrigger("Jump");
-            }
-            if (Input.GetAxis("Left Stick Vertical") == -1) //For
-            {
-                animator.SetTrigger("Walk");
-            }
-            if (Input.GetAxis("Left Stick Horizontal") == 1) //Right
-            {
-                animator.SetTrigger("StrafeRight");
-            }
-            if (Input.GetAxis("Left Stick Vertical") == 1) //Back
-            {
-                animator.SetTrigger("StrafeBack");
-            }
-            if (Input.GetAxis("Left Stick Horizontal") == -1) //Left
-            {
-                animator.SetTrigger("StrafeLeft");
-            }
-            if (Input.GetAxis("Left Stick Horizontal") == 0 && Input.GetAxis("Left Stick Vertical") == 0)
-            {
-                animator.SetTrigger("Idle");
-            }
-            #endregion
 
             ProgressStepCycle(speed); //Do the step cycle
             UpdateCameraPosition(speed); //Update the camera
@@ -266,7 +297,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (Input.GetButtonDown("Left Bumper") == true && !isRolling && m_CharacterController.isGrounded == true)
             {
-                if (Input.GetAxis("Left Stick Vertical") == Mathf.Abs(1) || Input.GetAxis("Left Stick Horizontal") == Mathf.Abs(1))
+                if (Input.GetAxis("Left Stick Vertical") != 0 || Input.GetAxis("Left Stick Horizontal") != 0)
                 {
                     StartCoroutine(_DirectionalRoll(Input.GetAxis("Left Stick Vertical"), Input.GetAxis("Left Stick Horizontal")));
                 }
@@ -298,19 +329,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (rollNumber == 1)
             {
-                animator.SetTrigger("RollFwd");
+                animator.SetTrigger("RollForwardTrigger");
             }
             if (rollNumber == 2)
             {
-                animator.SetTrigger("RollRight");
+                animator.SetTrigger("RollRightTrigger");
             }
             if (rollNumber == 3)
             {
-                animator.SetTrigger("RollBack");
+                animator.SetTrigger("RollBackwardTrigger");
             }
             if (rollNumber == 4)
             {
-                animator.SetTrigger("RollLeft");
+                animator.SetTrigger("RollLeftTrigger");
             }
             isRolling = true;
             yield return new WaitForSeconds(rollduration);
