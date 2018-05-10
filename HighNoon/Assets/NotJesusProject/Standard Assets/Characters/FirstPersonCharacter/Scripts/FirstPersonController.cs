@@ -71,7 +71,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void Update()
         {
-            RotateView();
+            //RotateView();
          
             if (!m_Jump) // the jump state needs to read here to make sure it is not missed || If we're not jumping, then see if there's input
             {
@@ -124,7 +124,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 animator.SetBool("Moving", true); ;
             }
 
-            if (Input.GetButtonDown("A")) //FOR JUMPING
+            if (Input.GetButtonDown("Abutton")) //FOR JUMPING
             {
                 animator.SetInteger("Jumping", 1);
                 animator.SetTrigger("JumpTrigger");
@@ -216,10 +216,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.UpdateCursorLock(); //Cursor locking stuff
         }
 
-        private void RotateView()
+        /*private void RotateView()
         {
             m_MouseLook.LookRotation(transform, m_Camera.transform);
-        }
+        }*/
 
         private void ProgressStepCycle(float speed)
         {
@@ -328,9 +328,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
         }
-
         
-
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             Rigidbody body = hit.collider.attachedRigidbody;
