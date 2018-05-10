@@ -13,6 +13,19 @@ public class WeaponSwapping : MonoBehaviour
 	
 	void Update ()
     {
+        if (this.transform.parent.name == "Player 1")
+        {
+            P1Selector();
+        }
+        if (this.transform.parent.name == "Player 2")
+        {
+            Debug.Log("bloop");
+            P2Selector();
+        }
+    }
+
+    void P1Selector()
+    {
         int previousSelectedWeapon = selectedWeapon;
         if (Input.GetAxis("DPAD Vertical") > 0f && hasSwitched == false)
         {
@@ -29,7 +42,7 @@ public class WeaponSwapping : MonoBehaviour
                 selectedWeapon++;
             }
         }
-        
+
         if (Input.GetAxis("DPAD Vertical") < 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");
@@ -75,7 +88,71 @@ public class WeaponSwapping : MonoBehaviour
             SelectWeapon();
         }
     }
+    void P2Selector()
+    {
+        Debug.Log("blep");
+        int previousSelectedWeapon = selectedWeapon;
+        if (Input.GetAxis("p2 DPAD vert") > 0f && hasSwitched == false)
+        {
+            SoundManager.instance.Play(swap, "swap");
+            if (selectedWeapon >= transform.childCount - 1)
+            {
+                print("DPAD RIGHT");
+                hasSwitched = true;
+                selectedWeapon = 0;
+            }
+            else
+            {
+                hasSwitched = true;
+                selectedWeapon++;
+            }
+        }
 
+        if (Input.GetAxis("p2 DPAD vert") < 0f && hasSwitched == false)
+        {
+            SoundManager.instance.Play(swap, "swap");
+            if (selectedWeapon <= 0)
+            {
+                print("DPAD LEFT");
+                hasSwitched = true;
+                selectedWeapon = transform.childCount - 1;
+            }
+            else
+            {
+                print("DPAD NULL");
+                hasSwitched = true;
+                selectedWeapon--;
+            }
+        }
+        if (Input.GetAxis("p2 DPAD vert") == 0f)
+        {
+            hasSwitched = false;
+        }
+
+        #region Keyboard Settings
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedWeapon = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
+        {
+            selectedWeapon = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
+        {
+            selectedWeapon = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 4)
+        {
+            selectedWeapon = 3;
+        }
+        #endregion
+
+        if (previousSelectedWeapon != selectedWeapon)
+        {
+            SelectWeapon();
+        }
+    }
     void SelectWeapon()
     {
         int i = 0;

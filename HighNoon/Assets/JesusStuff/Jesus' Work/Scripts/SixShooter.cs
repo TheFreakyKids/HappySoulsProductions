@@ -54,7 +54,17 @@ public class SixShooter : MonoBehaviour
 
         shotTimer += Time.deltaTime; //Doesn't allow the gun to become a laser
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f); //Keeps the timer in the appropriate range
-
+        if(this.transform.parent.transform.parent.name == "Player1")
+        {
+            Shooter1();
+        }
+        if (this.transform.parent.transform.parent.name == "Player2")
+        {
+            Shooter2();
+        }
+    }
+    void Shooter1()
+    {
         if (Input.GetAxis("Right Trigger") == 0) //If no RT Input, triggered is not pulled
             triggerPulled = false;
 
@@ -68,11 +78,36 @@ public class SixShooter : MonoBehaviour
         //}
         #endregion
 
-        if (Input.GetButtonDown("Right Bumper") == true && triggerPulled == false && currentAmmoInMag < magSize && ammoReserves > 0 && isReloading == false) 
+        if (Input.GetButtonDown("Right Bumper") == true && triggerPulled == false && currentAmmoInMag < magSize && ammoReserves > 0 && isReloading == false)
             Reload(); //If RB is pushed & the trigger is not pulled & you actually need to reload and you have ammo to reload with & you're not already reloading,
                       //then reload
     }
+    void Shooter2()
+    {
+        if (Input.GetAxis("Fire1") == 0)
+        {
+            triggerPulled = false;
+        }//If no RT Input, triggered is not pulled
+            
 
+        if (Input.GetAxis("Fire1") == 1 && triggerPulled == false && shotTimer == shotWaitPeriod)
+        {
+            Shoot(); 
+                
+        }//If there is RT input, the trigger is not pulled &                                                                                                
+                                                                                         //the shotTimer is set, then you can shoot
+
+        #region Rolling
+        //if (Input.GetButtonDown("Left Bumper") == true)  //put in controller for rolling later
+        //{
+        //    print("rolling");
+        //}
+        #endregion
+
+        if (Input.GetButtonDown("p2 rb") == true && triggerPulled == false && currentAmmoInMag < magSize && ammoReserves > 0 && isReloading == false)
+            Reload(); //If RB is pushed & the trigger is not pulled & you actually need to reload and you have ammo to reload with & you're not already reloading,
+                      //then reload
+    }
     private void Shoot()
     {
         triggerPulled = true; //You just pulled the trigger
@@ -80,7 +115,6 @@ public class SixShooter : MonoBehaviour
         if (currentAmmoInMag == 0) //If you have no ammo, you hear a dry gun sound and return
         {
             SoundManager.instance.Play(revolverDryFire, "sfx");
-            Debug.Log("Revolver is empty.");
             return;
         }
 
@@ -103,15 +137,10 @@ public class SixShooter : MonoBehaviour
                 hit.transform.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward * 500f);
             }
         }
-
-            
-
-        print("Fired Sixshooter");
     }
 
     private void Reload()
     {
-        print("Reloading SixShooter");
         isReloading = true; //You are reloading
 
         SoundManager.instance.Play(revolverLoad, "sfx"); //Hear reloading noise
@@ -128,7 +157,6 @@ public class SixShooter : MonoBehaviour
         }
 
         isReloading = false; //You're done reloading
-        print("Reloaded SixShooter");
     }
 
     public void AddAmmo(int outsideAmmo)
