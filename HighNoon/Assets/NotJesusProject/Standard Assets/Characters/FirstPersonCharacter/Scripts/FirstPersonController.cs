@@ -43,6 +43,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         //HIGH NOON VARS
         private bool isCrouched = false;
         private bool isRolling = false;
+        public float distThreshold = .5f;
 
         //HIGH NOON VARS BUT FROM THE RPG CON
         private Vector3 targetDashDirection;
@@ -124,12 +125,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 animator.SetBool("Moving", true); ;
             }
 
-            if (Input.GetButtonDown("Abutton")) //FOR JUMPING
+            if (Input.GetButtonDown("Abutton") && m_CharacterController.isGrounded) //FOR JUMPING
             {
                 animator.SetInteger("Jumping", 1);
                 animator.SetTrigger("JumpTrigger");
                 animator.SetInteger("Jumping", 2);
-                if (m_CharacterController.isGrounded == true)
+            }
+
+            RaycastHit hit;
+            Vector3 offset = new Vector3(0, -0.5f, 0);
+            if (Physics.Raycast((transform.position + offset), -Vector3.up, out hit, 100f))
+            {
+                Debug.DrawRay(transform.position + offset, -Vector3.up, Color.magenta);
+                if (hit.distance < distThreshold)
                 {
                     animator.SetInteger("Jumping", 0);
                 }
@@ -381,22 +389,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public IEnumerator _Roll(int rollNumber)
         {
-            if (rollNumber == 1)
-            {
-                animator.SetTrigger("RollForwardTrigger");
-            }
-            if (rollNumber == 2)
-            {
-                animator.SetTrigger("RollRightTrigger");
-            }
-            if (rollNumber == 3)
-            {
-                animator.SetTrigger("RollBackwardTrigger");
-            }
-            if (rollNumber == 4)
-            {
-                animator.SetTrigger("RollLeftTrigger");
-            }
+            animator.SetInteger("Action", rollNumber);
+            animator.SetTrigger("RollTrigger");
+
             isRolling = true;
             yield return new WaitForSeconds(rollduration);
             isRolling = false;

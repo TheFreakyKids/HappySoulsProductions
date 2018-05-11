@@ -1665,12 +1665,15 @@ MonoBehaviour:
   doublejumpSpeed: 10
   canDoubleJump: 0
   isDoubleJumping: 0
+  fallDelay: 0.2
   inAirSpeed: 8
   rollSpeed: 8
   rollduration: 0.5
   canMove: 1
   walkSpeed: 2
   runSpeed: 8
+  slopeAmount: 0.5
+  onAllowableSlope: 0
   weapon: 0
   isRelax: 0
   canAction: 1
