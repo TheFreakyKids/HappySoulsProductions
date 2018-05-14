@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> Wspawns;
 
+    public AudioClip tempMusic;
+
     private void Awake()
     {
         if (instance == null)
@@ -24,10 +26,11 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
-    
+    void Start()
+    {
+        SoundManager.instance.Play(tempMusic, "mx");
+    }
 	void Update ()
     {
     }
-
-    
 }
