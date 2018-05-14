@@ -52910,7 +52910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3201d0d6ef55bfe4d890a1c5bc651bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matchTime: 0
+  matchTime: 500
   minsLeft: 0
   secLeft: 0
   matchTimer: {fileID: 2029703429}
@@ -94729,7 +94729,7 @@ Prefab:
       objectReference: {fileID: 1851670705}
     - target: {fileID: 1872538415991546, guid: be9d4a7692429f5419de8d798b25e728, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be9d4a7692429f5419de8d798b25e728, type: 2}
