@@ -136,6 +136,10 @@ public class SixShooter : MonoBehaviour
             {
                 hit.transform.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward * 500f);
             }
+            if(hit.transform.CompareTag("Player") == true)
+            {
+                hit.transform.GetComponent<Player>().TakeDamage(damage);
+            }
         }
     }
 

@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float stamina = 5f;
     public float spawnTime = 4f;
     public bool isRespawning = false;
-
+    public bool died = false;
     public int revolverAmmoPool = 12;
     public int rifleAmmoPool = 4;
     public int shotgunAmmoPool = 4;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private void Update ()
     {
         health.value = currentHealth / 100; //Divide by 100 because Slider goes from 0-1 so w/o this Slider doesn't slide properly
-        Mathf.Clamp(currentHealth, 0, maxHealth); //Keeps health in appropriate range
+         //Keeps health in appropriate range
         if (infiniteAmmo == true || invincible == true || speedLoader == true)
         {
             StartCoroutine("PowerUpTimer");
@@ -52,8 +52,11 @@ public class Player : MonoBehaviour
             Suicide();
         if (Input.GetKeyDown(KeyCode.H) && isRespawning == false) //For debugging purposes
             TakeDamage(25);
-        if (currentHealth == 0f && isRespawning == false) //If you have no health & you're not already respawning, then die
+        if (currentHealth == 0f && isRespawning == false)
+        {
+            died = true;//If you have no health & you're not already respawning, then die
             Die();
+        }
 	}
 
     public void FixedUpdate()
@@ -65,7 +68,7 @@ public class Player : MonoBehaviour
     {
         if(invincible == false)
         {
-            currentHealth -= dam;
+            currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth); 
         }        
     }
 
@@ -133,6 +136,7 @@ public class Player : MonoBehaviour
             currentHealth = 100f;
             fpsCon.enabled = true;
         }
+        died = false;
         isRespawning = false;
     }
 
@@ -142,6 +146,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator PowerUpTimer()
     {
+        
         yield return new WaitForSeconds(10);
         infiniteAmmo = false;
         invincible = false;
