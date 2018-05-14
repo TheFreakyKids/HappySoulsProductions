@@ -71,7 +71,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void Update()
         {
-            //RotateView();
+           //RotateView();
          
             if (!m_Jump) // the jump state needs to read here to make sure it is not missed || If we're not jumping, then see if there's input
             {
@@ -182,7 +182,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             // always move along the camera forward as it is the direction that it being aimed at
             Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
-
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
@@ -216,10 +215,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.UpdateCursorLock(); //Cursor locking stuff
         }
 
-        /*private void RotateView()
+        private void RotateView()
         {
             m_MouseLook.LookRotation(transform, m_Camera.transform);
-        }*/
+        }
 
         private void ProgressStepCycle(float speed)
         {
