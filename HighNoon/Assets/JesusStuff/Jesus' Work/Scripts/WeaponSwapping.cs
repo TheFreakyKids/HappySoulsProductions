@@ -5,26 +5,30 @@ public class WeaponSwapping : MonoBehaviour
     [SerializeField] private int selectedWeapon = 0;
     public bool hasSwitched = false;
     public AudioClip swap;
+    private string parentName;
 
+    void Awake()
+    {
+        parentName = this.transform.parent.name;
+    }
 	void Start ()
     {
         SelectWeapon();	
 	}
 	
-	void Update ()
+	public void Update ()
     {
-        if (this.transform.parent.name == "Player 1")
+        if (parentName == "Player1")
         {
             P1Selector();
         }
-        if (this.transform.parent.name == "Player 2")
+        if (parentName == "Player2")
         {
-            Debug.Log("bloop");
             P2Selector();
         }
     }
 
-    void P1Selector()
+    public void P1Selector()
     {
         int previousSelectedWeapon = selectedWeapon;
         if (Input.GetAxis("DPAD Vertical") > 0f && hasSwitched == false)
