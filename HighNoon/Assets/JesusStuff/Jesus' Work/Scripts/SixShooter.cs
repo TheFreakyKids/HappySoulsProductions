@@ -25,7 +25,7 @@ public class SixShooter : MonoBehaviour
 
     private void Awake()
     {
-        ammoReserves = this.gameObject.GetComponentInParent<Player>().revolverAmmoPool;
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().revolverAmmoPoolP1;
         currentAmmoInMag = magSize;
         
 	}
@@ -46,11 +46,11 @@ public class SixShooter : MonoBehaviour
     {
         shotTimer += Time.deltaTime;
         shotTimer = Mathf.Clamp(shotTimer, 0f, shotWaitPeriod);
-        ammoReserves = this.gameObject.GetComponentInParent<Player>().revolverAmmoPool;
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().revolverAmmoPoolP1;
         //reload animation
         magSize = 6;
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
-        ammoRes.text = this.gameObject.GetComponentInParent<Player>().revolverAmmoPool.ToString();
+        ammoRes.text = this.gameObject.GetComponentInParent<Player>().revolverAmmoPoolP1.ToString();
 
         shotTimer += Time.deltaTime; //Doesn't allow the gun to become a laser
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f); //Keeps the timer in the appropriate range
@@ -158,7 +158,7 @@ public class SixShooter : MonoBehaviour
             }
 
             currentAmmoInMag++; //Otherwise, put a bullet in
-            this.gameObject.GetComponentInParent<Player>().revolverAmmoPool--; //Take a bullet from the reserves
+            this.gameObject.GetComponentInParent<Player>().revolverAmmoPoolP1--; //Take a bullet from the reserves
         }
 
         isReloading = false; //You're done reloading

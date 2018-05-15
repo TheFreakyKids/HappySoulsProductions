@@ -3438,7 +3438,6 @@ MonoBehaviour:
     BobDuration: 0.2
     BobAmount: 0.1
   m_StepInterval: 5
-  tempMusic: {fileID: 8300000, guid: 40e88dc798182e94d9007fc52db7e837, type: 3}
   speed: 0
   tempKill: {fileID: 8300000, guid: 1a920f75a409bfc4abfd5a0944fb147f, type: 3}
   tempAnnouncerKillStreak: {fileID: 8300000, guid: fd2ad3d50dac196489aa8a44f0d7a6fd,
@@ -3458,17 +3457,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  stamina: 5
   spawnTime: 4
   isRespawning: 0
-  revolverAmmoPool: 12
-  rifleAmmoPool: 4
-  shotgunAmmoPool: 4
+  died: 0
+  revolverAmmoPoolP1: 12
+  rifleAmmoPoolP1: 4
+  shotgunAmmoPoolP1: 4
+  revolverAmmoPoolP2: 12
+  rifleAmmoPoolP2: 4
+  shotgunAmmoPoolP2: 4
   infiniteAmmo: 0
   invincible: 0
   speedLoader: 0
   fpsCon: {fileID: 114219908518997772}
-  fpsCam: {fileID: 20789466242298056}
   health: {fileID: 0}
   elims: {fileID: 0}
   ragdollParts: []
@@ -3549,9 +3550,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 0}
-  verticalRotation: 0
+  verticalRotationP1: 0
+  verticalRotationP2: 0
   horizontalRotation: 0
   updownrange: 80
+  parentName: 
 --- !u!114 &114416182114145950
 MonoBehaviour:
   m_ObjectHideFlags: 1

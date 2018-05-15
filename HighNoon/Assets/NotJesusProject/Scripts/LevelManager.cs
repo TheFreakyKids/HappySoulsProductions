@@ -6,16 +6,7 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-    [SerializeField]
-    private float weaponSpawnTime = 5f;
-    [SerializeField]
-    private bool weaponIsRespawning = false;
-
-    [SerializeField]
-    private GameObject player;
-    [SerializeField]
-    private List<GameObject> Wspawns;
-
+    
     public AudioClip tempMusic;
 
     private void Awake()
@@ -29,8 +20,5 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         SoundManager.instance.Play(tempMusic, "mx");
-    }
-	void Update ()
-    {
     }
 }

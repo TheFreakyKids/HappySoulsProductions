@@ -7,20 +7,21 @@ public class Player : MonoBehaviour
 {
     public float maxHealth = 100;
     public float currentHealth;
-    public float stamina = 5f;
     public float spawnTime = 4f;
     public bool isRespawning = false;
     public bool died = false;
-    public int revolverAmmoPool = 12;
-    public int rifleAmmoPool = 4;
-    public int shotgunAmmoPool = 4;
+    public int revolverAmmoPoolP1 = 12;
+    public int rifleAmmoPoolP1 = 4;
+    public int shotgunAmmoPoolP1 = 4;
+    public int revolverAmmoPoolP2 = 12;
+    public int rifleAmmoPoolP2 = 4;
+    public int shotgunAmmoPoolP2 = 4;
 
     public bool infiniteAmmo = false;
     public bool invincible = false;
     public bool speedLoader = false;
 
     public MonoBehaviour fpsCon;
-    public Camera fpsCam;
     public Slider health;
     public Text elims; //For elim count when we have that functionality
     [SerializeField] private GameObject[] ragdollParts;
@@ -76,12 +77,8 @@ public class Player : MonoBehaviour
     {
         fpsCon.enabled = false;
 
-        GetComponent<Animator>().enabled = false;
-
-        for (int i = 0; i < ragdollParts.Length; i++)
-        {
-            ragdollParts[i].GetComponent<Ragdoll>().TurnOnRagdoll();
-        }
+        //GetComponent<Animator>().enabled = false;
+        
 
         StartCoroutine(Respawn());
     }
@@ -92,7 +89,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(spawnTime);
 
-        GetComponent<Animator>().enabled = true;
+        //GetComponent<Animator>().enabled = true;
 
         if (currentHealth != 100f)
         {
@@ -127,16 +124,10 @@ public class Player : MonoBehaviour
                     break;
             }
             #endregion
-
-            for (int i = 0; i < ragdollParts.Length; i++)
-            {
-                ragdollParts[i].GetComponent<Ragdoll>().TurnOffRagdoll();
-            }
-
+            
             currentHealth = 100f;
             fpsCon.enabled = true;
         }
-        died = false;
         isRespawning = false;
     }
 
@@ -146,7 +137,6 @@ public class Player : MonoBehaviour
     }
     private IEnumerator PowerUpTimer()
     {
-        
         yield return new WaitForSeconds(10);
         infiniteAmmo = false;
         invincible = false;

@@ -26,7 +26,7 @@ public class Shotgun : MonoBehaviour
 
     private void Awake()
     {
-        ammoReserves = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool;
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPoolP1;
         currentAmmoInMag = magSize;
     }
 
@@ -46,8 +46,8 @@ public class Shotgun : MonoBehaviour
     {
         
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
-        ammoRes.text = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool.ToString();
-        ammoReserves = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool;
+        ammoRes.text = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPoolP1.ToString();
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPoolP1;
         shotTimer += Time.deltaTime; //Gun can't be laser
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f); //Keeps timer in appropriate range
         if (this.transform.parent.transform.parent.name == "Player1")
@@ -105,6 +105,10 @@ public class Shotgun : MonoBehaviour
             {
                 hit.transform.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward * 1000f);
             }
+            if (hit.transform.CompareTag("Player") == true)
+            {
+                hit.transform.GetComponent<Player>().TakeDamage(damage);
+            }
         }
 
         
@@ -123,7 +127,7 @@ public class Shotgun : MonoBehaviour
                 break;
 
             currentAmmoInMag++; //Put a bullet in
-            this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool--; //Take a bullet from the reserves
+            this.gameObject.GetComponentInParent<Player>().shotgunAmmoPoolP1--; //Take a bullet from the reserves
         }
 
         isReloading = false; //Done reloading

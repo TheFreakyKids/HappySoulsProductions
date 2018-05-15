@@ -24,7 +24,7 @@ public class Rifle : MonoBehaviour
 
     private void Awake()
     {
-        ammoReserves = this.gameObject.GetComponentInParent<Player>().rifleAmmoPool;
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().rifleAmmoPoolP1;
         currentAmmoInMag = magSize;
     }
 
@@ -42,11 +42,11 @@ public class Rifle : MonoBehaviour
 
     private void Update()
     {
-        ammoReserves = this.gameObject.GetComponentInParent<Player>().rifleAmmoPool;
+        ammoReserves = this.gameObject.GetComponentInParent<Player>().rifleAmmoPoolP1;
         //reload animation
 
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
-        ammoRes.text = this.gameObject.GetComponentInParent<Player>().rifleAmmoPool.ToString();
+        ammoRes.text = this.gameObject.GetComponentInParent<Player>().rifleAmmoPoolP1.ToString();
         if (this.transform.parent.transform.parent.name == "Player1")
         {
             Debug.Log("p1");
@@ -99,6 +99,10 @@ public class Rifle : MonoBehaviour
             {
                 hit.transform.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward * 750f);
             }
+            if (hit.transform.CompareTag("Player") == true)
+            {
+                hit.transform.GetComponent<Player>().TakeDamage(damage);
+            }
         }
     }
 
@@ -112,7 +116,7 @@ public class Rifle : MonoBehaviour
                 break;
 
             currentAmmoInMag++;
-            this.gameObject.GetComponentInParent<Player>().rifleAmmoPool--;
+            this.gameObject.GetComponentInParent<Player>().rifleAmmoPoolP1--;
         }
     }
 

@@ -48,13 +48,15 @@ public class GameManager : MonoBehaviour
         if (player2.gameObject.GetComponent<Player>().died == true)
         {
             //player 2 died
-            player1Points++;
+            player1Points += 1;
+            player2.gameObject.GetComponent<Player>().died = false;
             player1ScoreDisplay.text = player1Points.ToString();
         }
         if (player1.gameObject.GetComponent<Player>().died == true)
         {
             //player 1 died
-            player2Points++;
+            player2Points += 1;
+            player1.gameObject.GetComponent<Player>().died = false;
             player2ScoreDisplay.text = player2Points.ToString();
         }
     }
@@ -70,6 +72,21 @@ public class GameManager : MonoBehaviour
         {
             player1Win = true;
             Debug.Log("p1 wins");
+        }
+        if (matchTime == 0)
+        {
+            if(player1Points > player2Points)
+            {
+                player1Win = true;
+            }
+            else if(player2Points > player1Points)
+            {
+                player2Win = true;
+            }
+            else if(player1Points == player2Points)
+            {
+                //tie
+            }
         }
     }
 }

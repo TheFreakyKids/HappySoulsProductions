@@ -26,7 +26,7 @@ public class WeaponSpawns : MonoBehaviour
                 kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Sixshooter");
 
-                other.GetComponent<Player>().revolverAmmoPool += 12;
+                other.GetComponent<Player>().revolverAmmoPoolP1 += 12;
                 meshRend.enabled = false;
                 boxCol.enabled = false;
                 foreach (MeshRenderer mRend in kids)
@@ -40,7 +40,7 @@ public class WeaponSpawns : MonoBehaviour
                 kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Shotgun");
 
-                other.GetComponent<Player>().shotgunAmmoPool += 4;
+                other.GetComponent<Player>().shotgunAmmoPoolP1 += 4;
                // this.gameObject.SetActive(false);
                 meshRend.enabled = false;
                 boxCol.enabled = false;
@@ -55,7 +55,7 @@ public class WeaponSpawns : MonoBehaviour
                 kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Rifle");
 
-                other.GetComponent<Player>().rifleAmmoPool += 2;
+                other.GetComponent<Player>().rifleAmmoPoolP1 += 2;
                // this.gameObject.SetActive(false);
                 meshRend.enabled = false;
                 boxCol.enabled = false;
