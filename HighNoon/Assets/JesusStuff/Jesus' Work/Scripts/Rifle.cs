@@ -47,15 +47,35 @@ public class Rifle : MonoBehaviour
 
         ammoInMag.text = currentAmmoInMag.ToString(); //For ammo count UI
         ammoRes.text = this.gameObject.GetComponentInParent<Player>().rifleAmmoPool.ToString();
-
+        if (this.transform.parent.transform.parent.name == "Player1")
+        {
+            Debug.Log("p1");
+            Shooter1();
+        }
+        if (this.transform.parent.transform.parent.name == "Player2")
+        {
+            Shooter2();
+        }
+        
+    }
+    void Shooter1()
+    {
         if (Input.GetAxis("Right Trigger") == 1 && triggerPulled == false)
             Shoot();
         if (Input.GetAxis("Right Trigger") == 0)
             triggerPulled = false;
-        if (Input.GetButtonDown("Right Bumper") && currentAmmoInMag < magSize && ammoReserves > 0) 
+        if (Input.GetButtonDown("Right Bumper") && currentAmmoInMag < magSize && ammoReserves > 0)
             Reload();
     }
-
+    void Shooter2()
+    {
+        if (Input.GetAxis("Fire1") == 1 && triggerPulled == false)
+            Shoot();
+        if (Input.GetAxis("Fire1") == 0)
+            triggerPulled = false;
+        if (Input.GetButtonDown("p2 rb") && currentAmmoInMag < magSize && ammoReserves > 0)
+            Reload();
+    }
     private void Shoot()
     {
         triggerPulled = true;

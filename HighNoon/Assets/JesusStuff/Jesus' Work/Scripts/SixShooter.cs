@@ -56,6 +56,7 @@ public class SixShooter : MonoBehaviour
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f); //Keeps the timer in the appropriate range
         if(this.transform.parent.transform.parent.name == "Player1")
         {
+            Debug.Log("p1");
             Shooter1();
         }
         if (this.transform.parent.transform.parent.name == "Player2")

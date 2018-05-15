@@ -50,15 +50,34 @@ public class Shotgun : MonoBehaviour
         ammoReserves = this.gameObject.GetComponentInParent<Player>().shotgunAmmoPool;
         shotTimer += Time.deltaTime; //Gun can't be laser
         shotTimer = Mathf.Clamp(shotTimer, 0f, .5f); //Keeps timer in appropriate range
-
+        if (this.transform.parent.transform.parent.name == "Player1")
+        {
+            Debug.Log("p1");
+            Shooter1();
+        }
+        if (this.transform.parent.transform.parent.name == "Player2")
+        {
+            Shooter2();
+        }
+    }                                                                                                                              
+    void Shooter1()
+    {
         if (Input.GetAxis("Right Trigger") == 1 && triggerPulled == false && shotTimer == shotWaitPeriod) //If you pressed RT, the trigger is not already pulled                                                                                                
             Shoot();                                                                                      //and the timer is set, shoot
         if (Input.GetAxis("Right Trigger") == 0) //If RT is not pushed, trigger is not pulled
             triggerPulled = false;
         if (Input.GetButtonDown("Right Bumper") == true && currentAmmoInMag < magSize && ammoReserves > 0 && isReloading == false) //If RB is pushed, you actually
-            Reload();                                                                                                              //need to reload, you have ammo
-    }                                                                                                                              //to reload with & you're not
-                                                                                                                                   //already reloading, reload
+            Reload();
+    }
+    void Shooter2()
+    {
+        if (Input.GetAxis("Fire1") == 1 && triggerPulled == false && shotTimer == shotWaitPeriod) //If you pressed RT, the trigger is not already pulled                                                                                                
+            Shoot();                                                                                      //and the timer is set, shoot
+        if (Input.GetAxis("Fire1") == 0) //If RT is not pushed, trigger is not pulled
+            triggerPulled = false;
+        if (Input.GetButtonDown("p2 rb") == true && currentAmmoInMag < magSize && ammoReserves > 0 && isReloading == false) //If RB is pushed, you actually
+            Reload();
+    }
     private void Shoot()
     {
         triggerPulled = true; //The trigger is pulled

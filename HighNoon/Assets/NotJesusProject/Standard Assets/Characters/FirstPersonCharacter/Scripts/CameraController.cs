@@ -4,10 +4,11 @@ using UnityEngine;
 
 public partial class CameraController : MonoBehaviour {
     public Camera playerCam;
-    public float verticalRotation;
+    public float verticalRotationP1;
+    public float verticalRotationP2;
     public float horizontalRotation;
     public float updownrange = 80f;
-    private string parentName;
+    public string parentName;
     void Awake()
     {
         playerCam = this.GetComponent<Camera>();
@@ -72,8 +73,8 @@ public partial class CameraController : MonoBehaviour {
         #endregion
         if (Input.GetAxis("Right Stick Vertical") > 0.1 || Input.GetAxis("Right Stick Vertical") < 0.1)
         {
-            verticalRotation -= Input.GetAxis("Right Stick Vertical");
-            verticalRotation = Mathf.Clamp(verticalRotation, -updownrange, updownrange);
+            verticalRotationP1 -= Input.GetAxis("Right Stick Vertical");
+            verticalRotationP1 = Mathf.Clamp(verticalRotationP1, -updownrange, updownrange);
             Debug.Log(parentName + " is using vertical rotation");
         }
         if (Input.GetAxis("Right Stick Horizontal") > 0.1 || Input.GetAxis("Right Stick Horizontal") < 0.1)
@@ -81,7 +82,7 @@ public partial class CameraController : MonoBehaviour {
             horizontalRotation += Input.GetAxis("Right Stick Horizontal");
         }
         
-        Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1, 0, 0);
         this.transform.parent.transform.localRotation = Quaternion.Euler(0, horizontalRotation * 1.5f, 0);
     }
     private void MouseLook2()
@@ -107,15 +108,15 @@ public partial class CameraController : MonoBehaviour {
         #endregion
         if (Input.GetAxis("P2VertLook") > 0.1 || Input.GetAxis("P2VertLook") < 0.1)
         {
-            verticalRotation -= Input.GetAxis("P2VertLook");
-            verticalRotation = Mathf.Clamp(verticalRotation, -updownrange, updownrange);
+            verticalRotationP2 -= Input.GetAxis("P2VertLook");
+            verticalRotationP2 = Mathf.Clamp(verticalRotationP2, -updownrange, updownrange);
         }
         if (Input.GetAxis("P2HorizLook") > 0.1 || Input.GetAxis("P2HorizLook") < 0.1)
         {
             horizontalRotation += Input.GetAxis("P2HorizLook");
         }
 
-        playerCam.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP2, 0, 0);
         this.transform.parent.transform.localRotation = Quaternion.Euler(0, horizontalRotation * 1.5f, 0);
     }
 }
