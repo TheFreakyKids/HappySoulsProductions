@@ -46,7 +46,8 @@ public class AimScript : MonoBehaviour {
 	void Update () {
 
 		//When right click is held down
-		if(Input.GetButton("Fire2")) {
+		if(Input.GetAxis("Left Trigger") >= 0.1)
+        {
 			//Move the gun to the zoom position
 			transform.localPosition = Vector3.Lerp(transform.localPosition, 
 			                                       zoomPosition, Time.deltaTime * moveSpeed);
@@ -61,7 +62,9 @@ public class AimScript : MonoBehaviour {
 				soundHasPlayed = true;
 			}
 
-		} else {
+		}
+        else
+        {
 			//When right click is released
 			//Move the gun back to the default position
 			transform.localPosition = Vector3.Lerp(transform.localPosition, 
@@ -72,15 +75,5 @@ public class AimScript : MonoBehaviour {
 
 			soundHasPlayed = false;
 		}
-
-		//Rotate the gun based on the mouse input
-		mouseX = Input.GetAxis ("Mouse X");
-		mouseY = Input.GetAxis ("Mouse Y");
-
-		//Rotate the gun on the x and y axis
-		rotationSpeed = Quaternion.Euler (-mouseY, mouseX, 0);
-
-		transform.localRotation = Quaternion.Slerp 
-			(transform.localRotation, rotationSpeed, aimSpeed * Time.deltaTime);
 	}
 }
