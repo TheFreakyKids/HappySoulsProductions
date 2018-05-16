@@ -1952,7 +1952,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1153626976726482}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 2.35, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4515356872885490}
@@ -2956,7 +2956,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1652260412538062}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!81 &81803073945616626
 AudioListener:
   m_ObjectHideFlags: 1
@@ -4439,7 +4439,6 @@ MonoBehaviour:
   fpsCon: {fileID: 114685802337528632}
   health: {fileID: 0}
   elims: {fileID: 0}
-  ragdollParts: []
 --- !u!114 &114935082322884618
 MonoBehaviour:
   m_ObjectHideFlags: 1

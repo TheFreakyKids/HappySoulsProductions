@@ -24,20 +24,10 @@ public class Player : MonoBehaviour
     public MonoBehaviour fpsCon;
     public Slider health;
     public Text elims; //For elim count when we have that functionality
-    [SerializeField] private GameObject[] ragdollParts;
 
     private void Awake()
     {
         currentHealth = maxHealth;
-
-        GameObject[] temp = GameObject.FindGameObjectsWithTag("RagdollPart");
-
-        ragdollParts = new GameObject[temp.Length];
-
-        for (int i = 0; i < temp.Length; i++)
-        {
-            ragdollParts[i] = temp[i];
-        }
     }
 
     private void Update ()

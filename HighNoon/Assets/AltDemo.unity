@@ -12318,7 +12318,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4416880956936822, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 4416880956936822, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
       propertyPath: m_LocalPosition.y
@@ -12347,6 +12347,36 @@ Prefab:
     - target: {fileID: 4416880956936822, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114798043562777464, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 712289960}
+    - target: {fileID: 114798043562777464, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: elims
+      value: 
+      objectReference: {fileID: 210556542}
+    - target: {fileID: 82335043018891762, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82335043018891762, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82875566776097108, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82875566776097108, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
@@ -93633,6 +93663,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 114521648596080092, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 1046877222}
+    - target: {fileID: 114521648596080092, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: elims
+      value: 
+      objectReference: {fileID: 1672521634}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0

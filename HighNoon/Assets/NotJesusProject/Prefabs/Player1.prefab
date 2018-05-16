@@ -4054,7 +4054,6 @@ MonoBehaviour:
   fpsCon: {fileID: 114615221041042872}
   health: {fileID: 0}
   elims: {fileID: 0}
-  ragdollParts: []
 --- !u!114 &114615221041042872
 MonoBehaviour:
   m_ObjectHideFlags: 1
