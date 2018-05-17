@@ -6,6 +6,7 @@ public class AimScript : MonoBehaviour
     public string parent;
 	float mouseX;
 	float mouseY;
+    
 	Quaternion rotationSpeed;
     #region Headers
     [Header("Gun Options")]
@@ -46,28 +47,54 @@ public class AimScript : MonoBehaviour
 
 	void Update ()
     {
-        if (parent == "Player1" && Input.GetAxis("Left Trigger") >= 0.1)
-        {
-            //Move the gun to the zoom position
-            transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
-            //Change the camera field of view
-            gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, zoomFov, fovSpeed * Time.deltaTime);
+        if (this.parent == "Player1")
+        {            
+            FirstAim();
         }
         //When right click is held down
-        else if (parent == "Player2" && Input.GetAxis("Left TriggerP2") >= 0.1)
+        else if (this.parent == "Player2")
         {
-            //Move the gun to the zoom position
-            transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
+            Debug.Log("fuck me why isnt this working");
+            SecondAim();
+        }
+	}
+
+    void FirstAim()
+    {
+        if(Input.GetAxis("Left Trigger") >= 0.2)
+        {
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
             //Change the camera field of view
-            gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, zoomFov, fovSpeed * Time.deltaTime);
+            this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, zoomFov, fovSpeed * Time.deltaTime);
         }
         else
         {
             //When right click is released
             //Move the gun back to the default position
-            transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition, Time.deltaTime * moveSpeed);
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition, Time.deltaTime * moveSpeed);
             //Change back the camera field of view
-            gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, defaultFov, fovSpeed * Time.deltaTime);
+            this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, defaultFov, fovSpeed * Time.deltaTime);
         }
-	}
+    }
+    void SecondAim()
+    {
+        float p2aim;
+        p2aim = Input.GetAxis("p2 lt");
+        if (p2aim > 0)
+        {
+            Debug.Log("fuck you ");
+            //Move the gun to the zoom position
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
+            //Change the camera field of view
+            this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, zoomFov, fovSpeed * Time.deltaTime);
+        }
+        else
+        {
+            //When right click is released
+            //Move the gun back to the default position
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition, Time.deltaTime * moveSpeed);
+            //Change back the camera field of view
+            this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, defaultFov, fovSpeed * Time.deltaTime);
+        }
+    }
 }

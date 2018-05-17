@@ -89,14 +89,11 @@ public class SixShooter : MonoBehaviour
         {
             triggerPulled = false;
         }//If no RT Input, triggered is not pulled
-            
-
         if (Input.GetAxis("Fire1") == 1 && triggerPulled == false && shotTimer == shotWaitPeriod)
         {
             Shoot(); 
                 
-        }//If there is RT input, the trigger is not pulled &                                                                                                
-                                                                                         //the shotTimer is set, then you can shoot
+        }//If there is RT input, the trigger is not pulled & the shotTimer is set, then you can shoot
 
         #region Rolling
         //if (Input.GetButtonDown("Left Bumper") == true)  //put in controller for rolling later

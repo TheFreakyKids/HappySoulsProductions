@@ -195,7 +195,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 6
+    axis: 5
     joyNum: 2
   - serializedVersion: 3
     m_Name: Fire1
@@ -340,6 +340,22 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: p2 lt
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.2
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 2
+    axis: 8
     joyNum: 2
   - serializedVersion: 3
     m_Name: Xbox One Controls Below
@@ -614,22 +630,6 @@ InputManager:
     axis: 6
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Left TriggerP2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 1000
-    dead: 0.2
-    sensitivity: 10
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 2
-    joyNum: 2
-  - serializedVersion: 3
     m_Name: Left Trigger
     descriptiveName: 
     descriptiveNegativeName: 
@@ -643,7 +643,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 8
     joyNum: 1
   - serializedVersion: 3
     m_Name: Right Trigger
