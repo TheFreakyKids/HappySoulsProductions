@@ -973,7 +973,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4177551874357074}
   - component: {fileID: 95020817450338602}
-  - component: {fileID: 82923227171156810}
   - component: {fileID: 82681360682445666}
   - component: {fileID: 114666949874018996}
   - component: {fileID: 114841772297281588}
@@ -3426,7 +3425,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -3450,7 +3449,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!82 &82710277895825978
 AudioSource:
   m_ObjectHideFlags: 1
@@ -3617,86 +3616,6 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1041056568432052}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &82923227171156810
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1714519835513540}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -3997,6 +3916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b701e074cd38a4fa4c84b13430b2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: 
   aimSpeed: 6.5
   moveSpeed: 28
   defaultPosition: {x: 0, y: -0.165, z: -0.065}
@@ -4017,6 +3937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b701e074cd38a4fa4c84b13430b2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: 
   aimSpeed: 6.5
   moveSpeed: 28
   defaultPosition: {x: 0, y: -0.145, z: -0.125}
@@ -4168,6 +4089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b701e074cd38a4fa4c84b13430b2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: 
   aimSpeed: 6.5
   moveSpeed: 28
   defaultPosition: {x: 0, y: -0.15, z: -0.15}
@@ -4201,16 +4123,9 @@ MonoBehaviour:
     spreadSize: 3.5
     pellets: 15
     projectileWeapon: 0
-    grenadeLauncher: 0
     projectile: {fileID: 0}
     currentProjectile: {fileID: 0}
     reloadTime: 0
-    grenade: 0
-    throwDelay: 0.15
-    hideGrenadeTimer: 0.75
-    showGrenadeTimer: 0.75
-    flamethrower: 0
-    minigun: 0
   ReloadSettings:
     casingOnReload: 0
     casingDelay: 0.3
@@ -4264,9 +4179,9 @@ MonoBehaviour:
     - {fileID: 4407429095896196}
     bulletSpawnPoint: {fileID: 4238380287755720}
   AudioClips:
-    mainAudioSource: {fileID: 82909969801444408}
-    shootSound: {fileID: 8300000, guid: 060626697f611aa43b1625cbbb9c4573, type: 3}
+    shootSound: {fileID: 8300000, guid: 1d02448a7427533439eee92d63e2ddf3, type: 3}
     reloadSound: {fileID: 8300000, guid: f59ae693e8e150d4dbcdf3f87a023af9, type: 3}
+    dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
   noSwitch: 0
 --- !u!114 &114841772297281588
 MonoBehaviour:
@@ -4292,16 +4207,9 @@ MonoBehaviour:
     spreadSize: 0
     pellets: 0
     projectileWeapon: 0
-    grenadeLauncher: 0
     projectile: {fileID: 0}
     currentProjectile: {fileID: 0}
     reloadTime: 0
-    grenade: 0
-    throwDelay: 0.15
-    hideGrenadeTimer: 0.75
-    showGrenadeTimer: 0.75
-    flamethrower: 0
-    minigun: 0
   ReloadSettings:
     casingOnReload: 1
     casingDelay: 1.025
@@ -4360,9 +4268,9 @@ MonoBehaviour:
     - {fileID: 4342610527020656}
     bulletSpawnPoint: {fileID: 4820774275592260}
   AudioClips:
-    mainAudioSource: {fileID: 82923227171156810}
-    shootSound: {fileID: 8300000, guid: c404c0f8d9b6df7458cb58da2c9af3b2, type: 3}
+    shootSound: {fileID: 8300000, guid: d2f786326ae6a3243ad314ce08c17491, type: 3}
     reloadSound: {fileID: 8300000, guid: 90acce9233f59144a8c146fa0b01dc2b, type: 3}
+    dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
   noSwitch: 0
 --- !u!114 &114916831233422924
 MonoBehaviour:
@@ -4388,16 +4296,9 @@ MonoBehaviour:
     spreadSize: 3.5
     pellets: 15
     projectileWeapon: 0
-    grenadeLauncher: 0
     projectile: {fileID: 0}
     currentProjectile: {fileID: 0}
     reloadTime: 0
-    grenade: 0
-    throwDelay: 0.15
-    hideGrenadeTimer: 0.75
-    showGrenadeTimer: 0.75
-    flamethrower: 0
-    minigun: 0
   ReloadSettings:
     casingOnReload: 1
     casingDelay: 0.4
@@ -4452,9 +4353,9 @@ MonoBehaviour:
     - {fileID: 4027715803228310}
     bulletSpawnPoint: {fileID: 4266674776237526}
   AudioClips:
-    mainAudioSource: {fileID: 82112372335846918}
     shootSound: {fileID: 8300000, guid: c404c0f8d9b6df7458cb58da2c9af3b2, type: 3}
     reloadSound: {fileID: 8300000, guid: aeae238690e25f846929b6e5ffe52701, type: 3}
+    dryFire: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114940937294199786
 MonoBehaviour:

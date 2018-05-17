@@ -26,12 +26,10 @@ public partial class CameraController : MonoBehaviour {
 		MouseLock();
         if (parentName == "Player1")
         {
-            Debug.Log(parentName);
             MouseLook1();
         }
         else if (parentName == "Player2")
         {
-            Debug.Log(parentName);
             MouseLook2();
         }
 
@@ -75,7 +73,6 @@ public partial class CameraController : MonoBehaviour {
         {
             verticalRotationP1 -= Input.GetAxis("Right Stick Vertical");
             verticalRotationP1 = Mathf.Clamp(verticalRotationP1, -updownrange, updownrange);
-            Debug.Log(parentName + " is using vertical rotation");
         }
         if (Input.GetAxis("Right Stick Horizontal") > 0.1 || Input.GetAxis("Right Stick Horizontal") < 0.1)
         {

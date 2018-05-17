@@ -93701,6 +93701,22 @@ Prefab:
       propertyPath: elims
       value: 
       objectReference: {fileID: 1672521634}
+    - target: {fileID: 4480997120291650, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626087546893850, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4945802033547066, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1213009279955164, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0

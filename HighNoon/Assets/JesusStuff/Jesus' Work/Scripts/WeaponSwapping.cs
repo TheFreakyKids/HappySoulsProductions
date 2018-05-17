@@ -91,7 +91,6 @@ public class WeaponSwapping : MonoBehaviour
     }
     void P2Selector()
     {
-        Debug.Log("blep");
         int previousSelectedWeapon = selectedWeapon;
         if (Input.GetAxis("p2 DPAD vert") > 0f && hasSwitched == false)
         {

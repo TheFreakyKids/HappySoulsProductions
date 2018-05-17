@@ -54,7 +54,6 @@ public class AimScript : MonoBehaviour
         //When right click is held down
         else if (this.parent == "Player2")
         {
-            Debug.Log("fuck me why isnt this working");
             SecondAim();
         }
 	}
@@ -82,7 +81,6 @@ public class AimScript : MonoBehaviour
         p2aim = Input.GetAxis("p2 lt");
         if (p2aim > 0)
         {
-            Debug.Log("fuck you ");
             //Move the gun to the zoom position
             this.transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
             //Change the camera field of view

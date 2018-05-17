@@ -17,10 +17,7 @@ public class CasingScript : MonoBehaviour {
 	public float maximumRotation;
 	[Header("Despawn Time")]
 	public float despawnTime;
-
-	[Header("Audio")]
-	public AudioClip[] casingSounds;
-	public AudioSource audioSource;
+    
 
 	//Launch the casing at start
 	void Awake () {
@@ -53,14 +50,7 @@ public class CasingScript : MonoBehaviour {
 		StartCoroutine (RemoveCasing ());
 	}
 
-	void OnCollisionEnter (Collision collision) {
-
-		//Get a random casing sound from the array every collision
-		audioSource.clip = casingSounds
-			[Random.Range(0, casingSounds.Length)];
-	    //Play the random casing sound
-	    audioSource.Play();
-	}
+	
 
 	IEnumerator RemoveCasing () {
 		//Destroy the casing after set amount of seconds

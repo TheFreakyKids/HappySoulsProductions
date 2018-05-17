@@ -186,15 +186,12 @@ public class ArmControllerScript : MonoBehaviour
 	[System.Serializable]
 	public class audioClips
 	{  
-		[Header("Audio Source")]
-		
-		public AudioSource mainAudioSource;
-		
 		[Header("Audio Clips")]
 		
 		//All audio clips
 		public AudioClip shootSound;
 		public AudioClip reloadSound;
+        public AudioClip dryFire;
 	}
 	public audioClips AudioClips;
 
@@ -226,7 +223,7 @@ public class ArmControllerScript : MonoBehaviour
 		//Set the "shoot" sound clip for melee weapons
 		if (MeleeSettings.isMeleeWeapon == true)
         {
-			AudioClips.mainAudioSource.clip = AudioClips.shootSound;
+			
 			//Disable the weapon trail at start
 			Components.weaponTrail.GetComponent<TrailRenderer>().enabled = false;
 		}
@@ -252,10 +249,13 @@ public class ArmControllerScript : MonoBehaviour
         {
             Shooter1();
         }
-		
-		
-		//If out of ammo
-		if (currentAmmo == 0)
+        if (parentName == "Player2")
+        {
+            Shooter2();
+        }
+
+        //If out of ammo
+        if (currentAmmo == 0)
         {
 			outOfAmmo = true;
 			//if ammo is higher than 0
@@ -293,28 +293,25 @@ public class ArmControllerScript : MonoBehaviour
                 {
                     anim.SetTrigger("Attack 1");
                     //Play weapon sound
-                    AudioClips.mainAudioSource.Play();
                 }
                 //Play attack animation 2, if not currently attacking or drawing weapon
                 if (randomAttackAnim == 2 && !isMeleeAttacking && !isDrawing)
                 {
                     anim.SetTrigger("Attack 2");
                     //Play weapon sound
-                    AudioClips.mainAudioSource.Play();
                 }
                 //Play attack animation 3, if not currently attacking or drawing weapon
                 if (randomAttackAnim == 3 && !isMeleeAttacking && !isDrawing)
                 {
                     anim.SetTrigger("Attack 3");
                     //Play weapon sound
-                    AudioClips.mainAudioSource.Play();
                 }
             }
             #endregion
         }
         //R key to reload
         //Not used for projectile weapons, grenade or melee weapons
-        if (Input.GetButtonDown("Right Bumper") && !isReloading && !MeleeSettings.isMeleeWeapon)
+        if (Input.GetButtonDown("Right Bumper") && !isReloading && !MeleeSettings.isMeleeWeapon && currentAmmo != ShootSettings.ammo)
         {
             Reload();
         }
@@ -332,7 +329,65 @@ public class ArmControllerScript : MonoBehaviour
     }
     void Shooter2()
     {
+        if (Input.GetAxis("Fire1") == 1 && !ShootSettings.automaticFire && !isReloading && !outOfAmmo && !isShooting && !isAimShooting && !isRunning && !isJumping)
+        {
+            //If shotgun shoot is true
+            if (ShootSettings.useShotgunSpread == true)
+            {
+                ShotgunShoot();
+            }
+            //If projectile weapon, grenade, melee weapons, grenade launcher and flamethrower is false
+            if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon)
+            {
+                Shoot();
+                //If projectile weapon is true
+            }
+            else if (ShootSettings.projectileWeapon == true)
+            {
+                StartCoroutine(ProjectileShoot());
+            }
+            #region MeleeShit
+            //If melee weapon is used, play random attack animation on left click
+            if (MeleeSettings.isMeleeWeapon == true)
+            {
+                //Play attack animation 1, if not currently attacking or drawing weapon
+                if (randomAttackAnim == 1 && !isMeleeAttacking && !isDrawing)
+                {
+                    anim.SetTrigger("Attack 1");
+                    //Play weapon sound
+                }
+                //Play attack animation 2, if not currently attacking or drawing weapon
+                if (randomAttackAnim == 2 && !isMeleeAttacking && !isDrawing)
+                {
+                    anim.SetTrigger("Attack 2");
+                    //Play weapon sound
+                }
+                //Play attack animation 3, if not currently attacking or drawing weapon
+                if (randomAttackAnim == 3 && !isMeleeAttacking && !isDrawing)
+                {
+                    anim.SetTrigger("Attack 3");
+                    //Play weapon sound
+                }
+            }
+            #endregion
+        }
+        //R key to reload
+        //Not used for projectile weapons, grenade or melee weapons
+        if (Input.GetButtonDown("p2 rb") && !isReloading && !MeleeSettings.isMeleeWeapon)
+        {
+            Reload();
+        }
 
+        //Run when holding down left shift and moving
+        if (Input.GetButton("Sprint") && Input.GetAxis("Vertical") > 0)
+        {
+            anim.SetFloat("Run", 0.2f);
+        }
+        else
+        {
+            //Stop running
+            anim.SetFloat("Run", 0.0f);
+        }
     }
 	//Muzzleflash
 	IEnumerator MuzzleFlash () {
@@ -418,8 +473,7 @@ public class ArmControllerScript : MonoBehaviour
 		anim.Play ("Reload");
 
 		//Play shoot sound
-		AudioClips.mainAudioSource.clip = AudioClips.reloadSound;
-		AudioClips.mainAudioSource.Play();
+		
 		
 		//Show the current projectile mesh
 		ShootSettings.currentProjectile.GetComponent
@@ -443,9 +497,9 @@ public class ArmControllerScript : MonoBehaviour
 		
 		//Remove 1 bullet
 		currentAmmo -= 1;
-		
-		//Play shoot sound
-		
+
+        //Play shoot sound
+        SoundManager.instance.Play(AudioClips.shootSound, "sfx");
 		
 		//Start casing instantiate
 		if (!ReloadSettings.casingOnReload)
@@ -500,9 +554,9 @@ public class ArmControllerScript : MonoBehaviour
 		
 		//Remove 1 bullet
 		currentAmmo -= 1;
-		
-		//Play shoot sound
-		
+
+        //Play shoot sound
+        SoundManager.instance.Play(AudioClips.shootSound, "sfx");
 		//Start casing instantiate
 		if (!ReloadSettings.casingOnReload)
         {
@@ -540,10 +594,9 @@ public class ArmControllerScript : MonoBehaviour
 		
 		//Play reload animation
 		anim.Play ("Reload");
-		
-		//Play reload sound
-		AudioClips.mainAudioSource.clip = AudioClips.reloadSound;
-		AudioClips.mainAudioSource.Play();
+
+        //Play reload sound
+        SoundManager.instance.Play(AudioClips.reloadSound, "sfx");
 		
 		//Spawn casing on reload, only used on some weapons
 		if (ReloadSettings.casingOnReload == true)
