@@ -2,29 +2,23 @@
 using System.Collections;
 
 public class ArmControllerScript : MonoBehaviour
-{
-	
+{	
 	Animator anim;
 	
 	bool isReloading;
-	bool outOfAmmo;
-	
+	bool outOfAmmo;	
 	bool isShooting;
 	bool isAimShooting;
 	bool isAiming;
 	bool isDrawing;
 	bool isRunning;
 	bool isJumping;
-
 	bool isMeleeAttacking;
-
 	//Random number generated to choose 
 	//attack animation for melee
-	int randomAttackAnim;
-	
+	int randomAttackAnim;	
 	//Used for fire rate
-	float lastFired;
-	
+	float lastFired;	
 	//Ammo left
 	public int currentAmmo;
 
@@ -68,8 +62,7 @@ public class ArmControllerScript : MonoBehaviour
 		
 		//If the current weapon is a projectile weapon (rpg, bazooka, etc)
 		public bool projectileWeapon;
-		
-		
+				
 		//The projectile spawned when shooting
 		public Transform projectile;
 		//The static projectile on the weapon
@@ -77,9 +70,7 @@ public class ArmControllerScript : MonoBehaviour
 		public Transform currentProjectile;
 		
 		//How long after shooting the reload will start
-		public float reloadTime;
-
-		
+		public float reloadTime;		
 	}
 	public shootSettings ShootSettings;
 	
@@ -200,50 +191,40 @@ public class ArmControllerScript : MonoBehaviour
 
 	public bool noSwitch = false;
 	
-	void Awake () {
-		
+	void Awake () {		
 		//Set the animator component
-		anim = GetComponent<Animator>();
-		
+		anim = GetComponent<Animator>();		
 		//Set the ammo count
-		RefillAmmo ();
-		
+		RefillAmmo ();		
 		//Hide muzzleflash and light at start, disable for projectile, grenade, melee weapons, grenade launcher and flamethrower
 		if (!ShootSettings.projectileWeapon && !MeleeSettings.isMeleeWeapon)
         { 			
 			Components.sideMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.topMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.frontMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
-		}
-		
+		}		
 		//Disable the light flash, disable for melee weapons and grenade
 		if (!MeleeSettings.isMeleeWeapon)
         {
 			Components.lightFlash.GetComponent<Light> ().enabled = false;
 		}
-
 		//Set the "shoot" sound clip for melee weapons
 		if (MeleeSettings.isMeleeWeapon == true) {
 			AudioClips.mainAudioSource.clip = AudioClips.shootSound;
 			//Disable the weapon trail at start
 			Components.weaponTrail.GetComponent<TrailRenderer>().enabled = false;
-		}
-        
-	}
-	
+		}       
+	}	
 	void Update ()
     {
-
 		//Generate random number to choose which melee attack animation to play
 		//If using a melee weapon
 		if (MeleeSettings.isMeleeWeapon == true) {
 			randomAttackAnim = Random.Range (1, 4);
 		}
-
 		//Check which animation 
 		//is currently playing
-		AnimationCheck ();
-		
+		AnimationCheck ();		
 		//Left click (if automatic fire is false)
 		if (Input.GetMouseButtonDown (0) && !ShootSettings.automaticFire
 		    //Disable shooting while running and jumping
@@ -260,7 +241,6 @@ public class ArmControllerScript : MonoBehaviour
 			} else if (ShootSettings.projectileWeapon == true) {
 				StartCoroutine(ProjectileShoot());
 			}
-
 			//If melee weapon is used, play random attack animation on left click
 			if (MeleeSettings.isMeleeWeapon == true) {
 				//Play attack animation 1, if not currently attacking or drawing weapon
@@ -283,33 +263,25 @@ public class ArmControllerScript : MonoBehaviour
 				}
 			}
 		}
-
-		
-
-		
-
 		//R key to reload
 		//Not used for projectile weapons, grenade or melee weapons
 		if (Input.GetKeyDown (KeyCode.R) && !isReloading && !ShootSettings.projectileWeapon 
 			&& !MeleeSettings.isMeleeWeapon) {
 			Reload ();
-		}
-		
+		}		
 		//Run when holding down left shift and moving
 		if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") > 0) {
 			anim.SetFloat("Run", 0.2f);
 		} else {
 			//Stop running
 			anim.SetFloat("Run", 0.0f);
-		}
-		
+		}		
 		//Space key to jump
 		//Disable jumping while reloading
 		if (Input.GetKeyDown (KeyCode.Space) && !isReloading) {
 			//Play jump animation
 			anim.Play("Jump");
-		}
-		
+		}		
 		//If out of ammo
 		if (currentAmmo == 0) {
 			outOfAmmo = true;
@@ -318,29 +290,24 @@ public class ArmControllerScript : MonoBehaviour
 			outOfAmmo = false;
 		}
 	}
-
 	//Muzzleflash
-	IEnumerator MuzzleFlash () {
-		
+	IEnumerator MuzzleFlash () {		
 		//Show muzzleflash if useMuzzleFlash is true
 		if (!ShootSettings.projectileWeapon && Components.useMuzzleflash == true) {
 			//Show a random muzzleflash from the array
 			Components.sideMuzzle.GetComponent<SpriteRenderer> ().sprite = Components.muzzleflashSideSprites 
 				[Random.Range (0, Components.muzzleflashSideSprites.Length)];
 			Components.topMuzzle.GetComponent<SpriteRenderer> ().sprite = Components.muzzleflashSideSprites 
-				[Random.Range (0, Components.muzzleflashSideSprites.Length)];
-			
+				[Random.Range (0, Components.muzzleflashSideSprites.Length)];			
 			//Show the muzzleflashes
 			Components.sideMuzzle.GetComponent<SpriteRenderer> ().enabled = true;
 			Components.topMuzzle.GetComponent<SpriteRenderer> ().enabled = true;
 			Components.frontMuzzle.GetComponent<SpriteRenderer> ().enabled = true;
-		}
-		
+		}		
 		//Enable the light flash if true
 		if (Components.useLightFlash == true) {
 			Components.lightFlash.GetComponent<Light> ().enabled = true;
-		}
-		
+		}		
 		//Play smoke particles if true
 		if (Components.playSmoke == true) {
 			Components.smokeParticles.Play ();
@@ -352,8 +319,7 @@ public class ArmControllerScript : MonoBehaviour
 		//Play bullet tracer particles if true
 		if (Components.playTracers == true) {
 			Components.bulletTracerParticles.Play();
-		}
-		
+		}		
 		//Show the muzzleflash for 0.02 seconds
 		yield return new WaitForSeconds (0.02f);
 		
@@ -362,18 +328,14 @@ public class ArmControllerScript : MonoBehaviour
 			Components.sideMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.topMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.frontMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
-		}
-		
+		}		
 		//Disable the light flash if true
 		if (Components.useLightFlash == true) {
 			Components.lightFlash.GetComponent<Light> ().enabled = false;
 		}
-	}
-
-	
+	}	
 	//Projectile shoot
-	IEnumerator ProjectileShoot () {
-		
+	IEnumerator ProjectileShoot () {		
 		//Play shoot animation
 		if (!anim.GetBool ("isAiming"))
         {
@@ -383,76 +345,56 @@ public class ArmControllerScript : MonoBehaviour
         {
 			anim.SetTrigger("Shoot");
 		}
-
 		//Remove 1 bullet
 		currentAmmo -= 1;
-
-		//Play shoot sound
-		
-		StartCoroutine (MuzzleFlash ());
-		
+		//Play shoot sound		
+		StartCoroutine (MuzzleFlash ());	
 		//Spawn the projectile
-		Instantiate (ShootSettings.projectile, Spawnpoints.bulletSpawnPoint.transform.position, Spawnpoints.bulletSpawnPoint.transform.rotation);
-		
+		Instantiate (ShootSettings.projectile, Spawnpoints.bulletSpawnPoint.transform.position, Spawnpoints.bulletSpawnPoint.transform.rotation);		
 		//Hide the current projectile mesh
 		ShootSettings.currentProjectile.GetComponent
-			<SkinnedMeshRenderer> ().enabled = false;
-		
-		yield return new WaitForSeconds (ShootSettings.reloadTime);
-		
+			<SkinnedMeshRenderer> ().enabled = false;		
+		yield return new WaitForSeconds (ShootSettings.reloadTime);		
 		//Play reload animation
 		anim.Play ("Reload");
-
 		//Play shoot sound
 		AudioClips.mainAudioSource.clip = AudioClips.reloadSound;
-		AudioClips.mainAudioSource.Play();
-		
+		AudioClips.mainAudioSource.Play();		
 		//Show the current projectile mesh
 		ShootSettings.currentProjectile.GetComponent
-			<SkinnedMeshRenderer> ().enabled = true;
-		
-	}
-	
+			<SkinnedMeshRenderer> ().enabled = true;		
+	}	
 	//Shotgun shoot
-	void ShotgunShoot() {
-		
+	void ShotgunShoot() {		
 		//Play shoot animation
 		if (!anim.GetBool ("isAiming")) {
 			anim.Play ("Fire");
 		} else {
 			anim.SetTrigger("Shoot");
-		}
-		
+		}		
 		//Remove 1 bullet
-		currentAmmo -= 1;
-		
+		currentAmmo -= 1;		
 		//Play shoot sound
-		
-		
+			
 		//Start casing instantiate
 		if (!ReloadSettings.casingOnReload)
         {
 			StartCoroutine (CasingDelay ());
-		}
-		
+		}		
 		//Show the muzzleflash
-		StartCoroutine (MuzzleFlash ());
-		
+		StartCoroutine (MuzzleFlash ());		
 		//Send out shotgun raycast with set amount of pellets
 		for (int i = 0; i < ShootSettings.pellets; ++i)
-        {
-			
+        {			
 			float randomRadius = Random.Range 
 				(0, ShootSettings.spreadSize);        
 			float randomAngle = Random.Range 
-				(0, 2 * Mathf.PI);
-			
+				(0, 2 * Mathf.PI);		
 			//Raycast direction
 			Vector3 direction = new Vector3 (
 				randomRadius * Mathf.Cos (randomAngle),
 				randomRadius * Mathf.Sin (randomAngle),
-				15);
-			
+				15);			
 			direction = transform.TransformDirection (direction.normalized);
 			
 			RaycastHit hit;        
@@ -465,11 +407,9 @@ public class ArmControllerScript : MonoBehaviour
                 }
 			}    
 		}
-	}
-	
+	}	
 	//Shoot
-	void Shoot() {
-		
+	void Shoot() {		
 		//Play shoot animation
 		if (!anim.GetBool ("isAiming"))
         {
@@ -478,59 +418,45 @@ public class ArmControllerScript : MonoBehaviour
         else
         {
 			anim.SetTrigger("Shoot");
-		}
-		
+		}		
 		//Remove 1 bullet
-		currentAmmo -= 1;
-		
-		//Play shoot sound
-		
+		currentAmmo -= 1;		
+		//Play shoot sound		
 		//Start casing instantiate
 		if (!ReloadSettings.casingOnReload) {
 			StartCoroutine (CasingDelay ());
-		}
-		
+		}		
 		//Show the muzzleflash
-		StartCoroutine (MuzzleFlash ());
-		
+		StartCoroutine (MuzzleFlash ());		
 		//Raycast bullet
 		RaycastHit hit;
-		Ray ray = new Ray (transform.position, transform.forward);
-		
+		Ray ray = new Ray (transform.position, transform.forward);		
 		//Send out the raycast from the "bulletSpawnPoint" position
 		if (Physics.Raycast (Spawnpoints.bulletSpawnPoint.transform.position, Spawnpoints.bulletSpawnPoint.transform.forward, out hit, ShootSettings.bulletDistance))
-        {
-			
+        {			
 			//If a rigibody is hit, add bullet force to it
 			if (hit.rigidbody != null)
             {
                 hit.rigidbody.AddForce(ray.direction * ShootSettings.bulletForce);
             }
 		}
-	}
-	
+	}	
 	//Refill ammo
 	void RefillAmmo ()
-    {
-		
+    {		
 		currentAmmo = ShootSettings.ammo;
-	}
-	
+	}	
 	//Reload
-	void Reload () {
-		
+	void Reload () {		
 		//Play reload animation
-		anim.Play ("Reload");
-		
+		anim.Play ("Reload");		
 		//Play reload sound
 		AudioClips.mainAudioSource.clip = AudioClips.reloadSound;
-		AudioClips.mainAudioSource.Play();
-		
+		AudioClips.mainAudioSource.Play();		
 		//Spawn casing on reload, only used on some weapons
 		if (ReloadSettings.casingOnReload == true) {
 			StartCoroutine(CasingDelay());
-		}
-		
+		}		
 		if (outOfAmmo == true && ReloadSettings.hasBulletInMag == true) {
 			//Hide the bullet inside the mag if ammo is 0
 			for (int i = 0; i < ReloadSettings.bulletInMag.Length; i++) {
@@ -540,8 +466,7 @@ public class ArmControllerScript : MonoBehaviour
 			//Start the "show bullet" timer
 			StartCoroutine (BulletInMagTimer ());
 		}
-	}
-	
+	}	
 	IEnumerator BulletInMagTimer () {
 		//Wait for set amount of time 
 		yield return new WaitForSeconds 
@@ -552,8 +477,7 @@ public class ArmControllerScript : MonoBehaviour
 			ReloadSettings.bulletInMag[i].GetComponent
 				<MeshRenderer> ().enabled = true;
 		}
-	}
-	
+	}	
 	IEnumerator CasingDelay () {
 		//Wait set amount of time for casing to spawn
 		yield return new WaitForSeconds (ReloadSettings.casingDelay);
@@ -563,48 +487,39 @@ public class ArmControllerScript : MonoBehaviour
 			             Spawnpoints.casingSpawnPoints [i].transform.position, 
 			             Spawnpoints.casingSpawnPoints [i].transform.rotation);
 		}
-	}
-	
+	}	
 	//Check current animation playing
-	void AnimationCheck () {
-		
+	void AnimationCheck () {		
 		//Check if shooting
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Fire")) {
 			isShooting = true;
 		} else {
 			isShooting = false;
 		}
-
-		
-
 		//Check if shooting while aiming down sights
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Aim Fire")) {
 			isAimShooting = true;
 		} else {
 			isAimShooting = false;
 		}
-
 		//Check if running
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Run")) {
 			isRunning = true;
 		} else {
 			isRunning = false;
-		}
-		
+		}		
 		//Check if jumping
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Jump")) {
 			isJumping = true;
 		} else {
 			isJumping = false;
 		}
-
 		//Check if drawing weapon
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Draw")) {
 			isDrawing = true;
 		} else {
 			isDrawing = false;
 		}
-
 		//Check if finsihed reloading when using "insert" style reload
 		//Used for bolt action sniper and pump shotgun for example
 		if (ReloadSettings.usesInsert == true && 
@@ -612,10 +527,7 @@ public class ArmControllerScript : MonoBehaviour
 			isReloading = false;
 			//Used in the demo scnes
 			noSwitch = false;
-		}
-
-		
-		
+		}	
 		//Check if reloading
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Reload")) {
 			// If reloading
@@ -633,7 +545,6 @@ public class ArmControllerScript : MonoBehaviour
 				noSwitch = false;
 			}
 		}
-
 		//Check if melee weapon animation is playing
 		//To make sure melee animations cant be played at same time
 		if (MeleeSettings.isMeleeWeapon == true) {
