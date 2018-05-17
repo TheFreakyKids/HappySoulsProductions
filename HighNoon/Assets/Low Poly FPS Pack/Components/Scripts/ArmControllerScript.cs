@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArmControllerScript : MonoBehaviour {
+public class ArmControllerScript : MonoBehaviour
+{
 	
 	Animator anim;
 	
@@ -16,10 +17,6 @@ public class ArmControllerScript : MonoBehaviour {
 	bool isJumping;
 
 	bool isMeleeAttacking;
-
-	bool isGrenadeReloading;
-	//Used for minigun
-	bool enableMinigunShooting;
 
 	//Random number generated to choose 
 	//attack animation for melee
@@ -71,8 +68,7 @@ public class ArmControllerScript : MonoBehaviour {
 		
 		//If the current weapon is a projectile weapon (rpg, bazooka, etc)
 		public bool projectileWeapon;
-		//If the current weapon is the grenade launcher
-		public bool grenadeLauncher;
+		
 		
 		//The projectile spawned when shooting
 		public Transform projectile;
@@ -83,27 +79,7 @@ public class ArmControllerScript : MonoBehaviour {
 		//How long after shooting the reload will start
 		public float reloadTime;
 
-		[Header("Grenade Settings")]
-
-		//If the current weapon is a grenade
-		public bool grenade;
-
-		//Delay when releasing left click to throw
-		public float throwDelay = 0.15f;
-		//Delay to hide grenade model
-		public float hideGrenadeTimer = 0.75f;
-		//Delay to show grenade model
-		public float showGrenadeTimer = 0.75f;
-
-		[Header("Flamethrower Settings")]
-
-		//If the current weapon is the flamethrower
-		public bool flamethrower;
-
-		[Header("Minigun Settings")]
-
-		//If the current weapon is the minigun
-		public bool minigun;
+		
 	}
 	public shootSettings ShootSettings;
 	
@@ -233,15 +209,16 @@ public class ArmControllerScript : MonoBehaviour {
 		RefillAmmo ();
 		
 		//Hide muzzleflash and light at start, disable for projectile, grenade, melee weapons, grenade launcher and flamethrower
-		if (!ShootSettings.projectileWeapon && !MeleeSettings.isMeleeWeapon && !ShootSettings.grenade && !ShootSettings.grenadeLauncher && !ShootSettings.flamethrower) {
-			
+		if (!ShootSettings.projectileWeapon && !MeleeSettings.isMeleeWeapon)
+        { 			
 			Components.sideMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.topMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.frontMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 		}
 		
 		//Disable the light flash, disable for melee weapons and grenade
-		if (!MeleeSettings.isMeleeWeapon && !ShootSettings.grenade) {
+		if (!MeleeSettings.isMeleeWeapon)
+        {
 			Components.lightFlash.GetComponent<Light> ().enabled = false;
 		}
 
@@ -251,14 +228,11 @@ public class ArmControllerScript : MonoBehaviour {
 			//Disable the weapon trail at start
 			Components.weaponTrail.GetComponent<TrailRenderer>().enabled = false;
 		}
-
-		//Prevent from throwing grenade right at start/load
-		if (ShootSettings.grenade == true) {
-			isGrenadeReloading = true;
-		}
+        
 	}
 	
-	void Update () {
+	void Update ()
+    {
 
 		//Generate random number to choose which melee attack animation to play
 		//If using a melee weapon
@@ -279,8 +253,8 @@ public class ArmControllerScript : MonoBehaviour {
 				ShotgunShoot();
 			}
 			//If projectile weapon, grenade, melee weapons, grenade launcher and flamethrower is false
-			if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon 
-				&& !ShootSettings.grenade && !ShootSettings.grenadeLauncher & !ShootSettings.flamethrower && !ShootSettings.minigun) {
+			if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon)
+            {
 				Shoot();
 				//If projectile weapon is true
 			} else if (ShootSettings.projectileWeapon == true) {
@@ -310,98 +284,14 @@ public class ArmControllerScript : MonoBehaviour {
 			}
 		}
 
-		//Left click (used for grenade launcher)
-		if (Input.GetMouseButtonDown (0) && ShootSettings.grenadeLauncher == true
-			//Disable shooting while running and jumping
-			&& !isReloading && !outOfAmmo && !isShooting && !isAimShooting && !isRunning && !isJumping) {
-			//Shoot
-			GrenadeLauncherShoot();
-		}
-
-		//Left click hold (used for flamethrower)
-		if (Input.GetMouseButton (0) && ShootSettings.flamethrower == true
-			//Disable shooting while running, jumping and reloading
-			&& !isReloading && !outOfAmmo && !isShooting && !isAimShooting && !isRunning && !isJumping) {
-			//If current ammo is higher than 0
-			if (currentAmmo > 0) {
-				//Remove ammo
-				currentAmmo -= 1;
-				//Play the "flame" particles
-				Components.smokeParticles.Play ();
-				//Enable the light flash
-				Components.lightFlash.enabled = true;
-			}
-			//If the audio is not playing
-			if (!AudioClips.mainAudioSource.isPlaying) {
-				//Play shoot sound
-				AudioClips.mainAudioSource.clip = AudioClips.shootSound;
-				AudioClips.mainAudioSource.Play();	
-			}
-		//Left click release
-		} else if (!isReloading && ShootSettings.flamethrower == true) {
-			//Stop playing "flame" particles
-			Components.smokeParticles.Stop ();
-			//Stop playing shoot sound
-			AudioClips.mainAudioSource.Stop();
-			//Disable the light flash
-			Components.lightFlash.enabled = false;
-		}
 		
-		//Left click hold (if automatic fire is true)
-		if (Input.GetMouseButton (0) && ShootSettings.automaticFire == true
-		    //Disable shooting while running and jumping
-			&& !isReloading && !outOfAmmo && !isShooting && !isAimShooting && !isRunning && !isJumping) {
-			//Shoot automatic
-			if (Time.time - lastFired > 1 / ShootSettings.fireRate) {
-				Shoot();
-				lastFired = Time.time;
-			}
-		}
 
-		//Left click hold (minigun shooting)
-		if (Input.GetMouseButton (0) && ShootSettings.minigun == true
-			//Disable shooting while running and jumping
-			&& !outOfAmmo && !isShooting && !isRunning && !isJumping) {
-			//Shoot minigun, if enable minigun shooting is true
-			if (Time.time - lastFired > 1 / ShootSettings.fireRate && enableMinigunShooting == true) {
-				Shoot();
-				lastFired = Time.time;
-			}
-
-			anim.SetBool ("Spin Up", true);
-		} else if (ShootSettings.minigun == true) {
-			anim.SetBool ("Spin Up", false);
-		}
-
-		//Right click hold to aim
-		//Disable aiming for melee weapons and grenade
-		if (!MeleeSettings.isMeleeWeapon && !ShootSettings.grenade) {
-			if (Input.GetMouseButton (1)) {
-				anim.SetBool ("isAiming", true);
-			} else {
-				anim.SetBool ("isAiming", false);
-			}
-		}
-			
-		//Left click to throw grenade
-		//Disable if currently "reloading" grenade, and if running or jumping
-		if (Input.GetMouseButtonDown (0) && ShootSettings.grenade == true && 
-				!isGrenadeReloading && !isRunning && !isJumping) {
-			//Disable grenade throwing
-			isGrenadeReloading = true;
-			//Play throwing animations
-			anim.SetTrigger ("Throw");
-
-			//Start throwing grenade
-			StartCoroutine(GrenadeThrow());
-			//Start hide grenade timer
-			StartCoroutine(HideGrenadeTimer());
-		}
 		
+
 		//R key to reload
 		//Not used for projectile weapons, grenade or melee weapons
 		if (Input.GetKeyDown (KeyCode.R) && !isReloading && !ShootSettings.projectileWeapon 
-			&& !MeleeSettings.isMeleeWeapon && !ShootSettings.grenade && !ShootSettings.minigun) {
+			&& !MeleeSettings.isMeleeWeapon) {
 			Reload ();
 		}
 		
@@ -415,7 +305,7 @@ public class ArmControllerScript : MonoBehaviour {
 		
 		//Space key to jump
 		//Disable jumping while reloading
-		if (Input.GetKeyDown (KeyCode.Space) && !isReloading && !isGrenadeReloading) {
+		if (Input.GetKeyDown (KeyCode.Space) && !isReloading) {
 			//Play jump animation
 			anim.Play("Jump");
 		}
@@ -480,70 +370,17 @@ public class ArmControllerScript : MonoBehaviour {
 		}
 	}
 
-	//Spawn grenade projectile
-	IEnumerator GrenadeThrow () {
-
-		//Play grenade sound
-		AudioClips.mainAudioSource.clip = AudioClips.shootSound;
-		AudioClips.mainAudioSource.Play();
-
-		//Wait for set amount of time to throw grenade
-		yield return new WaitForSeconds (ShootSettings.throwDelay);
-		//Spawn the grenade projectile
-		Instantiate (ShootSettings.projectile, 
-			Spawnpoints.bulletSpawnPoint.transform.position, 
-			Spawnpoints.bulletSpawnPoint.transform.rotation);
-	}
-
-	//Used to hide and show the grenade mesh
-	IEnumerator HideGrenadeTimer () {
-		//Wait for set amount of time
-		yield return new WaitForSeconds (ShootSettings.hideGrenadeTimer);
-		//Hide the current grenade projectile mesh
-		ShootSettings.currentProjectile.GetComponent
-		<SkinnedMeshRenderer> ().enabled = false;
-
-		//Wait for set amount of time, to show the grenade again
-		yield return new WaitForSeconds (ShootSettings.showGrenadeTimer);
-		//Show the current grenade projectile mesh
-		ShootSettings.currentProjectile.GetComponent
-		<SkinnedMeshRenderer> ().enabled = true;
-	}
-
-	//Grenade launcher shoot
-	//Shoot
-	void GrenadeLauncherShoot() {
-
-		//Play shoot animation
-		if (!anim.GetBool ("isAiming")) {
-			anim.Play ("Fire");
-		} else {
-			anim.SetTrigger("Shoot");
-		}
-
-		//Remove 1 bullet
-		currentAmmo -= 1;
-
-		//Play shoot sound
-		AudioClips.mainAudioSource.clip = AudioClips.shootSound;
-		AudioClips.mainAudioSource.Play();
-
-		//Spawn the projectile
-		Instantiate (ShootSettings.projectile, 
-			Spawnpoints.bulletSpawnPoint.transform.position, 
-			Spawnpoints.bulletSpawnPoint.transform.rotation);
-
-		//Show the muzzleflash 
-		StartCoroutine (MuzzleFlash ());
-	}
-
+	
 	//Projectile shoot
 	IEnumerator ProjectileShoot () {
 		
 		//Play shoot animation
-		if (!anim.GetBool ("isAiming")) {
+		if (!anim.GetBool ("isAiming"))
+        {
 			anim.Play ("Fire");
-		} else {
+		}
+        else
+        {
 			anim.SetTrigger("Shoot");
 		}
 
@@ -551,15 +388,11 @@ public class ArmControllerScript : MonoBehaviour {
 		currentAmmo -= 1;
 
 		//Play shoot sound
-		AudioClips.mainAudioSource.clip = AudioClips.shootSound;
-		AudioClips.mainAudioSource.Play();
 		
 		StartCoroutine (MuzzleFlash ());
 		
 		//Spawn the projectile
-		Instantiate (ShootSettings.projectile, 
-		             Spawnpoints.bulletSpawnPoint.transform.position, 
-		             Spawnpoints.bulletSpawnPoint.transform.rotation);
+		Instantiate (ShootSettings.projectile, Spawnpoints.bulletSpawnPoint.transform.position, Spawnpoints.bulletSpawnPoint.transform.rotation);
 		
 		//Hide the current projectile mesh
 		ShootSettings.currentProjectile.GetComponent
@@ -594,11 +427,11 @@ public class ArmControllerScript : MonoBehaviour {
 		currentAmmo -= 1;
 		
 		//Play shoot sound
-		AudioClips.mainAudioSource.clip = AudioClips.shootSound;
-		AudioClips.mainAudioSource.Play();
+		
 		
 		//Start casing instantiate
-		if (!ReloadSettings.casingOnReload) {
+		if (!ReloadSettings.casingOnReload)
+        {
 			StartCoroutine (CasingDelay ());
 		}
 		
@@ -606,7 +439,8 @@ public class ArmControllerScript : MonoBehaviour {
 		StartCoroutine (MuzzleFlash ());
 		
 		//Send out shotgun raycast with set amount of pellets
-		for (int i = 0; i < ShootSettings.pellets; ++i) {
+		for (int i = 0; i < ShootSettings.pellets; ++i)
+        {
 			
 			float randomRadius = Random.Range 
 				(0, ShootSettings.spreadSize);        
@@ -622,98 +456,13 @@ public class ArmControllerScript : MonoBehaviour {
 			direction = transform.TransformDirection (direction.normalized);
 			
 			RaycastHit hit;        
-			if (Physics.Raycast (Spawnpoints.bulletSpawnPoint.transform.position, direction, 
-			                     out hit, ShootSettings.bulletDistance)) {
-				
+			if (Physics.Raycast (Spawnpoints.bulletSpawnPoint.transform.position, direction, out hit, ShootSettings.bulletDistance))
+            {
 				//If a rigibody is hit, add bullet force to it
 				if (hit.rigidbody != null)
-					hit.rigidbody.AddForce (direction * ShootSettings.bulletForce);
-				
-				//********** USED IN THE DEMO SCENES **********
-				//If the raycast hit the tag "Target"
-				if (hit.transform.tag == "Target") {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-					//Toggle the isHit bool on the target object
-					hit.transform.gameObject.GetComponent<TargetScript>().isHit = true;
-				}
-				
-				//********** USED IN THE DEMO SCENES **********
-				//If the raycast hit the tag "ExplosiveBarrel"
-				if (hit.transform.tag == "ExplosiveBarrel") {
-					//Toggle the explode bool on the explosive barrel object
-					hit.transform.gameObject.GetComponent<ExplosiveBarrelScript>().explode = true;
-					//Spawn metal impact on surface of the barrel
-					Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//********** USED IN THE DEMO SCENES **********
-				//If the raycast hit the tag "GasTank"
-				if (hit.transform.tag == "GasTank") {
-					//Toggle the explode bool on the explosive barrel object
-					hit.transform.gameObject.GetComponent<GasTankScript>().isHit = true;
-					//Spawn metal impact on surface of the gas tank
-					Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Metal (Static)"
-				if (hit.transform.tag == ImpactTags.metalImpactStaticTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.metalImpactStaticPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Metal"
-				if (hit.transform.tag == ImpactTags.metalImpactTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Wood (Static)"
-				if (hit.transform.tag == ImpactTags.woodImpactStaticTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.woodImpactStaticPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Wood"
-				if (hit.transform.tag == ImpactTags.woodImpactTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.woodImpactPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Concrete (Static)"
-				if (hit.transform.tag == ImpactTags.concreteImpactStaticTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.concreteImpactStaticPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Concrete"
-				if (hit.transform.tag == ImpactTags.concreteImpactTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.concreteImpactPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Dirt (Static)"
-				if (hit.transform.tag == ImpactTags.dirtImpactStaticTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.dirtImpactStaticPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
-				
-				//If the raycast hit the tag "Dirt"
-				if (hit.transform.tag == ImpactTags.dirtImpactTag) {
-					//Spawn bullet impact on surface
-					Instantiate (Prefabs.dirtImpactPrefab, hit.point, 
-					             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				}
+                {
+                    hit.rigidbody.AddForce(direction * ShootSettings.bulletForce);
+                }
 			}    
 		}
 	}
@@ -722,9 +471,12 @@ public class ArmControllerScript : MonoBehaviour {
 	void Shoot() {
 		
 		//Play shoot animation
-		if (!anim.GetBool ("isAiming")) {
+		if (!anim.GetBool ("isAiming"))
+        {
 			anim.Play ("Fire");
-		} else {
+		}
+        else
+        {
 			anim.SetTrigger("Shoot");
 		}
 		
@@ -732,8 +484,6 @@ public class ArmControllerScript : MonoBehaviour {
 		currentAmmo -= 1;
 		
 		//Play shoot sound
-		AudioClips.mainAudioSource.clip = AudioClips.shootSound;
-		AudioClips.mainAudioSource.Play();
 		
 		//Start casing instantiate
 		if (!ReloadSettings.casingOnReload) {
@@ -748,103 +498,20 @@ public class ArmControllerScript : MonoBehaviour {
 		Ray ray = new Ray (transform.position, transform.forward);
 		
 		//Send out the raycast from the "bulletSpawnPoint" position
-		if (Physics.Raycast (Spawnpoints.bulletSpawnPoint.transform.position, 
-		                     Spawnpoints.bulletSpawnPoint.transform.forward, out hit, ShootSettings.bulletDistance)) {
+		if (Physics.Raycast (Spawnpoints.bulletSpawnPoint.transform.position, Spawnpoints.bulletSpawnPoint.transform.forward, out hit, ShootSettings.bulletDistance))
+        {
 			
 			//If a rigibody is hit, add bullet force to it
 			if (hit.rigidbody != null)
-				hit.rigidbody.AddForce (ray.direction * ShootSettings.bulletForce);
-			
-			//********** USED IN THE DEMO SCENES **********
-			//If the raycast hit the tag "Target"
-			if (hit.transform.tag == "Target") {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-				//Toggle the isHit bool on the target object
-				hit.transform.gameObject.GetComponent<TargetScript>().isHit = true;
-			}
-			
-			//********** USED IN THE DEMO SCENES **********
-			//If the raycast hit the tag "ExplosiveBarrel"
-			if (hit.transform.tag == "ExplosiveBarrel") {
-				//Toggle the explode bool on the explosive barrel object
-				hit.transform.gameObject.GetComponent<ExplosiveBarrelScript>().explode = true;
-				//Spawn metal impact on surface of the barrel
-				Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//********** USED IN THE DEMO SCENES **********
-			//If the raycast hit the tag "GasTank"
-			if (hit.transform.tag == "GasTank") {
-				//Toggle the explode bool on the explosive barrel object
-				hit.transform.gameObject.GetComponent<GasTankScript>().isHit = true;
-				//Spawn metal impact on surface of the gas tank
-				Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Metal (Static)"
-			if (hit.transform.tag == ImpactTags.metalImpactStaticTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.metalImpactStaticPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Metal"
-			if (hit.transform.tag == ImpactTags.metalImpactTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.metalImpactPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Wood (Static)"
-			if (hit.transform.tag == ImpactTags.woodImpactStaticTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.woodImpactStaticPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Wood"
-			if (hit.transform.tag == ImpactTags.woodImpactTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.woodImpactPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Concrete (Static)"
-			if (hit.transform.tag == ImpactTags.concreteImpactStaticTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.concreteImpactStaticPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Concrete"
-			if (hit.transform.tag == ImpactTags.concreteImpactTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.concreteImpactPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Dirt (Static)"
-			if (hit.transform.tag == ImpactTags.dirtImpactStaticTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.dirtImpactStaticPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
-			
-			//If the raycast hit the tag "Dirt"
-			if (hit.transform.tag == ImpactTags.dirtImpactTag) {
-				//Spawn bullet impact on surface
-				Instantiate (Prefabs.dirtImpactPrefab, hit.point, 
-				             Quaternion.FromToRotation (Vector3.forward, hit.normal)); 
-			}
+            {
+                hit.rigidbody.AddForce(ray.direction * ShootSettings.bulletForce);
+            }
 		}
 	}
 	
 	//Refill ammo
-	void RefillAmmo () {
+	void RefillAmmo ()
+    {
 		
 		currentAmmo = ShootSettings.ammo;
 	}
@@ -908,12 +575,7 @@ public class ArmControllerScript : MonoBehaviour {
 			isShooting = false;
 		}
 
-		//Check if minigun is shooting
-		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Spin")) {
-			enableMinigunShooting = true;
-		} else {
-			enableMinigunShooting = false;
-		}
+		
 
 		//Check if shooting while aiming down sights
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Aim Fire")) {
@@ -952,14 +614,7 @@ public class ArmControllerScript : MonoBehaviour {
 			noSwitch = false;
 		}
 
-		//Check if finsihed throwing and reloading grenade
-		//Used for grenade only
-		if (ShootSettings.grenade == true && 
-			anim.GetCurrentAnimatorStateInfo (0).IsName ("Idle")) {
-			isGrenadeReloading = false;
-			//Used in the demo scnes
-			noSwitch = false;
-		}
+		
 		
 		//Check if reloading
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Reload")) {
