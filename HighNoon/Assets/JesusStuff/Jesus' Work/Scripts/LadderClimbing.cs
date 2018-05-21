@@ -10,7 +10,7 @@ public class LadderClimbing : MonoBehaviour
             {
                 var targetPos = other.transform.position + (Vector3.up * 10);
 
-                other.transform.position = Vector3.Lerp(other.transform.position, targetPos, Time.deltaTime * 1.6f);
+                other.transform.position = Vector3.Lerp(other.transform.position, targetPos, Time.deltaTime * .8f);
             }
         }
     }

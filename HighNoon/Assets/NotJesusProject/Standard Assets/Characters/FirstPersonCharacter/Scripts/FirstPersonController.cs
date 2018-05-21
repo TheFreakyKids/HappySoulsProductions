@@ -39,15 +39,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float speed;
         public AudioClip tempKill;
         public AudioClip tempAnnouncerKillStreak;
-        //HIGH NOON VARS
-        private bool isCrouched = false;
-        private bool isRolling = false;
-
-        //HIGH NOON VARS BUT FROM THE RPG CON
-        private Vector3 targetDashDirection;
-        protected Animator animator;
-        public float rollduration;
-        public Rigidbody rb;
 
         private void Start() //Initialization
         {
@@ -60,11 +51,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
 			m_MouseLook.Init(transform , m_Camera.transform);
-
-
-
-            //HIGH NOON
-            animator = GetComponentInChildren<Animator>();
         }
         
         private void Update()
@@ -97,74 +83,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
-
-            if (m_CharacterController.isGrounded == true) //CHECKING FOR ROLLING IF YOU'RE ON THE GROUND
-            {
-                CheckForRolling();
-            }
-
-            #region HIGH NOON MOVEMENT ANIM CALLS
-
-            float velocityXel = transform.InverseTransformDirection(rb.velocity).x;
-            float velocityZel = transform.InverseTransformDirection(rb.velocity).z;
-
-            if (!m_IsWalking) //FOR RUNNING
-            {
-                animator.SetFloat("Velocity X", 1);
-                animator.SetFloat("Velocity Z", 1);
-                animator.SetBool("Moving", true); ;
-            }
-
-            else if (m_IsWalking)
-            {
-                animator.SetFloat("Velocity X", .5f);
-                animator.SetFloat("Velocity Z", .5f);
-                animator.SetBool("Moving", true); ;
-            }
-
-            if (Input.GetButtonDown("Abutton")) //FOR JUMPING
-            {
-                animator.SetInteger("Jumping", 1);
-                animator.SetTrigger("JumpTrigger");
-                animator.SetInteger("Jumping", 2);
-                if (m_CharacterController.isGrounded == true)
-                {
-                    animator.SetInteger("Jumping", 0);
-                }
-            }
-
-            if (Input.GetAxis("Left Stick Vertical") == -1) //For
-            {
-                animator.SetFloat("Velocity X", 1);
-                animator.SetBool("Moving", true);
-            }
-            else if (Input.GetAxis("Left Stick Vertical") < 0 && Input.GetAxis("Left Stick Vertical") > -1) //For
-            {
-                animator.SetFloat("Velocity X", .5f);
-                animator.SetBool("Moving", true);
-            }
-
-            if (Input.GetAxis("Left Stick Horizontal") > 0) //Right
-            {
-                //animator.SetTrigger("StrafeRight");
-            }
-
-            if (Input.GetAxis("Left Stick Vertical") > 0) //Back
-            {
-                //animator.SetTrigger("StrafeBack");
-            }
-
-            if (Input.GetAxis("Left Stick Horizontal") < 0) //Left
-            {
-                //animator.SetTrigger("StrafeLeft");
-            }
-
-            if (Input.GetAxis("Left Stick Horizontal") == 0 && Input.GetAxis("Left Stick Vertical") == 0)
-            {
-                animator.SetFloat("Velocity X", 0);
-                animator.SetBool("Moving", false);
-            }
-            #endregion
         }
 
         public void FixedUpdate()
@@ -254,18 +172,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 newCameraPosition = m_Camera.transform.localPosition;
                 newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
-            }
-           
-            if (Input.GetButton("B") == true && isCrouched == false)  //CROUCHING
-            {
-                newCameraPosition.y = (m_Camera.transform.localPosition.y / 2);
-            }
-            m_Camera.transform.localPosition = newCameraPosition;
-        } //CROUCHING IS IN HERE
+            }          
+        } 
         
         public void GetInput1(out float speed)
         {
-
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Left Stick Horizontal");
             float vertical = -CrossPlatformInputManager.GetAxis("Left Stick Vertical");
@@ -341,63 +252,5 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
-
-        #region ROLLING FUNCTIONS
-
-        public void CheckForRolling() //FOR HIGH NOON
-        {
-            if (Input.GetButtonDown("Left Bumper") == true && !isRolling && m_CharacterController.isGrounded == true)
-            {
-                if (Input.GetAxis("Left Stick Vertical") != 0 || Input.GetAxis("Left Stick Horizontal") != 0)
-                {
-                    StartCoroutine(_DirectionalRoll(Input.GetAxis("Left Stick Vertical"), Input.GetAxis("Left Stick Horizontal")));
-                }
-            }
-        }
-
-        public IEnumerator _DirectionalRoll(float x, float v)
-        {
-            if (Input.GetAxis("Left Stick Vertical") == -1)
-            {
-                StartCoroutine(_Roll(1));
-            }
-            if (Input.GetAxis("Left Stick Horizontal") == 1)
-            {
-                StartCoroutine(_Roll(2));
-            }
-            if (Input.GetAxis("Left Stick Vertical") == 1)
-            {
-                StartCoroutine(_Roll(3));
-            }
-            if (Input.GetAxis("Left Stick Horizontal") == -1)
-            {
-                StartCoroutine(_Roll(4));
-            }
-            yield return null;
-        }
-
-        public IEnumerator _Roll(int rollNumber)
-        {
-            if (rollNumber == 1)
-            {
-                animator.SetTrigger("RollForwardTrigger");
-            }
-            if (rollNumber == 2)
-            {
-                animator.SetTrigger("RollRightTrigger");
-            }
-            if (rollNumber == 3)
-            {
-                animator.SetTrigger("RollBackwardTrigger");
-            }
-            if (rollNumber == 4)
-            {
-                animator.SetTrigger("RollLeftTrigger");
-            }
-            isRolling = true;
-            yield return new WaitForSeconds(rollduration);
-            isRolling = false;
-        }
-        #endregion
     }
 }

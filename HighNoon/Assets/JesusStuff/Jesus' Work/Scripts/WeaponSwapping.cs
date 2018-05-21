@@ -9,7 +9,7 @@ public class WeaponSwapping : MonoBehaviour
 
     void Awake()
     {
-        parentName = this.transform.parent.name;
+        parentName = this.transform.parent.transform.parent.transform.parent.name;
     }
 	void Start ()
     {

@@ -50,25 +50,6 @@ public partial class CameraController : MonoBehaviour {
     
 	private void MouseLook1()
     {
-        #region Crap
-        /*float mouseInputX = Input.GetAxis("Right Stick Horizontal");
-		transform.Rotate(new Vector3(0, mouseInputX * 2, 0));
-        float mouseInputY = Input.GetAxis("Right Stick Vertical");
-        playerCamera.transform.Rotate(new Vector3(mouseInputY * -1, 0, 0));
-        if(playerCamera.transform.localEulerAngles.x >= 80)
-        {
-            Debug.Log("more than 80");
-            playerCamera.transform.rotation = Quaternion.Euler(79, 0, 0);
-        }
-        else if (playerCamera.transform.localEulerAngles.x <= -80)
-        {
-            playerCamera.transform.rotation = Quaternion.Euler(-80, 0, 0);
-        }*/
-        /*Vector3 rot = transform.eulerAngles;
-        float mouseY = Input.GetAxis("Mouse Y");
-        rot.x = Mathf.Clamp(rot.x + mouseY, 0, 80);
-        transform.eulerAngles = rot;*/
-        #endregion
         if (Input.GetAxis("Right Stick Vertical") > 0.1 || Input.GetAxis("Right Stick Vertical") < 0.1)
         {
             verticalRotationP1 -= Input.GetAxis("Right Stick Vertical");
@@ -79,30 +60,11 @@ public partial class CameraController : MonoBehaviour {
             horizontalRotation += Input.GetAxis("Right Stick Horizontal");
         }
         
-        playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1, 0, 0);
-        this.transform.parent.transform.localRotation = Quaternion.Euler(0, horizontalRotation * 1.5f, 0);
+        playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1 * 4f, 0, 0);
+        this.transform.parent.transform.localRotation = Quaternion.Euler(0, horizontalRotation * 4f, 0);
     }
     private void MouseLook2()
     {
-        #region Crap
-        /*float mouseInputX = Input.GetAxis("Right Stick Horizontal");
-		transform.Rotate(new Vector3(0, mouseInputX * 2, 0));
-        float mouseInputY = Input.GetAxis("Right Stick Vertical");
-        playerCamera.transform.Rotate(new Vector3(mouseInputY * -1, 0, 0));
-        if(playerCamera.transform.localEulerAngles.x >= 80)
-        {
-            Debug.Log("more than 80");
-            playerCamera.transform.rotation = Quaternion.Euler(79, 0, 0);
-        }
-        else if (playerCamera.transform.localEulerAngles.x <= -80)
-        {
-            playerCamera.transform.rotation = Quaternion.Euler(-80, 0, 0);
-        }*/
-        /*Vector3 rot = transform.eulerAngles;
-        float mouseY = Input.GetAxis("Mouse Y");
-        rot.x = Mathf.Clamp(rot.x + mouseY, 0, 80);
-        transform.eulerAngles = rot;*/
-        #endregion
         if (Input.GetAxis("P2VertLook") > 0.1 || Input.GetAxis("P2VertLook") < 0.1)
         {
             verticalRotationP2 -= Input.GetAxis("P2VertLook");
