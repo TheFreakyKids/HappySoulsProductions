@@ -72988,6 +72988,16 @@ Prefab:
       propertyPath: ammoRes
       value: 
       objectReference: {fileID: 1851670705}
+    - target: {fileID: 114821002107830182, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: AudioClips.reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f59ae693e8e150d4dbcdf3f87a023af9, type: 3}
+    - target: {fileID: 114821002107830182, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: AudioClips.leverActoin
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0
@@ -77844,6 +77854,16 @@ Prefab:
       propertyPath: elims
       value: 
       objectReference: {fileID: 210556542}
+    - target: {fileID: 114737918314429864, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: AudioClips.reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f59ae693e8e150d4dbcdf3f87a023af9, type: 3}
+    - target: {fileID: 114737918314429864, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: AudioClips.leverActoin
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
   m_IsPrefabParent: 0

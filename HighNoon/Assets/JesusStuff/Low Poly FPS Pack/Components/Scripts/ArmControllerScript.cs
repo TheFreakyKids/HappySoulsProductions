@@ -203,6 +203,7 @@ public class ArmControllerScript : MonoBehaviour
 		public AudioClip shootSound;
 		public AudioClip reloadSound;
         public AudioClip dryFire;
+        public AudioClip leverActoin;
 	}
 	public audioClips AudioClips;
 
@@ -628,7 +629,11 @@ public class ArmControllerScript : MonoBehaviour
 			}    
 		}
 	}
-	
+	IEnumerator LeverAction()
+    {
+        yield return new WaitForSeconds(0.2f);
+        SoundManager.instance.Play(AudioClips.leverActoin, "sfx");
+    }
 	//Shoot
 	void Shoot() {
 		
@@ -647,6 +652,10 @@ public class ArmControllerScript : MonoBehaviour
 
         //Play shoot sound
         SoundManager.instance.Play(AudioClips.shootSound, "sfx");
+        if(this.gameObject.name == "arms@lever_action_rifle")
+        {
+            StartCoroutine(LeverAction());
+        }
 		//Start casing instantiate
 		if (!ReloadSettings.casingOnReload)
         {
