@@ -41,8 +41,7 @@ public class AimScript : MonoBehaviour
     #endregion
     void Awake ()
     {
-        parent = this.transform.parent.transform.parent.transform.parent.transform.parent.name;
-        
+        parent = this.transform.parent.transform.parent.transform.parent.transform.parent.name;        
 	}
 
 	void Update ()

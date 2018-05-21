@@ -1,86 +1,84 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponSpawns : MonoBehaviour
 {
     public bool weaponIsRespawning = false;
-    float weaponSpawnTime = 10f;
-    public MeshRenderer meshRend;
+    public float weaponSpawnTime = 10f;
+    public MeshRenderer[] meshRend;
     public BoxCollider boxCol;
-    [SerializeField]
-    public List<MeshRenderer> kids;
+    public ParticleSystem[] effects;
     public void Start()
     {
-        meshRend = this.gameObject.GetComponent<MeshRenderer>();
+        meshRend = this.gameObject.GetComponentsInChildren<MeshRenderer>();
         boxCol = this.gameObject.GetComponent<BoxCollider>();
+
+        effects = GetComponentsInChildren<ParticleSystem>();
     }
     public void OnTriggerEnter(Collider other)
     {
-        List<MeshRenderer> kids = new List<MeshRenderer>();
         if (other.gameObject.tag == "Player" && weaponIsRespawning == false)
         {
             Debug.Log("fuck you");
             if (this.tag == "SixShooter")
             {
-                kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Sixshooter");
 
                 other.GetComponent<Player>().revolverAmmoPoolP1 += 12;
-                meshRend.enabled = false;
-                boxCol.enabled = false;
-                foreach (MeshRenderer mRend in kids)
+                for (int i = 0; i < meshRend.Length; i++)
                 {
-                    mRend.enabled = false;
+                    meshRend[i].enabled = false;
                 }
-                StartCoroutine(WeaponRespawn(this.gameObject, kids));
+                boxCol.enabled = false;
+                for (int i = 0; i < effects.Length; i++)
+                {
+                    effects[i].enableEmission = false;
+                }
+                StartCoroutine(WeaponRespawn(this.gameObject, meshRend));
             }
             if (this.tag == "Shotgun")
             {
-                kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Shotgun");
 
                 other.GetComponent<Player>().shotgunAmmoPoolP1 += 4;
-               // this.gameObject.SetActive(false);
-                meshRend.enabled = false;
-                boxCol.enabled = false;
-                foreach (MeshRenderer mRend in kids)
+                for (int i = 0; i < meshRend.Length; i++)
                 {
-                    mRend.enabled = false;
+                    meshRend[i].enabled = false;
                 }
-                StartCoroutine(WeaponRespawn(this.gameObject, kids));
+                boxCol.enabled = false;
+                StartCoroutine(WeaponRespawn(this.gameObject, meshRend));
             }
             if (this.tag == "Rifle")
             {
-                kids.AddRange(GetComponentsInChildren<MeshRenderer>());
                 print("Nabbed Rifle");
 
                 other.GetComponent<Player>().rifleAmmoPoolP1 += 2;
-               // this.gameObject.SetActive(false);
-                meshRend.enabled = false;
-                boxCol.enabled = false;
-                foreach (MeshRenderer mRend in kids)
+                for (int i = 0; i < meshRend.Length; i++)
                 {
-                    mRend.enabled = false;
+                    meshRend[i].enabled = false;
                 }
-                StartCoroutine(WeaponRespawn(this.gameObject, kids));
+                boxCol.enabled = false;
+                StartCoroutine(WeaponRespawn(this.gameObject, meshRend));
             }
         }
     }
 
-    public IEnumerator WeaponRespawn(GameObject spawn, List<MeshRenderer> rend)
+    public IEnumerator WeaponRespawn(GameObject spawn, MeshRenderer[] meshs)
     {
         weaponIsRespawning = true;
         yield return new WaitForSeconds(weaponSpawnTime);
 
         Debug.Log("WEAPON RESPAWNED");
-        meshRend.enabled = true;
-        boxCol.enabled = true;
-        foreach (MeshRenderer mRend in rend)
+        for (int i = 0; i < meshs.Length; i++)
         {
-            mRend.enabled = true;
+            meshs[i].enabled = true;
+        }
+        boxCol.enabled = true;
+        for (int i = 0; i < effects.Length; i++)
+        {
+            effects[i].enableEmission = true;
         }
         weaponIsRespawning = false;
-        
+       
     }
 }

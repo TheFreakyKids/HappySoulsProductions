@@ -40,6 +40,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public AudioClip tempKill;
         public AudioClip tempAnnouncerKillStreak;
 
+        public bool isClimbing = false;
+
         private void Start() //Initialization
         {
             m_CharacterController = GetComponent<CharacterController>(); 
@@ -123,7 +125,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime; //Otherwise, do gravity stuff
             }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime); //This is where we call to move
+            m_CollisionFlags = m_CharacterController.Move(isClimbing ? (m_MoveDir * 0) : (m_MoveDir*Time.fixedDeltaTime)); //This is where we call to move
 
             ProgressStepCycle(speed); //Do the step cycle
             UpdateCameraPosition(speed); //Update the camera
