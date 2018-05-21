@@ -9,10 +9,12 @@ public partial class CameraController : MonoBehaviour {
     public float horizontalRotation;
     public float updownrange = 80f;
     public string parentName;
+    public Transform parentTransform;
     void Awake()
     {
         playerCam = this.GetComponent<Camera>();
-        parentName = this.transform.parent.name;
+        parentName = this.transform.parent.transform.parent.transform.parent.name;
+        parentTransform = this.transform.parent.transform.parent.transform.parent;
     }
 	void Start()
     {
@@ -52,7 +54,7 @@ public partial class CameraController : MonoBehaviour {
     {
         if (Input.GetAxis("Right Stick Vertical") > 0.1 || Input.GetAxis("Right Stick Vertical") < 0.1)
         {
-            verticalRotationP1 -= Input.GetAxis("Right Stick Vertical");
+            verticalRotationP1 -= Input.GetAxis("Right Stick Vertical") * 2.4f;
             verticalRotationP1 = Mathf.Clamp(verticalRotationP1, -updownrange, updownrange);
         }
         if (Input.GetAxis("Right Stick Horizontal") > 0.1 || Input.GetAxis("Right Stick Horizontal") < 0.1)
@@ -60,8 +62,8 @@ public partial class CameraController : MonoBehaviour {
             horizontalRotation += Input.GetAxis("Right Stick Horizontal");
         }
         
-        playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1 * 4f, 0, 0);
-        this.transform.parent.transform.localRotation = Quaternion.Euler(0, horizontalRotation * 4f, 0);
+        playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1, 0, 0);
+        parentTransform.rotation = Quaternion.Euler(0, horizontalRotation * 4f, 0);
     }
     private void MouseLook2()
     {

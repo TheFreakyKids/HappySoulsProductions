@@ -5,10 +5,12 @@ public class ArmControllerScript : MonoBehaviour
 {
     string parentName;
 	Animator anim;
-	
+    public float shotgunDamage = 85;
+    public float revolverDamage = 35;
+    public float rifleDamage = 65;
 	bool isReloading;
 	bool outOfAmmo;
-	
+    bool triggerPulled = false;
 	bool isShooting;
 	bool isAimShooting;
 	bool isAiming;
@@ -232,7 +234,9 @@ public class ArmControllerScript : MonoBehaviour
 	
 	void Update ()
     {
-
+         shotgunDamage = 85;
+         revolverDamage = 35;
+         rifleDamage = 65;
 		//Generate random number to choose which melee attack animation to play
 		//If using a melee weapon
 		if (MeleeSettings.isMeleeWeapon == true)
@@ -267,22 +271,30 @@ public class ArmControllerScript : MonoBehaviour
 	}
     void Shooter1()
     {
-        if (Input.GetAxis("Right Trigger") == 1 && !ShootSettings.automaticFire && !isReloading && !outOfAmmo && !isShooting && !isAimShooting && !isRunning && !isJumping)
+        if (Input.GetAxis("Right Trigger") == 1 && !ShootSettings.automaticFire && !isReloading && !isShooting && !isAimShooting && !isRunning && !isJumping && triggerPulled == false)
         {
-            //If shotgun shoot is true
-            if (ShootSettings.useShotgunSpread == true)
+            triggerPulled = true;
+            if (currentAmmo == 0)
             {
-                ShotgunShoot();
+                SoundManager.instance.Play(AudioClips.dryFire, "sfx");
             }
-            //If projectile weapon, grenade, melee weapons, grenade launcher and flamethrower is false
-            if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon)
+            else
             {
-                Shoot();
-                //If projectile weapon is true
-            }
-            else if (ShootSettings.projectileWeapon == true)
-            {
-                StartCoroutine(ProjectileShoot());
+                //If shotgun shoot is true
+                if (ShootSettings.useShotgunSpread == true)
+                {
+                    ShotgunShoot();
+                }
+                //If projectile weapon, grenade, melee weapons, grenade launcher and flamethrower is false
+                if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon)
+                {
+                    Shoot();
+                    //If projectile weapon is true
+                }
+                else if (ShootSettings.projectileWeapon == true)
+                {
+                    StartCoroutine(ProjectileShoot());
+                }
             }
             #region MeleeShit
             //If melee weapon is used, play random attack animation on left click
@@ -308,6 +320,10 @@ public class ArmControllerScript : MonoBehaviour
                 }
             }
             #endregion
+        }
+        if (Input.GetAxis("Right Trigger") == 0)
+        {
+            triggerPulled = false;
         }
         //R key to reload
         //Not used for projectile weapons, grenade or melee weapons
@@ -329,22 +345,30 @@ public class ArmControllerScript : MonoBehaviour
     }
     void Shooter2()
     {
-        if (Input.GetAxis("Fire1") == 1 && !ShootSettings.automaticFire && !isReloading && !outOfAmmo && !isShooting && !isAimShooting && !isRunning && !isJumping)
+        if (Input.GetAxis("Fire1") == 1 && !ShootSettings.automaticFire && !isReloading && !isShooting && !isAimShooting && !isRunning && !isJumping && triggerPulled == false)
         {
-            //If shotgun shoot is true
-            if (ShootSettings.useShotgunSpread == true)
+            triggerPulled = true;
+            if (currentAmmo == 0)
             {
-                ShotgunShoot();
+                SoundManager.instance.Play(AudioClips.dryFire, "sfx");
             }
-            //If projectile weapon, grenade, melee weapons, grenade launcher and flamethrower is false
-            if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon)
+            else
             {
-                Shoot();
-                //If projectile weapon is true
-            }
-            else if (ShootSettings.projectileWeapon == true)
-            {
-                StartCoroutine(ProjectileShoot());
+                //If shotgun shoot is true
+                if (ShootSettings.useShotgunSpread == true)
+                {
+                    ShotgunShoot();
+                }
+                //If projectile weapon, grenade, melee weapons, grenade launcher and flamethrower is false
+                if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon)
+                {
+                    Shoot();
+                    //If projectile weapon is true
+                }
+                else if (ShootSettings.projectileWeapon == true)
+                {
+                    StartCoroutine(ProjectileShoot());
+                }
             }
             #region MeleeShit
             //If melee weapon is used, play random attack animation on left click
@@ -370,6 +394,10 @@ public class ArmControllerScript : MonoBehaviour
                 }
             }
             #endregion
+        }
+        if (Input.GetAxis("Fire1") == 0)
+        {
+            triggerPulled = false;
         }
         //R key to reload
         //Not used for projectile weapons, grenade or melee weapons
@@ -439,8 +467,7 @@ public class ArmControllerScript : MonoBehaviour
 			Components.lightFlash.GetComponent<Light> ().enabled = false;
 		}
 	}
-
-	
+    
 	//Projectile shoot
 	IEnumerator ProjectileShoot () {
 		
@@ -535,6 +562,10 @@ public class ArmControllerScript : MonoBehaviour
                 {
                     hit.rigidbody.AddForce(direction * ShootSettings.bulletForce);
                 }
+                if(hit.transform.CompareTag("Player")==true)
+                {
+                    hit.transform.GetComponent<Player>().TakeDamage(shotgunDamage);
+                }
 			}    
 		}
 	}
@@ -579,7 +610,15 @@ public class ArmControllerScript : MonoBehaviour
             {
                 hit.rigidbody.AddForce(ray.direction * ShootSettings.bulletForce);
             }
-		}
+            if (hit.transform.CompareTag("Player") == true && this.gameObject.name == "arms@revolver_1")
+            {
+                hit.transform.GetComponent<Player>().TakeDamage(revolverDamage);
+            }
+            if (hit.transform.CompareTag("Player") == true && this.gameObject.name == "arms@lever_action_rifle")
+            {
+                hit.transform.GetComponent<Player>().TakeDamage(rifleDamage);
+            }
+        }
 	}
 	
 	//Refill ammo
