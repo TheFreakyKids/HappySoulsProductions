@@ -72998,6 +72998,14 @@ Prefab:
       propertyPath: AudioClips.leverActoin
       value: 
       objectReference: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
+    - target: {fileID: 1041056568432052, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529012313096264, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0
@@ -77864,6 +77872,14 @@ Prefab:
       propertyPath: AudioClips.leverActoin
       value: 
       objectReference: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
+    - target: {fileID: 1306179956445176, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563643590756350, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
   m_IsPrefabParent: 0
