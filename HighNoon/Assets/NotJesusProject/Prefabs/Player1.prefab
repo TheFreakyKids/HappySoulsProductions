@@ -3771,6 +3771,9 @@ MonoBehaviour:
   spawnTime: 4
   isRespawning: 0
   died: 0
+  revolverAmmoPool: 12
+  rifleAmmoPool: 6
+  shotgunAmmoPool: 4
   revolverAmmoPoolP1: 12
   rifleAmmoPoolP1: 4
   shotgunAmmoPoolP1: 4
@@ -3919,6 +3922,9 @@ MonoBehaviour:
   shotgunDamage: 0
   revolverDamage: 0
   rifleDamage: 0
+  loadedAmmo: {fileID: 0}
+  ammoRes: {fileID: 0}
+  parentObject: {fileID: 0}
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -4006,6 +4012,9 @@ MonoBehaviour:
   shotgunDamage: 0
   revolverDamage: 0
   rifleDamage: 0
+  loadedAmmo: {fileID: 0}
+  ammoRes: {fileID: 0}
+  parentObject: {fileID: 0}
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -4116,6 +4125,9 @@ MonoBehaviour:
   shotgunDamage: 0
   revolverDamage: 0
   rifleDamage: 0
+  loadedAmmo: {fileID: 0}
+  ammoRes: {fileID: 0}
+  parentObject: {fileID: 0}
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -4188,7 +4200,7 @@ MonoBehaviour:
   AudioClips:
     shootSound: {fileID: 8300000, guid: c404c0f8d9b6df7458cb58da2c9af3b2, type: 3}
     reloadSound: {fileID: 8300000, guid: aeae238690e25f846929b6e5ffe52701, type: 3}
-    dryFire: {fileID: 0}
+    dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
   noSwitch: 0
 --- !u!124 &124526722818183548
 Behaviour:

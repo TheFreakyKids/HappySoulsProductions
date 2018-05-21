@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 4857927521479602}
   - component: {fileID: 33664734254694162}
   - component: {fileID: 23692756997770932}
-  m_Layer: 2
+  m_Layer: 4
   m_Name: SM_CharacterAttachments_Bandana_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,7 +1049,7 @@ GameObject:
   - component: {fileID: 4986546344482154}
   - component: {fileID: 33541587585703860}
   - component: {fileID: 23907533596639316}
-  m_Layer: 2
+  m_Layer: 4
   m_Name: SM_CharacterAttachments_Pouch_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,7 +1096,7 @@ GameObject:
   - component: {fileID: 4916336263031538}
   - component: {fileID: 33691218821289696}
   - component: {fileID: 23154763971138662}
-  m_Layer: 2
+  m_Layer: 4
   m_Name: SM_CharacterAttachment_Holster_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2726,7 +2726,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967279
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3748,6 +3748,9 @@ MonoBehaviour:
   shotgunDamage: 0
   revolverDamage: 0
   rifleDamage: 0
+  loadedAmmo: {fileID: 0}
+  ammoRes: {fileID: 0}
+  parentObject: {fileID: 0}
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -3820,7 +3823,7 @@ MonoBehaviour:
   AudioClips:
     shootSound: {fileID: 8300000, guid: c404c0f8d9b6df7458cb58da2c9af3b2, type: 3}
     reloadSound: {fileID: 8300000, guid: aeae238690e25f846929b6e5ffe52701, type: 3}
-    dryFire: {fileID: 0}
+    dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
   noSwitch: 0
 --- !u!114 &114511846241945994
 MonoBehaviour:
@@ -3979,6 +3982,9 @@ MonoBehaviour:
   shotgunDamage: 0
   revolverDamage: 0
   rifleDamage: 0
+  loadedAmmo: {fileID: 0}
+  ammoRes: {fileID: 0}
+  parentObject: {fileID: 0}
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -4084,6 +4090,9 @@ MonoBehaviour:
   shotgunDamage: 0
   revolverDamage: 0
   rifleDamage: 0
+  loadedAmmo: {fileID: 0}
+  ammoRes: {fileID: 0}
+  parentObject: {fileID: 0}
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -4178,6 +4187,9 @@ MonoBehaviour:
   spawnTime: 4
   isRespawning: 0
   died: 0
+  revolverAmmoPool: 12
+  rifleAmmoPool: 6
+  shotgunAmmoPool: 4
   revolverAmmoPoolP1: 12
   rifleAmmoPoolP1: 4
   shotgunAmmoPoolP1: 4

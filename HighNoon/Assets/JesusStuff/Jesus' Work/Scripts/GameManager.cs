@@ -35,10 +35,6 @@ public class GameManager : MonoBehaviour
         matchTime -= Time.deltaTime;
         matchTime = Mathf.Clamp(matchTime, 0, matchTime);
         matchTimer.text = Mathf.Round(matchTime).ToString();
-        if(Input.GetKey(KeyCode.A))
-        {
-            player2.gameObject.GetComponent<Player>().died = true;
-        }
         DeathCheck();
         VictoryCheck();
     }

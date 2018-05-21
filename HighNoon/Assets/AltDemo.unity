@@ -72958,6 +72958,36 @@ Prefab:
       propertyPath: elims
       value: 
       objectReference: {fileID: 1672521634}
+    - target: {fileID: 114916831233422924, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: loadedAmmo
+      value: 
+      objectReference: {fileID: 1916521061}
+    - target: {fileID: 114916831233422924, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: ammoRes
+      value: 
+      objectReference: {fileID: 1851670705}
+    - target: {fileID: 114821002107830182, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: loadedAmmo
+      value: 
+      objectReference: {fileID: 1916521061}
+    - target: {fileID: 114821002107830182, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: ammoRes
+      value: 
+      objectReference: {fileID: 1851670705}
+    - target: {fileID: 114841772297281588, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: loadedAmmo
+      value: 
+      objectReference: {fileID: 1916521061}
+    - target: {fileID: 114841772297281588, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: ammoRes
+      value: 
+      objectReference: {fileID: 1851670705}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0
@@ -77774,6 +77804,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 114852328280481334, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: loadedAmmo
+      value: 
+      objectReference: {fileID: 825742904}
+    - target: {fileID: 114852328280481334, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: ammoRes
+      value: 
+      objectReference: {fileID: 1507599352}
+    - target: {fileID: 114737918314429864, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: loadedAmmo
+      value: 
+      objectReference: {fileID: 825742904}
+    - target: {fileID: 114737918314429864, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: ammoRes
+      value: 
+      objectReference: {fileID: 1507599352}
+    - target: {fileID: 114284120294820820, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: loadedAmmo
+      value: 
+      objectReference: {fileID: 825742904}
+    - target: {fileID: 114284120294820820, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: ammoRes
+      value: 
+      objectReference: {fileID: 1507599352}
     - target: {fileID: 114998592843502664, guid: cb61934175bfd4f488d9d9f620df74db,
         type: 2}
       propertyPath: health
@@ -77784,23 +77844,6 @@ Prefab:
       propertyPath: elims
       value: 
       objectReference: {fileID: 210556542}
-    - target: {fileID: 1730555585925670, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
-      propertyPath: m_Layer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424079434031200, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
-      propertyPath: m_Layer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671599206933394, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
-      propertyPath: m_Layer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 20173148623204312, guid: cb61934175bfd4f488d9d9f620df74db,
-        type: 2}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4294967279
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
   m_IsPrefabParent: 0

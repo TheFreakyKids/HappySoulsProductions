@@ -10,13 +10,17 @@ public class Player : MonoBehaviour
     public float spawnTime = 4f;
     public bool isRespawning = false;
     public bool died = false;
+    public int revolverAmmoPool = 12;
+    public int rifleAmmoPool = 4;
+    public int shotgunAmmoPool = 4;
+    #region BecauseCompilers
     public int revolverAmmoPoolP1 = 12;
     public int rifleAmmoPoolP1 = 4;
     public int shotgunAmmoPoolP1 = 4;
     public int revolverAmmoPoolP2 = 12;
     public int rifleAmmoPoolP2 = 4;
     public int shotgunAmmoPoolP2 = 4;
-
+    #endregion
     public bool infiniteAmmo = false;
     public bool invincible = false;
     public bool speedLoader = false;

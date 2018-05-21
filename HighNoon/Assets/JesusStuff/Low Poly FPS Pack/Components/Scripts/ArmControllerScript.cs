@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ArmControllerScript : MonoBehaviour
@@ -8,6 +9,9 @@ public class ArmControllerScript : MonoBehaviour
     public float shotgunDamage = 85;
     public float revolverDamage = 35;
     public float rifleDamage = 65;
+    float riflePool;
+    float revolverPool;
+    float shotgunPool;
 	bool isReloading;
 	bool outOfAmmo;
     bool triggerPulled = false;
@@ -17,12 +21,17 @@ public class ArmControllerScript : MonoBehaviour
 	bool isDrawing;
 	bool isRunning;
 	bool isJumping;
-
 	bool isMeleeAttacking;
 
-	//Random number generated to choose 
-	//attack animation for melee
-	int randomAttackAnim;
+    #region ForGUIreference
+    public Text loadedAmmo;
+    public Text ammoRes;
+    public GameObject parentObject;
+    #endregion
+
+    //Random number generated to choose 
+    //attack animation for melee
+    int randomAttackAnim;
 	
 	//Used for fire rate
 	float lastFired;
@@ -199,12 +208,20 @@ public class ArmControllerScript : MonoBehaviour
 
 	public bool noSwitch = false;
 	
-	void Awake () {
+	void Awake ()
+    {
 		
 		//Set the animator component
 		anim = GetComponent<Animator>();
         parentName = this.transform.parent.transform.parent.transform.parent.transform.parent.name;
-
+        if(parentName == "Player1")
+        {
+            parentObject = GameObject.Find("Player1");
+        }
+        if (parentName == "Player2")
+        {
+            parentObject = GameObject.Find("Player2");
+        }
         //Set the ammo count
         RefillAmmo ();
 		
@@ -234,12 +251,28 @@ public class ArmControllerScript : MonoBehaviour
 	
 	void Update ()
     {
-         shotgunDamage = 85;
-         revolverDamage = 35;
-         rifleDamage = 65;
-		//Generate random number to choose which melee attack animation to play
-		//If using a melee weapon
-		if (MeleeSettings.isMeleeWeapon == true)
+        shotgunDamage = 85;
+        revolverDamage = 35;
+        rifleDamage = 65;
+        loadedAmmo.text = currentAmmo.ToString();
+        if(this.gameObject.name == "arms@revolver_1")
+        {
+            revolverPool = parentObject.GetComponent<Player>().revolverAmmoPool;
+            ammoRes.text = revolverPool.ToString();
+        }
+        if (this.gameObject.name == "arms@lever_action_rifle")
+        {
+            riflePool = parentObject.GetComponent<Player>().rifleAmmoPool;
+            ammoRes.text = riflePool.ToString();
+        }
+        if (this.gameObject.name == "arms@sawn_off_shotgun")
+        {
+            shotgunPool = parentObject.GetComponent<Player>().shotgunAmmoPool;
+            ammoRes.text = shotgunPool.ToString();
+        }
+        //Generate random number to choose which melee attack animation to play
+        //If using a melee weapon
+        if (MeleeSettings.isMeleeWeapon == true)
         {
 			randomAttackAnim = Random.Range (1, 4);
 		}
@@ -329,7 +362,26 @@ public class ArmControllerScript : MonoBehaviour
         //Not used for projectile weapons, grenade or melee weapons
         if (Input.GetButtonDown("Right Bumper") && !isReloading && !MeleeSettings.isMeleeWeapon && currentAmmo != ShootSettings.ammo)
         {
-            Reload();
+            if (currentAmmo != 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@revolver_1" && revolverPool == 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@lever_action_rifle" && riflePool == 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@sawn_off_shotgun" && shotgunPool == 0)
+            {
+                return;
+            }
+            else
+            {
+                Reload();
+            }
         }
 
         //Run when holding down left shift and moving
@@ -403,7 +455,14 @@ public class ArmControllerScript : MonoBehaviour
         //Not used for projectile weapons, grenade or melee weapons
         if (Input.GetButtonDown("p2 rb") && !isReloading && !MeleeSettings.isMeleeWeapon)
         {
-            Reload();
+            if(currentAmmo != 0)
+            {
+                return;
+            }
+            else
+            {
+                Reload();
+            }            
         }
 
         //Run when holding down left shift and moving
@@ -633,7 +692,37 @@ public class ArmControllerScript : MonoBehaviour
 		
 		//Play reload animation
 		anim.Play ("Reload");
-
+        while(currentAmmo < ShootSettings.ammo)
+        {
+            if (this.gameObject.name == "arms@revolver_1")
+            {
+                if(parentObject.GetComponent<Player>().revolverAmmoPool == 0)
+                {
+                    break;
+                }
+                currentAmmo++;
+                parentObject.GetComponent<Player>().revolverAmmoPool--;
+            }
+            if (this.gameObject.name == "arms@lever_action_rifle")
+            {
+                if (parentObject.GetComponent<Player>().rifleAmmoPool == 0)
+                {
+                    break;
+                }
+                currentAmmo++;
+                parentObject.GetComponent<Player>().rifleAmmoPool--;
+            }
+            if (this.gameObject.name == "arms@sawn_off_shotgun")
+            {
+                if (parentObject.GetComponent<Player>().shotgunAmmoPool == 0)
+                {
+                    break;
+                }
+                currentAmmo++;
+                parentObject.GetComponent<Player>().shotgunAmmoPool--;
+            }
+        }
+        
         //Play reload sound
         SoundManager.instance.Play(AudioClips.reloadSound, "sfx");
 		
@@ -746,7 +835,7 @@ public class ArmControllerScript : MonoBehaviour
 			// If reloading
 			isReloading = true;
 			//Refill ammo
-			RefillAmmo();
+			//RefillAmmo();
 			//Used in the demo scenes
 			noSwitch = true;
 		}
