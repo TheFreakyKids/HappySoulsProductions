@@ -10,7 +10,11 @@ public partial class CameraController : MonoBehaviour
     public float updownrange = 80f;
     public string parentName;
     public Transform parentTransform;
-
+    public float hipVertSensitivity = 2.4f;
+    public float hipHorizSensitivity = 4.0f;
+    public float adsVertSensitivity = .75f;
+    public float adsHorizSensitivity = .5f;
+    public bool ads = false;
     public int playerNum;
 
     void Awake()
@@ -33,26 +37,35 @@ public partial class CameraController : MonoBehaviour
     {
 		// Check mouse lock status
 		MouseLock();
-        //if (parentName == "Player1")
-        //{
-        //    MouseLook1();
-        //}
-        //else if (parentName == "Player2")
-        //{
-        //    MouseLook2();
-        //}
-        NewMouseLook();
+        /*if (parentName == "Player1")
+        {
+            MouseLook1();
+        }
+        else if (parentName == "Player2")
+        {
+            MouseLook2();
+        }*/
+        /*if(ads == true)
+        {
+            Aiming();
+        }
+        else
+        {*/
+            NewMouseLook();
+      //}
     }
 
 	private void MouseLock()
     {
 		// Release mouse on escape key
-		if (Input.GetKey(KeyCode.Escape)) {
+		if (Input.GetKey(KeyCode.Escape))
+        {
 			Cursor.lockState = CursorLockMode.None;
 		}
 
 		// Lock mouse again on left click
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0))
+        {
 			Cursor.lockState = CursorLockMode.Locked;
 		}
 	}
@@ -72,12 +85,27 @@ public partial class CameraController : MonoBehaviour
         playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1, 0, 0);
         parentTransform.rotation = Quaternion.Euler(0, horizontalRotation * 4f, 0);
     }
-    
-	private void MouseLook1()
+   /* private void Aiming()
+    {
+        if (Input.GetAxis("RSVert" + playerNum) > 0.1 || Input.GetAxis("RSVert" + playerNum) < 0.1)
+        {
+            verticalRotationP1 -= Input.GetAxis("RSVert" + playerNum) * .75f;
+            verticalRotationP1 = Mathf.Clamp(verticalRotationP1, -updownrange, updownrange);
+        }
+        if (Input.GetAxis("RSHor" + playerNum) > 0.1 || Input.GetAxis("RSHor" + playerNum) < 0.1)
+        {
+            horizontalRotation += Input.GetAxis("RSHor" + playerNum);
+        }
+
+        playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1, 0, 0);
+        parentTransform.rotation = Quaternion.Euler(0, horizontalRotation * .5f, 0);
+    }*/
+
+    /*private void MouseLook1()
     {
         if (Input.GetAxis("RSVert1") > 0.1 || Input.GetAxis("RSVert1") < 0.1)
         {
-            verticalRotationP1 -= Input.GetAxis("RSVert1") * 2.4f;
+            verticalRotationP1 -= Input.GetAxis("RSVert1") * vertSensitivity;
             verticalRotationP1 = Mathf.Clamp(verticalRotationP1, -updownrange, updownrange);
         }
         if (Input.GetAxis("RSHor1") > 0.1 || Input.GetAxis("RSHor1") < 0.1)
@@ -86,7 +114,7 @@ public partial class CameraController : MonoBehaviour
         }
         
         playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP1, 0, 0);
-        parentTransform.rotation = Quaternion.Euler(0, horizontalRotation * 4f, 0);
+        parentTransform.rotation = Quaternion.Euler(0, horizontalRotation * horizSensitivity, 0);
     }
 
     private void MouseLook2()
@@ -102,5 +130,5 @@ public partial class CameraController : MonoBehaviour
         }
         playerCam.transform.localRotation = Quaternion.Euler(verticalRotationP2, 0, 0);
         this.transform.parent.transform.localRotation = Quaternion.Euler(0, horizontalRotation * 1.5f, 0);
-    }
+    }*/
 }

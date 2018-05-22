@@ -25,7 +25,9 @@ public class Player : MonoBehaviour
     public bool invincible = false;
     public bool speedLoader = false;
 
+    public Rigidbody rb;
     public MonoBehaviour fpsCon;
+    public MonoBehaviour camCon;
     public Slider health;
     public Text elims; //For elim count when we have that functionality
     public Transform[] playerSpawns;
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
     {
         currentHealth = maxHealth;
         playerSpawns = GameObject.Find("PlayerSpawns").GetComponentsInChildren<Transform>();
-
+        rb = this.gameObject.GetComponent<Rigidbody>();
         string numberOnly = Regex.Replace(gameObject.name, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
     }
@@ -72,7 +74,8 @@ public class Player : MonoBehaviour
     private void Die()
     {
         fpsCon.enabled = false;
-
+        camCon.enabled = false;
+        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
         StartCoroutine(Respawn());
     }
 
@@ -90,6 +93,8 @@ public class Player : MonoBehaviour
             
             currentHealth = 100f;
             fpsCon.enabled = true;
+            camCon.enabled = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         isRespawning = false;
     }

@@ -4213,6 +4213,7 @@ MonoBehaviour:
   invincible: 0
   speedLoader: 0
   fpsCon: {fileID: 114569944698289902}
+  camCon: {fileID: 114063426019285224}
   health: {fileID: 0}
   elims: {fileID: 0}
   playerSpawns: []

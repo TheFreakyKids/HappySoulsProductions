@@ -7,9 +7,7 @@ public class AimScript : MonoBehaviour
     public string parent;
 	float mouseX;
 	float mouseY;
-
     public int playerNum;
-    
 	Quaternion rotationSpeed;
     #region Headers
     [Header("Gun Options")]
@@ -46,7 +44,7 @@ public class AimScript : MonoBehaviour
     {
         parent = this.transform.parent.transform.parent.transform.parent.transform.parent.name;
 
-        string numberOnly = Regex.Replace(parent, "[^0-9]", "");
+        string numberOnly = Regex.Replace(parent, "[^0-9]", "");   //hi robert i love you
         playerNum = int.Parse(numberOnly);
     }
 
@@ -69,9 +67,11 @@ public class AimScript : MonoBehaviour
     {
         if (Input.GetAxis("LT" + playerNum) >= 0.2)
         {
+            //gunCamera.gameObject.GetComponent<CameraController>().ads = true;
             this.transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
             //Change the camera field of view
             this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, zoomFov, fovSpeed * Time.deltaTime);
+            
         }
         else
         {
@@ -80,6 +80,7 @@ public class AimScript : MonoBehaviour
             this.transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition, Time.deltaTime * moveSpeed);
             //Change back the camera field of view
             this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, defaultFov, fovSpeed * Time.deltaTime);
+            //gunCamera.gameObject.GetComponent<CameraController>().ads = false;
         }
     }
 

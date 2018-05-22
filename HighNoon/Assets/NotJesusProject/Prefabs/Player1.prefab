@@ -3726,6 +3726,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 
+  adsHorizSensitivity: 0
+  adsVertSensitivity: 0
+  hipHorizSensitivity: 4
+  hipVertSensitivity: 2.4
   playerNum: 0
   aimSpeed: 6.5
   moveSpeed: 28
@@ -3748,6 +3752,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 
+  adsHorizSensitivity: 0
+  adsVertSensitivity: 0
+  hipHorizSensitivity: 4
+  hipVertSensitivity: 2.4
   playerNum: 0
   aimSpeed: 6.5
   moveSpeed: 28
@@ -3787,6 +3795,7 @@ MonoBehaviour:
   invincible: 0
   speedLoader: 0
   fpsCon: {fileID: 114615221041042872}
+  camCon: {fileID: 114031098239235620}
   health: {fileID: 0}
   elims: {fileID: 0}
   playerSpawns: []
@@ -3906,6 +3915,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 
+  adsHorizSensitivity: 0.75
+  adsVertSensitivity: 0.5
+  hipHorizSensitivity: 4
+  hipVertSensitivity: 2.4
   playerNum: 0
   aimSpeed: 6.5
   moveSpeed: 28
@@ -4123,6 +4136,8 @@ MonoBehaviour:
   updownrange: 80
   parentName: 
   parentTransform: {fileID: 0}
+  vertSensitivity: 2.4
+  horizSensitivity: 4
   playerNum: 0
 --- !u!114 &114916831233422924
 MonoBehaviour:
