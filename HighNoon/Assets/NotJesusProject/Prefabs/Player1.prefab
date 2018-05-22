@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1044178529835596
 GameObject:
   m_ObjectHideFlags: 1
@@ -741,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1534072301813768
 GameObject:
   m_ObjectHideFlags: 1
@@ -3713,6 +3713,7 @@ MonoBehaviour:
   selectedWeapon: 0
   hasSwitched: 0
   swap: {fileID: 8300000, guid: ccff20e4f583edc4a8448c33d4a0e89d, type: 3}
+  playerNum: 0
 --- !u!114 &114166861366637358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3725,6 +3726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 
+  playerNum: 0
   aimSpeed: 6.5
   moveSpeed: 28
   defaultPosition: {x: 0, y: -0.165, z: -0.065}
@@ -3746,6 +3748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 
+  playerNum: 0
   aimSpeed: 6.5
   moveSpeed: 28
   defaultPosition: {x: 0, y: -0.145, z: -0.125}
@@ -3786,6 +3789,8 @@ MonoBehaviour:
   fpsCon: {fileID: 114615221041042872}
   health: {fileID: 0}
   elims: {fileID: 0}
+  playerSpawns: []
+  playerNum: 0
 --- !u!114 &114615221041042872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3801,7 +3806,7 @@ MonoBehaviour:
   m_WalkSpeed: 5
   m_RunSpeed: 8.5
   m_RunstepLenghten: 0.7
-  m_JumpSpeed: 18.25
+  m_JumpSpeed: 14
   m_StickToGroundForce: 10
   m_GravityMultiplier: 2
   m_MouseLook:
@@ -3887,6 +3892,8 @@ MonoBehaviour:
   tempKill: {fileID: 8300000, guid: 1a920f75a409bfc4abfd5a0944fb147f, type: 3}
   tempAnnouncerKillStreak: {fileID: 8300000, guid: fd2ad3d50dac196489aa8a44f0d7a6fd,
     type: 3}
+  isClimbing: 0
+  playerNum: 0
 --- !u!114 &114666949874018996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3899,6 +3906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 
+  playerNum: 0
   aimSpeed: 6.5
   moveSpeed: 28
   defaultPosition: {x: 0, y: -0.15, z: -0.15}
@@ -3925,6 +3933,7 @@ MonoBehaviour:
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
+  playerNum: 0
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -3997,6 +4006,7 @@ MonoBehaviour:
     shootSound: {fileID: 8300000, guid: 1d02448a7427533439eee92d63e2ddf3, type: 3}
     reloadSound: {fileID: 8300000, guid: f59ae693e8e150d4dbcdf3f87a023af9, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
+    leverAction: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
   noSwitch: 0
 --- !u!114 &114841772297281588
 MonoBehaviour:
@@ -4015,6 +4025,7 @@ MonoBehaviour:
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
+  playerNum: 0
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -4092,6 +4103,7 @@ MonoBehaviour:
     shootSound: {fileID: 8300000, guid: d2f786326ae6a3243ad314ce08c17491, type: 3}
     reloadSound: {fileID: 8300000, guid: 90acce9233f59144a8c146fa0b01dc2b, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
+    leverAction: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114911309790530946
 MonoBehaviour:
@@ -4111,6 +4123,7 @@ MonoBehaviour:
   updownrange: 80
   parentName: 
   parentTransform: {fileID: 0}
+  playerNum: 0
 --- !u!114 &114916831233422924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4128,6 +4141,7 @@ MonoBehaviour:
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
+  playerNum: 0
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -4201,6 +4215,7 @@ MonoBehaviour:
     shootSound: {fileID: 8300000, guid: c404c0f8d9b6df7458cb58da2c9af3b2, type: 3}
     reloadSound: {fileID: 8300000, guid: aeae238690e25f846929b6e5ffe52701, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
+    leverAction: {fileID: 0}
   noSwitch: 0
 --- !u!124 &124526722818183548
 Behaviour:
