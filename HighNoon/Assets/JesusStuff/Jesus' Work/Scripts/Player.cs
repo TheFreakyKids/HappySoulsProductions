@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class Player : MonoBehaviour
 {
@@ -28,10 +28,17 @@ public class Player : MonoBehaviour
     public MonoBehaviour fpsCon;
     public Slider health;
     public Text elims; //For elim count when we have that functionality
+    public Transform[] playerSpawns;
+
+    public int playerNum;
 
     private void Awake()
     {
         currentHealth = maxHealth;
+        playerSpawns = GameObject.Find("PlayerSpawns").GetComponentsInChildren<Transform>();
+
+        string numberOnly = Regex.Replace(gameObject.name, "[^0-9]", "");
+        playerNum = int.Parse(numberOnly);
     }
 
     private void Update ()
@@ -54,11 +61,6 @@ public class Player : MonoBehaviour
         }
 	}
 
-    public void FixedUpdate()
-    {
-       
-    }
-
     public void TakeDamage(float dam)
     {
         if(invincible == false)
@@ -71,9 +73,6 @@ public class Player : MonoBehaviour
     {
         fpsCon.enabled = false;
 
-        //GetComponent<Animator>().enabled = false;
-        
-
         StartCoroutine(Respawn());
     }
 
@@ -83,41 +82,11 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(spawnTime);
 
-        //GetComponent<Animator>().enabled = true;
-
         if (currentHealth != 100f)
         {
-            #region Spawning
             int point = Random.Range(0, 7);
 
-            switch (point)
-            {
-                case 0:
-                    transform.position = GameObject.Find("SpawnPoint0").transform.position;
-                    break;
-                case 1:
-                    transform.position = GameObject.Find("SpawnPoint1").transform.position;
-                    break;
-                case 2:
-                    transform.position = GameObject.Find("SpawnPoint2").transform.position;
-                    break;
-                case 3:
-                    transform.position = GameObject.Find("SpawnPoint3").transform.position;
-                    break;
-                case 4:
-                    transform.position = GameObject.Find("SpawnPoint4").transform.position;
-                    break;
-                case 5:
-                    transform.position = GameObject.Find("SpawnPoint5").transform.position;
-                    break;
-                case 6:
-                    transform.position = GameObject.Find("SpawnPoint6").transform.position;
-                    break;
-                case 7:
-                    transform.position = GameObject.Find("SpawnPoint7").transform.position;
-                    break;
-            }
-            #endregion
+            transform.position = playerSpawns[point].position;
             
             currentHealth = 100f;
             fpsCon.enabled = true;

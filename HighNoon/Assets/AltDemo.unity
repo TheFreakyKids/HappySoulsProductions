@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44813693, g: 0.49814975, b: 0.5755494, a: 1}
+  m_IndirectSpecularColor: {r: 0.44813734, g: 0.49815017, b: 0.57555115, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3484,13 +3484,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 287278213}
-  - {fileID: 1481907960}
   - {fileID: 1262754472}
-  - {fileID: 1935708132}
+  - {fileID: 1432665536}
+  - {fileID: 1481907960}
   - {fileID: 60375915}
+  - {fileID: 1935708132}
   - {fileID: 116571703}
   - {fileID: 937557936}
-  - {fileID: 1432665536}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5911,6 +5911,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &135356418
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10588,6 +10590,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &235362559
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10919,6 +10923,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!54 &242102319
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14578,6 +14584,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &318644032
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15311,6 +15319,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &329280750
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29056,6 +29066,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &555343891
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30780,6 +30792,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &593829847
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34043,6 +34057,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &644549133
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34702,7 +34718,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 10, y: 180, z: 0}
 --- !u!1001 &666007565
 Prefab:
@@ -40243,6 +40259,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &752456877
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40797,6 +40815,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &763036660
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -44403,6 +44423,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!54 &832741754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45994,6 +46016,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &866707213
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -50547,6 +50571,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &958748034
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -51684,6 +51710,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &984477734
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -53901,6 +53929,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &1022660069
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -60343,6 +60373,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!54 &1144238307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67642,6 +67674,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &1301246317
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72801,6 +72835,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114615221041042872, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: m_JumpSpeed
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0
@@ -76653,6 +76692,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &1469381564
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77669,7 +77710,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4507661593372480, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 114852328280481334, guid: cb61934175bfd4f488d9d9f620df74db,
         type: 2}
@@ -77728,6 +77769,11 @@ Prefab:
     - target: {fileID: 1563643590756350, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114569944698289902, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: m_JumpSpeed
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
@@ -93724,6 +93770,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &1767995149
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -95765,6 +95813,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &1799754634
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -97694,6 +97744,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &1844345725
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -112211,6 +112263,8 @@ MonoBehaviour:
   isClosed: 1
   doorIsMoving: 0
   players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!64 &2139553419
 MeshCollider:
   m_ObjectHideFlags: 0

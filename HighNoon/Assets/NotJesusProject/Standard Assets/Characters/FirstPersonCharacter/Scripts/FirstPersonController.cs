@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using System.Text.RegularExpressions;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -40,7 +41,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public AudioClip tempKill;
         public AudioClip tempAnnouncerKillStreak;
 
-        public bool isClimbing = false;
+        public bool isClimbing = false; //HN
+        public int playerNum;
 
         private void Start() //Initialization
         {
@@ -53,24 +55,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            string numberOnly = Regex.Replace(gameObject.name, "[^0-9]", "");
+            playerNum = int.Parse(numberOnly);
         }
         
         private void Update()
         {
-           //RotateView();
-         
+           //RotateView();        
             if (!m_Jump) // the jump state needs to read here to make sure it is not missed || If we're not jumping, then see if there's input
             {
-                if(this.gameObject.name == "Player1")
-                {
-                    m_Jump = CrossPlatformInputManager.GetButtonDown("Abutton");
-                }
-                if (this.gameObject.name == "Player2")
-                {
-                    m_Jump = CrossPlatformInputManager.GetButtonDown("aJump");
-                }
-            }
+                //if(this.gameObject.name == "Player1")
+                //{
+                //    m_Jump = CrossPlatformInputManager.GetButtonDown("A1");
+                //}
+                //else if (this.gameObject.name == "Player2")
+                //{
+                //    m_Jump = CrossPlatformInputManager.GetButtonDown("A2");
+                //}
 
+                m_Jump = CrossPlatformInputManager.GetButtonDown("A" + playerNum);
+            }
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded) //If we were in the air and now we're on the ground, do the jump bob, don't apply up force, 
                 //and recognize that were not jumping now
             {
@@ -78,26 +83,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
             }
-
             if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded) //If we're not grounded, and we're not jumping and we were grounded, don't apply jump force
             {
                 m_MoveDir.y = 0f;
             }
-
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
         public void FixedUpdate()
         {
-            /*float speed;*/
-            if (this.gameObject.name == "Player1")
-            {
-                GetInput1(out speed);
-            }
-            if (this.gameObject.name == "Player2")
-            {
-                GetInput2(out speed);
-            }
+            //if (this.gameObject.name == "Player1")
+            //{
+            //    GetInput1(out speed);
+            //}
+            //if (this.gameObject.name == "Player2")
+            //{
+            //    GetInput2(out speed);
+            //}
+
+            NewGetInput(out speed);
+
             // always move along the camera forward as it is the direction that it being aimed at
             Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
             // get a normal for the surface that is being touched to move along it
@@ -108,7 +113,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
-
 
             if (m_CharacterController.isGrounded) //If we're on the ground, apply the stick to ground force.
             {
@@ -145,14 +149,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_StepCycle += (m_CharacterController.velocity.magnitude + (speed*(m_IsWalking ? 1f : m_RunstepLenghten)))*
                              Time.fixedDeltaTime;
             }
-
             if (!(m_StepCycle > m_NextStep))
             {
                 return;
             }
 
             m_NextStep = m_StepCycle + m_StepInterval;
-            
+           
         }
         
         private void UpdateCameraPosition(float speed)
@@ -177,23 +180,52 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }          
         } 
         
-        public void GetInput1(out float speed)
+        public void NewGetInput(out float speed)
         {
             // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Left Stick Horizontal");
-            float vertical = -CrossPlatformInputManager.GetAxis("Left Stick Vertical");
+            float horizontal = CrossPlatformInputManager.GetAxis("LSHor" + playerNum);
+            float vertical = -CrossPlatformInputManager.GetAxis("LSVert" + playerNum);
 
             bool waswalking = m_IsWalking;
 
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetButton("Left Stick Button"); //this one actually does the sprint(hold down L-Stick)
+            m_IsWalking = !Input.GetButton("LSBut" + playerNum); //this one actually does the sprint(hold down L-Stick)
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
             m_Input = new Vector2(horizontal, vertical);
+            // normalize input if it exceeds 1 in combined length:
+            if (m_Input.sqrMagnitude > 1)
+            {
+                m_Input.Normalize();
+            }
+            // handle speed change to give an fov kick
+            // only if the player is going to a run, is running and the fovkick is to be used
+            if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
+            {
+                StopAllCoroutines();
+                StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
+            }
+        }
 
+        public void GetInput1(out float speed)
+        {
+            // Read input
+            float horizontal = CrossPlatformInputManager.GetAxis("LSHor1");
+            float vertical = -CrossPlatformInputManager.GetAxis("LSVert1");
+
+            bool waswalking = m_IsWalking;
+
+#if !MOBILE_INPUT
+            // On standalone builds, walk/run speed is modified by a key press.
+            // keep track of whether or not the character is walking or running
+            m_IsWalking = !Input.GetButton("LSBut1"); //this one actually does the sprint(hold down L-Stick)
+#endif
+            // set the desired speed to be walking or running
+            speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+            m_Input = new Vector2(horizontal, vertical);
             // normalize input if it exceeds 1 in combined length:
             if (m_Input.sqrMagnitude > 1)
             {
@@ -210,26 +242,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void GetInput2(out float speed)
         {
             // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+            float horizontal = CrossPlatformInputManager.GetAxis("LSHor2");
+            float vertical = CrossPlatformInputManager.GetAxis("LSVert2");
 
             bool waswalking = m_IsWalking;
 
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetButton("Sprint"); //this one actually does the sprint(hold down L-Stick)
+            m_IsWalking = !Input.GetButton("LSBut2"); //this one actually does the sprint(hold down L-Stick)
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
             m_Input = new Vector2(horizontal, vertical);
-
             // normalize input if it exceeds 1 in combined length:
             if (m_Input.sqrMagnitude > 1)
             {
                 m_Input.Normalize();
             }
-
             // handle speed change to give an fov kick
             // only if the player is going to a run, is running and the fovkick is to be used
             if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
@@ -247,7 +277,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
-
             if (body == null || body.isKinematic)
             {
                 return;

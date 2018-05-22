@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class AimScript : MonoBehaviour
 {
     public string parent;
 	float mouseX;
 	float mouseY;
+
+    public int playerNum;
     
 	Quaternion rotationSpeed;
     #region Headers
@@ -37,29 +40,52 @@ public class AimScript : MonoBehaviour
 	[Header("Audio")]
 	public AudioSource aimSound;
 	//Used to check if the audio has played
-	bool soundHasPlayed = false;
+	//bool soundHasPlayed = false;
     #endregion
     void Awake ()
     {
-        parent = this.transform.parent.transform.parent.transform.parent.transform.parent.name;        
-	}
+        parent = this.transform.parent.transform.parent.transform.parent.transform.parent.name;
+
+        string numberOnly = Regex.Replace(parent, "[^0-9]", "");
+        playerNum = int.Parse(numberOnly);
+    }
 
 	void Update ()
     {
-        if (this.parent == "Player1")
-        {            
-            FirstAim();
-        }
-        //When right click is held down
-        else if (this.parent == "Player2")
-        {
-            SecondAim();
-        }
+        //if (this.parent == "Player1")
+        //{            
+        //    FirstAim();
+        //}
+        ////When right click is held down
+        //else if (this.parent == "Player2")
+        //{
+        //    SecondAim();
+        //}
+
+        NewAim();
 	}
+
+    void NewAim()
+    {
+        if (Input.GetAxis("LT" + playerNum) >= 0.2)
+        {
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
+            //Change the camera field of view
+            this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, zoomFov, fovSpeed * Time.deltaTime);
+        }
+        else
+        {
+            //When right click is released
+            //Move the gun back to the default position
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition, Time.deltaTime * moveSpeed);
+            //Change back the camera field of view
+            this.gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView, defaultFov, fovSpeed * Time.deltaTime);
+        }
+    }
 
     void FirstAim()
     {
-        if(Input.GetAxis("Left Trigger") >= 0.2)
+        if(Input.GetAxis("LT1") >= 0.2)
         {
             this.transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Time.deltaTime * moveSpeed);
             //Change the camera field of view
@@ -77,7 +103,7 @@ public class AimScript : MonoBehaviour
     void SecondAim()
     {
         float p2aim;
-        p2aim = Input.GetAxis("p2 lt");
+        p2aim = Input.GetAxis("LT2");
         if (p2aim > 0)
         {
             //Move the gun to the zoom position

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
 
@@ -13,8 +13,10 @@ public class DoorOpening : MonoBehaviour
     public Transform playerTrans;
     public bool isClosed = true; //false is close, true is open
     public bool doorIsMoving = false; //for Coroutine, when start only one
-
     public GameObject[] players;
+    public Material mat;
+    public Image icon;
+
     void Awake()
     {
         isClosed = true; //door is open, maybe change
@@ -34,28 +36,35 @@ public class DoorOpening : MonoBehaviour
         {
             if (Vector3.Distance(players[i].transform.position, transform.position) < 3f)
             {
-                if (Input.GetButtonDown("X") || Input.GetButtonDown("Fire2") && !doorIsMoving)
+                if (Input.GetButtonDown("X" + players[i].GetComponent<Player>().playerNum) && !doorIsMoving)
                 {
-                    if (isClosed)
-                    { //close door
-                        if (Vector3.Dot(players[i].transform.forward, transform.forward) > 0)
+                    RaycastHit hit;
+                    if (Physics.Raycast(players[i].transform.position, players[i].transform.forward, out hit)) //Not complete
+                    {
+                        if (hit.transform == transform)
                         {
-                            StartCoroutine(moveDoor(doorOpen2));
+                            if (isClosed)
+                            { //close door
+                                if (Vector3.Dot(players[i].transform.forward, transform.forward) > 0)
+                                {
+                                    StartCoroutine(MoveDoor(doorOpen2));
+                                }
+                                else if (Vector3.Dot(players[i].transform.forward, transform.forward) < 0)
+                                {
+                                    StartCoroutine(MoveDoor(doorOpen));
+                                }
+                            }
+                            else
+                            { //open door
+                                StartCoroutine(MoveDoor(doorClose));
+                            }
                         }
-                        else if (Vector3.Dot(players[i].transform.forward, transform.forward) < 0)
-                        {
-                            StartCoroutine(moveDoor(doorOpen));
-                        }
-                    }
-                    else
-                    { //open door
-                        StartCoroutine(moveDoor(doorClose));
                     }
                 }
             }
         }
     }
-    public IEnumerator moveDoor(Quaternion dest)
+    public IEnumerator MoveDoor(Quaternion dest)
     {
         doorIsMoving = true;
         //Check if close/open, if angle less 4 degree, or use another value more 0
@@ -70,5 +79,9 @@ public class DoorOpening : MonoBehaviour
         doorIsMoving = false;
         //UPDATE 1: add yield
         yield return null;
+    }
+    public void OnGUI()
+    {
+        
     }
 }

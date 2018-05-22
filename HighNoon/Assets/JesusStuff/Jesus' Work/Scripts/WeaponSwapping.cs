@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class WeaponSwapping : MonoBehaviour
 {
@@ -7,9 +8,14 @@ public class WeaponSwapping : MonoBehaviour
     public AudioClip swap;
     private string parentName;
 
+    public int playerNum;
+
     void Awake()
     {
         parentName = this.transform.parent.transform.parent.transform.parent.name;
+
+        string numberOnly = Regex.Replace(parentName, "[^0-9]", "");
+        playerNum = int.Parse(numberOnly);
     }
 	void Start ()
     {
@@ -18,20 +24,22 @@ public class WeaponSwapping : MonoBehaviour
 	
 	public void Update ()
     {
-        if (parentName == "Player1")
-        {
-            P1Selector();
-        }
-        if (parentName == "Player2")
-        {
-            P2Selector();
-        }
+        //if (parentName == "Player1")
+        //{
+        //    P1Selector();
+        //}
+        //if (parentName == "Player2")
+        //{
+        //    P2Selector();
+        //}
+
+        NewSelector();
     }
 
-    public void P1Selector()
+    public void NewSelector()
     {
         int previousSelectedWeapon = selectedWeapon;
-        if (Input.GetAxis("DPAD Vertical") > 0f && hasSwitched == false)
+        if (Input.GetAxis("DPADVert" + playerNum) > 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon >= transform.childCount - 1)
@@ -46,7 +54,7 @@ public class WeaponSwapping : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("DPAD Vertical") < 0f && hasSwitched == false)
+        if (Input.GetAxis("DPADVert" + playerNum) < 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon <= 0)
@@ -60,7 +68,69 @@ public class WeaponSwapping : MonoBehaviour
                 selectedWeapon--;
             }
         }
-        if (Input.GetAxis("DPAD Vertical") == 0f)
+        if (Input.GetAxis("DPADVert" + playerNum) == 0f)
+        {
+            hasSwitched = false;
+        }
+
+        #region Keyboard Settings
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedWeapon = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
+        {
+            selectedWeapon = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
+        {
+            selectedWeapon = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 4)
+        {
+            selectedWeapon = 3;
+        }
+        #endregion
+
+        if (previousSelectedWeapon != selectedWeapon)
+        {
+            SelectWeapon();
+        }
+    }
+
+    public void P1Selector()
+    {
+        int previousSelectedWeapon = selectedWeapon;
+        if (Input.GetAxis("DPADVert1") > 0f && hasSwitched == false)
+        {
+            SoundManager.instance.Play(swap, "swap");
+            if (selectedWeapon >= transform.childCount - 1)
+            {
+                hasSwitched = true;
+                selectedWeapon = 0;
+            }
+            else
+            {
+                hasSwitched = true;
+                selectedWeapon++;
+            }
+        }
+
+        if (Input.GetAxis("DPADVert1") < 0f && hasSwitched == false)
+        {
+            SoundManager.instance.Play(swap, "swap");
+            if (selectedWeapon <= 0)
+            {
+                hasSwitched = true;
+                selectedWeapon = transform.childCount - 1;
+            }
+            else
+            {
+                hasSwitched = true;
+                selectedWeapon--;
+            }
+        }
+        if (Input.GetAxis("DPADVert1") == 0f)
         {
             hasSwitched = false;
         }
@@ -92,7 +162,7 @@ public class WeaponSwapping : MonoBehaviour
     void P2Selector()
     {
         int previousSelectedWeapon = selectedWeapon;
-        if (Input.GetAxis("p2 DPAD vert") > 0f && hasSwitched == false)
+        if (Input.GetAxis("DPADVert2") > 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon >= transform.childCount - 1)
@@ -108,7 +178,7 @@ public class WeaponSwapping : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("p2 DPAD vert") < 0f && hasSwitched == false)
+        if (Input.GetAxis("DPADVert2") < 0f && hasSwitched == false)
         {
             SoundManager.instance.Play(swap, "swap");
             if (selectedWeapon <= 0)
@@ -124,7 +194,7 @@ public class WeaponSwapping : MonoBehaviour
                 selectedWeapon--;
             }
         }
-        if (Input.GetAxis("p2 DPAD vert") == 0f)
+        if (Input.GetAxis("DPADVert2") == 0f)
         {
             hasSwitched = false;
         }

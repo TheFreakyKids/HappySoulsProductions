@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class ArmControllerScript : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class ArmControllerScript : MonoBehaviour
     public GameObject parentObject;
     #endregion
 
+    public int playerNum;
+
     //Random number generated to choose 
     //attack animation for melee
     int randomAttackAnim;
@@ -45,7 +48,6 @@ public class ArmControllerScript : MonoBehaviour
 		[Header("Melee Weapons")]
 		//If the current weapon is a melee weapon
 		public bool isMeleeWeapon;
-
 	}
 	public meleeSettings MeleeSettings;
 	
@@ -79,8 +81,7 @@ public class ArmControllerScript : MonoBehaviour
 		
 		//If the current weapon is a projectile weapon (rpg, bazooka, etc)
 		public bool projectileWeapon;
-		
-		
+			
 		//The projectile spawned when shooting
 		public Transform projectile;
 		//The static projectile on the weapon
@@ -88,9 +89,7 @@ public class ArmControllerScript : MonoBehaviour
 		public Transform currentProjectile;
 		
 		//How long after shooting the reload will start
-		public float reloadTime;
-
-		
+		public float reloadTime;	
 	}
 	public shootSettings ShootSettings;
 	
@@ -203,15 +202,14 @@ public class ArmControllerScript : MonoBehaviour
 		public AudioClip shootSound;
 		public AudioClip reloadSound;
         public AudioClip dryFire;
-        public AudioClip leverActoin;
+        public AudioClip leverAction;
 	}
 	public audioClips AudioClips;
 
 	public bool noSwitch = false;
 	
 	void Awake ()
-    {
-		
+    {		
 		//Set the animator component
 		anim = GetComponent<Animator>();
         parentName = this.transform.parent.transform.parent.transform.parent.transform.parent.name;
@@ -247,8 +245,10 @@ public class ArmControllerScript : MonoBehaviour
 			//Disable the weapon trail at start
 			Components.weaponTrail.GetComponent<TrailRenderer>().enabled = false;
 		}
-        
-	}
+
+        string numberOnly = Regex.Replace(parentName, "[^0-9]", "");
+        playerNum = int.Parse(numberOnly);
+    }
 	
 	void Update ()
     {
@@ -303,9 +303,9 @@ public class ArmControllerScript : MonoBehaviour
 			outOfAmmo = false;
 		}
 	}
-    void Shooter1()
+    void NewShoot()
     {
-        if (Input.GetAxis("Right Trigger") == 1 && !ShootSettings.automaticFire && !isReloading && !isShooting && !isAimShooting && !isRunning && !isJumping && triggerPulled == false)
+        if (Input.GetAxis("RT" + playerNum) == 1 && !ShootSettings.automaticFire && !isReloading && !isShooting && !isAimShooting && !isRunning && !isJumping && triggerPulled == false)
         {
             triggerPulled = true;
             if (currentAmmo == 0)
@@ -355,13 +355,13 @@ public class ArmControllerScript : MonoBehaviour
             }
             #endregion
         }
-        if (Input.GetAxis("Right Trigger") == 0)
+        if (Input.GetAxis("RT" + playerNum) == 0)
         {
             triggerPulled = false;
         }
         //R key to reload
         //Not used for projectile weapons, grenade or melee weapons
-        if (Input.GetButtonDown("Right Bumper") && !isReloading && !MeleeSettings.isMeleeWeapon && currentAmmo != ShootSettings.ammo)
+        if (Input.GetButtonDown("RB" + playerNum) && !isReloading && !MeleeSettings.isMeleeWeapon && currentAmmo != ShootSettings.ammo)
         {
             if (currentAmmo != 0)
             {
@@ -386,19 +386,19 @@ public class ArmControllerScript : MonoBehaviour
         }
 
         //Run when holding down left shift and moving
-        if (Input.GetButton("Left Stick Button") && Input.GetAxis("Vertical") > 0)
+        if (Input.GetButton("LSBut" + playerNum) && Input.GetAxis("LSVert" + playerNum) > 0)
         {
-            anim.SetFloat("Run", 0.2f);
+            this.anim.SetFloat("Run", 0.2f);
         }
         else
         {
             //Stop running
-            anim.SetFloat("Run", 0.0f);
+            this.anim.SetFloat("Run", 0.0f);
         }
     }
-    void Shooter2()
+    void Shooter1()
     {
-        if (Input.GetAxis("Fire1") == 1 && !ShootSettings.automaticFire && !isReloading && !isShooting && !isAimShooting && !isRunning && !isJumping && triggerPulled == false)
+        if (Input.GetAxis("RT1") == 1 && !ShootSettings.automaticFire && !isReloading && !isShooting && !isAimShooting && !isRunning && !isJumping && triggerPulled == false)
         {
             triggerPulled = true;
             if (currentAmmo == 0)
@@ -448,13 +448,106 @@ public class ArmControllerScript : MonoBehaviour
             }
             #endregion
         }
-        if (Input.GetAxis("Fire1") == 0)
+        if (Input.GetAxis("RT1") == 0)
         {
             triggerPulled = false;
         }
         //R key to reload
         //Not used for projectile weapons, grenade or melee weapons
-        if (Input.GetButtonDown("p2 rb") && !isReloading && !MeleeSettings.isMeleeWeapon)
+        if (Input.GetButtonDown("RB1") && !isReloading && !MeleeSettings.isMeleeWeapon && currentAmmo != ShootSettings.ammo)
+        {
+            if (currentAmmo != 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@revolver_1" && revolverPool == 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@lever_action_rifle" && riflePool == 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@sawn_off_shotgun" && shotgunPool == 0)
+            {
+                return;
+            }
+            else
+            {
+                Reload();
+            }
+        }
+
+        //Run when holding down left shift and moving
+        if (Input.GetButton("LSBut1") && Input.GetAxis("LSVert1") > 0)
+        {
+            anim.SetFloat("Run", 0.2f);
+        }
+        else
+        {
+            //Stop running
+            anim.SetFloat("Run", 0.0f);
+        }
+    }
+    void Shooter2()
+    {
+        if (Input.GetAxis("RT2") == 1 && !ShootSettings.automaticFire && !isReloading && !isShooting && !isAimShooting && !isRunning && !isJumping && triggerPulled == false)
+        {
+            triggerPulled = true;
+            if (currentAmmo == 0)
+            {
+                SoundManager.instance.Play(AudioClips.dryFire, "sfx");
+            }
+            else
+            {
+                //If shotgun shoot is true
+                if (ShootSettings.useShotgunSpread == true)
+                {
+                    ShotgunShoot();
+                }
+                //If projectile weapon, grenade, melee weapons, grenade launcher and flamethrower is false
+                if (!ShootSettings.projectileWeapon && !ShootSettings.useShotgunSpread && !MeleeSettings.isMeleeWeapon)
+                {
+                    Shoot();
+                    //If projectile weapon is true
+                }
+                else if (ShootSettings.projectileWeapon == true)
+                {
+                    StartCoroutine(ProjectileShoot());
+                }
+            }
+            #region MeleeShit
+            //If melee weapon is used, play random attack animation on left click
+            if (MeleeSettings.isMeleeWeapon == true)
+            {
+                //Play attack animation 1, if not currently attacking or drawing weapon
+                if (randomAttackAnim == 1 && !isMeleeAttacking && !isDrawing)
+                {
+                    anim.SetTrigger("Attack 1");
+                    //Play weapon sound
+                }
+                //Play attack animation 2, if not currently attacking or drawing weapon
+                if (randomAttackAnim == 2 && !isMeleeAttacking && !isDrawing)
+                {
+                    anim.SetTrigger("Attack 2");
+                    //Play weapon sound
+                }
+                //Play attack animation 3, if not currently attacking or drawing weapon
+                if (randomAttackAnim == 3 && !isMeleeAttacking && !isDrawing)
+                {
+                    anim.SetTrigger("Attack 3");
+                    //Play weapon sound
+                }
+            }
+            #endregion
+        }
+        if (Input.GetAxis("RT2") == 0)
+        {
+            triggerPulled = false;
+        }
+        //R key to reload
+        //Not used for projectile weapons, grenade or melee weapons
+        if (Input.GetButtonDown("RB2") && !isReloading && !MeleeSettings.isMeleeWeapon)
         {
             if(currentAmmo != 0)
             {
@@ -467,7 +560,7 @@ public class ArmControllerScript : MonoBehaviour
         }
 
         //Run when holding down left shift and moving
-        if (Input.GetButton("Sprint") && Input.GetAxis("Vertical") > 0)
+        if (Input.GetButton("LSBut2") && Input.GetAxis("LSVert2") > 0)
         {
             anim.SetFloat("Run", 0.2f);
         }
@@ -477,6 +570,7 @@ public class ArmControllerScript : MonoBehaviour
             anim.SetFloat("Run", 0.0f);
         }
     }
+
 	//Muzzleflash
 	IEnumerator MuzzleFlash () {
 		
@@ -632,7 +726,7 @@ public class ArmControllerScript : MonoBehaviour
 	IEnumerator LeverAction()
     {
         yield return new WaitForSeconds(0.2f);
-        SoundManager.instance.Play(AudioClips.leverActoin, "sfx");
+        SoundManager.instance.Play(AudioClips.leverAction, "sfx");
     }
 	//Shoot
 	void Shoot() {
