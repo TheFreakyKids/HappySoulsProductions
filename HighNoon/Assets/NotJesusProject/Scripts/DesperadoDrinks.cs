@@ -37,7 +37,7 @@ public class DesperadoDrinks : MonoBehaviour
                 boxCollider.enabled = false;
                 StartCoroutine(BottleActivator());
             }
-            else if(this.tag =="Fusion")
+            else if(this.tag == "Fusion")
             {
                 //player goes faster for 15 sec
                 Debug.Log("fast as fuck");
