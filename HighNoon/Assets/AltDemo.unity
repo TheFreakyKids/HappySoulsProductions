@@ -1862,7 +1862,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237290886271948, guid: 4c30de39de33be24c97be0173468bf5b, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c30de39de33be24c97be0173468bf5b, type: 2}
@@ -3039,9 +3039,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &71992021
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3477,7 +3478,7 @@ Transform:
   - {fileID: 1494094510}
   - {fileID: 2019661961}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &81567402
 Prefab:
@@ -5831,10 +5832,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &135356418
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10506,10 +10509,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &235362559
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10833,12 +10838,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorOpenAngle: -90
   doorCloseAngle: 0
-  doorAnimSpeed: 3
+  doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!54 &242102319
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12823,7 +12830,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 279372722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.62, z: 0.074}
+  m_LocalPosition: {x: 0, y: 6.22, z: 0.453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 666007566}
@@ -12882,7 +12889,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 8.75, z: 0.4}
+  m_Size: {x: 1, y: 6.5, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &279372727
 MeshFilter:
@@ -14445,10 +14452,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &318644032
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15176,10 +15185,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &329280750
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16593,7 +16604,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4059237942499300, guid: 296179edba0d69f48a01347a9b8f38c5, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 296179edba0d69f48a01347a9b8f38c5, type: 2}
@@ -19016,9 +19027,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &404592723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19563,7 +19575,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4311361816464894, guid: 7dde413b1fa76bd47a7a3a4f2357f622, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dde413b1fa76bd47a7a3a4f2357f622, type: 2}
@@ -26715,7 +26727,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &494011777
 Prefab:
@@ -29079,10 +29091,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &555343891
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29196,7 +29210,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4411677436949478, guid: 469744011a56d784aa9ab6937eedf57d, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 469744011a56d784aa9ab6937eedf57d, type: 2}
@@ -30801,10 +30815,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &593829847
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32917,7 +32933,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &626685000
 Prefab:
@@ -33730,7 +33746,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4905030514599024, guid: 90cbbc2dda3af0c42beb24fbb35d2630, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 65884593863130738, guid: 90cbbc2dda3af0c42beb24fbb35d2630,
         type: 2}
@@ -34062,10 +34078,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &644549133
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -39690,9 +39708,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &739739239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40357,10 +40376,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &752456877
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40909,10 +40930,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &763036660
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -41098,7 +41121,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4430777473079954, guid: 1131250c3003b0140a8e9155b6304f44, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 65665685303035512, guid: 1131250c3003b0140a8e9155b6304f44,
         type: 2}
@@ -44513,10 +44536,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!54 &832741754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46102,10 +46127,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &866707213
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -46284,9 +46311,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &877134892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50639,10 +50667,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &958748034
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -51774,10 +51804,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &984477734
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -53989,10 +54021,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &1022660069
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -60429,10 +60463,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!54 &1144238307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67800,10 +67836,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &1301246317
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -71599,9 +71637,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &1377791702
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -76395,6 +76434,56 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &1462628186
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1805102272}
+    m_Modifications:
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.034999967
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.1500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 488062, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19861964, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+      propertyPath: randomSeed
+      value: 1031170885
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 661f21b6e6d0a6543a4a1a9122f017b0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1463078148 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1358722407381910, guid: a1ef1d012cb6db34b9666c8da15cf70a,
@@ -76804,10 +76893,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &1469381564
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77645,9 +77736,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &1494094516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81779,6 +81871,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &1573947849
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1805102272}
+    m_Modifications:
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.034999967
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.1500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 436318, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19881392, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: randomSeed
+      value: 874307775
+      objectReference: {fileID: 0}
+    - target: {fileID: 19877946, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: randomSeed
+      value: -1318578238
+      objectReference: {fileID: 0}
+    - target: {fileID: 177676, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1574279766
 Prefab:
   m_ObjectHideFlags: 0
@@ -85239,7 +85389,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4274554277770894, guid: 6ced95f04487bec4e81f51a934884b80, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.55
+      value: -0.56
       objectReference: {fileID: 0}
     - target: {fileID: 4274554277770894, guid: 6ced95f04487bec4e81f51a934884b80, type: 2}
       propertyPath: m_LocalPosition.z
@@ -91607,7 +91757,7 @@ Transform:
   - {fileID: 1596448535}
   - {fileID: 272912259}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732337497 stripped
 GameObject:
@@ -93927,10 +94077,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &1767995149
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -96030,10 +96182,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &1799754634
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -96266,6 +96420,103 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84d0b0fb7b244b94caeabd0b28b6ba72, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1805102270
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 144408, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+      propertyPath: m_TagString
+      value: SixShooter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1805102271 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 144408, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+  m_PrefabInternal: {fileID: 1805102270}
+--- !u!4 &1805102272 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 402592, guid: 6ad626faf6a77ca4ea3d21abee099e08, type: 2}
+  m_PrefabInternal: {fileID: 1805102270}
+--- !u!114 &1805102273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1805102271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654d89335683d364b95ba66dc8b3dc39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponIsRespawning: 0
+  weaponSpawnTime: 10
+  meshRend: []
+  boxCol: {fileID: 0}
+  effects: []
+--- !u!65 &1805102274
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1805102271}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Center: {x: 0, y: 0, z: 0.13}
+--- !u!114 &1805102275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1805102271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5730d0d370094c428f94e0e6983ad8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponRot: {fileID: 0}
+  players: []
+  dist: []
+  speed: 360
 --- !u!1 &1805395973 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1453898409058198, guid: ed2f947edb4f7a84eb4b7f095fd00a3a,
@@ -97957,10 +98208,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &1844345725
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -104869,9 +105122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &1985170020
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106359,9 +106613,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsRespawning: 0
-  meshRend: {fileID: 0}
+  weaponSpawnTime: 10
+  meshRend: []
   boxCol: {fileID: 0}
-  kids: []
+  effects: []
 --- !u!65 &2019661967
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -108619,7 +108874,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4290923130318826, guid: 10e5ccdd981e0914a81aad971f2d50a0, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10e5ccdd981e0914a81aad971f2d50a0, type: 2}
@@ -109776,7 +110031,7 @@ RectTransform:
   - {fileID: 159656784}
   - {fileID: 1507599351}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -112504,10 +112759,12 @@ MonoBehaviour:
   doorCloseAngle: 0
   doorAnimSpeed: 4
   doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
   doorClose: {x: 0, y: 0, z: 0, w: 0}
   playerTrans: {fileID: 0}
   isClosed: 1
   doorIsMoving: 0
+  players: []
 --- !u!64 &2139553419
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -1,46 +1,56 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class DoorOpening : MonoBehaviour
 {
-    [SerializeField] private float doorOpenAngle = -90.0f;
-    [SerializeField] private float doorCloseAngle = 0.0f;
-    [SerializeField] private float doorAnimSpeed = 4.0f;
-    [SerializeField] private Quaternion doorOpen;
-    [SerializeField] private Quaternion doorClose;
-    [SerializeField] private Transform playerTrans;
-    [SerializeField] private bool isClosed = true; //false is close, true is open
-    [SerializeField] private bool doorIsMoving = false; //for Coroutine, when start only one
+    public float doorOpenAngle = -90.0f;
+    public float doorCloseAngle = 0.0f;
+    public float doorAnimSpeed = 4.0f;
+    public Quaternion doorOpen;
+    public Quaternion doorOpen2;
+    public Quaternion doorClose;
+    public Transform playerTrans;
+    public bool isClosed = true; //false is close, true is open
+    public bool doorIsMoving = false; //for Coroutine, when start only one
+
+    public GameObject[] players;
     void Awake()
     {
         isClosed = true; //door is open, maybe change
                             //Initialization your quaternions
         doorOpen = Quaternion.Euler(0, doorOpenAngle, 0);
+        doorOpen2 = Quaternion.Euler(0, -doorOpenAngle, 0);
         doorClose = Quaternion.Euler(0, doorCloseAngle, 0);
         //Find only one time your player and get him reference
         playerTrans = GameObject.FindWithTag("Player").transform;
-    }
 
-    void OnMouseEnter()
-    {
-
+        players = GameObject.FindGameObjectsWithTag("Player");
     }
 
     void Update()
     {
-        //If press X key on Xbox One
-        if (Input.GetButtonDown("X") || Input.GetButtonDown("Fire2")&& !doorIsMoving)
+        for (int i = 0; i< players.Length; i++)
         {
-            //Calculate distance between player and door
-            if (Vector3.Distance(playerTrans.position, transform.position) < 2f)
+            if (Vector3.Distance(players[i].transform.position, transform.position) < 3f)
             {
-                if (isClosed)
-                { //close door
-                    StartCoroutine(moveDoor(doorOpen));
-                }
-                else
-                { //open door
-                    StartCoroutine(moveDoor(doorClose));
+                if (Input.GetButtonDown("X") || Input.GetButtonDown("Fire2") && !doorIsMoving)
+                {
+                    if (isClosed)
+                    { //close door
+                        if (Vector3.Dot(players[i].transform.forward, transform.forward) > 0)
+                        {
+                            StartCoroutine(moveDoor(doorOpen2));
+                        }
+                        else if (Vector3.Dot(players[i].transform.forward, transform.forward) < 0)
+                        {
+                            StartCoroutine(moveDoor(doorOpen));
+                        }
+                    }
+                    else
+                    { //open door
+                        StartCoroutine(moveDoor(doorClose));
+                    }
                 }
             }
         }
