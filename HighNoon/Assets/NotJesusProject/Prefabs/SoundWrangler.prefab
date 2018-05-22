@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4311361816464894}
   - component: {fileID: 114275248488918980}
+  - component: {fileID: 114398089951916414}
   m_Layer: 0
   m_Name: SoundWrangler
   m_TagString: Untagged
@@ -58,3 +59,15 @@ MonoBehaviour:
   audioItemMX: {fileID: 1301704187335998, guid: 122782a7d718bf8439fe45483d03ff9e,
     type: 2}
   audioItemH: {fileID: 1878090014271588, guid: 1ccd61bb67e530348af2d20ffdbcb81a, type: 2}
+--- !u!114 &114398089951916414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1877206779988978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b007bb1f61afd894ba40e0a5bff62a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: df7ad989659442045ad8257e6869fba3, type: 2}
