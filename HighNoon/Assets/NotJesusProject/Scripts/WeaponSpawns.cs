@@ -47,18 +47,25 @@ public class WeaponSpawns : MonoBehaviour
                 }
                 boxCol.enabled = false;
                 StartCoroutine(WeaponRespawn(this.gameObject, meshRend));
+                for (int i = 0; i < effects.Length; i++)
+                {
+                    effects[i].enableEmission = false;
+                }
             }
             if (this.tag == "Rifle")
             {
                 print("Nabbed Rifle");
-
-                for (int i = 0; i < meshRend.Length; i++)
                 other.GetComponent<Player>().rifleAmmoPool += 6;
+                for (int i = 0; i < meshRend.Length; i++)                
                 {
                     meshRend[i].enabled = false;
                 }
                 boxCol.enabled = false;
                 StartCoroutine(WeaponRespawn(this.gameObject, meshRend));
+                for (int i = 0; i < effects.Length; i++)
+                {
+                    effects[i].enableEmission = false;
+                }
             }
         }
     }
