@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         playerNum = int.Parse(numberOnly);
 
         canvas = GameObject.Find("Canvas");
-        damText = textAnim.GetComponent<Text>();
+        //damText = textAnim.GetComponent<Text>();
     }
 
     private void Update ()
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
             if (invincible == false)
             {
                 currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth);
-                damText.text = dam.ToString();
+                //damText.text = dam.ToString();
 
                 Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 

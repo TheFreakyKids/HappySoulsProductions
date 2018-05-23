@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,11 +63,15 @@ public class GameManager : MonoBehaviour
         if (player2Points == 10)
         {
             player2Win = true;
+            SceneManager.LoadScene("Player2Win");
+            Cursor.lockState = CursorLockMode.None;
             Debug.Log("p2 wins");
         }
-        if (player1Points == 10)
+        if (player1Points == 2)
         {
             player1Win = true;
+            SceneManager.LoadScene("Player1Win");
+            Cursor.lockState = CursorLockMode.None;
             Debug.Log("p1 wins");
         }
         if (matchTime == 0)
