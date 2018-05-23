@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     public Transform[] playerSpawns;
 
     public int playerNum;
+    public Text damText;
+    public Animator textAnim;
+    public static GameObject canvas;
 
     private void Awake()
     {
@@ -41,6 +44,9 @@ public class Player : MonoBehaviour
         rb = this.gameObject.GetComponent<Rigidbody>();
         string numberOnly = Regex.Replace(gameObject.name, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
+
+        canvas = GameObject.Find("Canvas");
+        damText = textAnim.GetComponent<Text>();
     }
 
     private void Update ()
@@ -65,10 +71,20 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float dam)
     {
-        if(invincible == false)
+        if (!died)
         {
-            currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth); 
-        }        
+            if (invincible == false)
+            {
+                currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth);
+                damText.text = dam.ToString();
+
+                Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+
+                var foo = Instantiate(damText, screenPosition, Quaternion.identity, canvas.transform);
+                AnimatorClipInfo[] clipInfo = textAnim.GetCurrentAnimatorClipInfo(0);
+                Destroy(foo, clipInfo[0].clip.length);
+            }
+        }                                                                                                                                                                                                                                                   
     }
 
     private void Die()
