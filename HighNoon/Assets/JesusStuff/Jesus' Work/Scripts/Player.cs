@@ -33,9 +33,6 @@ public class Player : MonoBehaviour
     public Transform[] playerSpawns;
 
     public int playerNum;
-    public Text damText;
-    public Animator textAnim;
-    public static GameObject canvas;
 
     private void Awake()
     {
@@ -45,8 +42,7 @@ public class Player : MonoBehaviour
         string numberOnly = Regex.Replace(gameObject.name, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
 
-        canvas = GameObject.Find("Canvas");
-        damText = textAnim.GetComponent<Text>();
+        FloatingTextController.Initialize();
     }
 
     private void Update ()
@@ -76,13 +72,7 @@ public class Player : MonoBehaviour
             if (invincible == false)
             {
                 currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth);
-                damText.text = dam.ToString();
-
-                Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-
-                var foo = Instantiate(damText, screenPosition, Quaternion.identity, canvas.transform);
-                AnimatorClipInfo[] clipInfo = textAnim.GetCurrentAnimatorClipInfo(0);
-                Destroy(foo, clipInfo[0].clip.length);
+                FloatingTextController.CreateFloatingText(dam.ToString(), transform);
             }
         }                                                                                                                                                                                                                                                   
     }

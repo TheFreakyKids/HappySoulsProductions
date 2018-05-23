@@ -72834,6 +72834,12 @@ Prefab:
       value: 
       objectReference: {fileID: 95815778349798952, guid: 02548fdc70944f449aab26bb7a546a03,
         type: 2}
+    - target: {fileID: 114521648596080092, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: textAnim
+      value: 
+      objectReference: {fileID: 95815778349798952, guid: 02548fdc70944f449aab26bb7a546a03,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0
@@ -77755,6 +77761,12 @@ Prefab:
     - target: {fileID: 114998592843502664, guid: cb61934175bfd4f488d9d9f620df74db,
         type: 2}
       propertyPath: anim
+      value: 
+      objectReference: {fileID: 95815778349798952, guid: 02548fdc70944f449aab26bb7a546a03,
+        type: 2}
+    - target: {fileID: 114998592843502664, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: textAnim
       value: 
       objectReference: {fileID: 95815778349798952, guid: 02548fdc70944f449aab26bb7a546a03,
         type: 2}
