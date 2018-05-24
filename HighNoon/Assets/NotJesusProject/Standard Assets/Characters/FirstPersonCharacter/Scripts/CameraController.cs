@@ -22,7 +22,7 @@ public partial class CameraController : MonoBehaviour
         playerCam = this.GetComponent<Camera>();
         parentName = this.transform.parent.transform.parent.transform.parent.name;
         parentTransform = this.transform.parent.transform.parent.transform.parent;
-
+        //Time.timeScale = 1.0f;
         string numberOnly = Regex.Replace(parentName, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
     }
