@@ -16,6 +16,11 @@ TagManager:
   - Fusion
   - SpeedCola
   - Brisk
+  - GasTank
+  - Metal
+  - Target
+  - ExplosiveBarrel
+  - PCanvas
   layers:
   - Default
   - TransparentFX

@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
             if (invincible == false)
             {
                 currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth);
-                FloatingTextController.CreateFloatingText(dam.ToString(), transform);
+                FloatingTextController.CreateFloatingText(dam.ToString(), transform, playerNum);
             }
         }                                                                                                                                                                                                                                                   
     }
