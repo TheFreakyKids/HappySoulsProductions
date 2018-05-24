@@ -63,15 +63,15 @@ public class GameManager : MonoBehaviour
         if (player2Points == 10)
         {
             player2Win = true;
-            SceneManager.LoadScene("Player2Win");
-            Cursor.lockState = CursorLockMode.None;
+            StartCoroutine(SlowMo());
+            //SceneManager.LoadScene("Player2Win");
             Debug.Log("p2 wins");
         }
         if (player1Points == 2)
         {
             player1Win = true;
+            StartCoroutine(SlowMo());
             SceneManager.LoadScene("Player1Win");
-            Cursor.lockState = CursorLockMode.None;
             Debug.Log("p1 wins");
         }
         if (matchTime == 0)
@@ -89,5 +89,12 @@ public class GameManager : MonoBehaviour
                 //tie
             }
         }
+    }
+    IEnumerator SlowMo()
+    {
+        Time.timeScale = 0.4f;
+        Cursor.lockState = CursorLockMode.None;
+        yield return new WaitForSeconds(5f);
+        
     }
 }
