@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject p1win;
+    public GameObject p2win;
+    public GameObject levelUI;
     public static GameManager instance;
     [SerializeField] private float matchTime;
     [SerializeField] private float minsLeft;
@@ -36,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        levelUI = GameObject.Find("GameUI");
+        matchTimer = GameObject.FindGameObjectWithTag("ExplosiveBarrel").GetComponent<Text>();
         Debug.Log(player1Points + " update function");
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
@@ -44,6 +49,16 @@ public class GameManager : MonoBehaviour
         matchTimer.text = Mathf.Round(matchTime).ToString();
         DeathCheck();
         VictoryCheck();
+        if (p1win.activeSelf || p2win.activeSelf)
+        {
+            if(Input.GetButton("A1") || Input.GetButton("A2"))
+            {
+                p1win.SetActive(false);
+                p2win.SetActive(false);
+                SceneManager.LoadScene("Menu");
+                levelUI.gameObject.GetComponent<Canvas>().enabled = true;
+            }
+        }
     }
 
     void DeathCheck()
@@ -66,23 +81,28 @@ public class GameManager : MonoBehaviour
 
     void VictoryCheck()
     {
-        if (player2Points == 10)
+        if (player2Points == 5)
         {
             player2Win = true;
             StartCoroutine(SlowMo());
             Debug.Log("p2 wins");
+            levelUI.gameObject.GetComponent<Canvas>().enabled = false;
+            p2win.SetActive(true);
             player1Points = 0;
             player2Points = 0;
             player2Win = false;
         }
-        if (player1Points == 2)
+        if (player1Points == 5)
         {
             player1Win = true;
             StartCoroutine(SlowMo());
             Debug.Log("p1 wins");
+            levelUI.gameObject.GetComponent<Canvas>().enabled = false;
+            p1win.SetActive(true);
             player1Points = 0;
             player2Points = 0;
             player1Win = false;
+            
             Debug.Log(player1Points + " win checker function" + player1Win);
         }
         if (matchTime == 0)
@@ -109,6 +129,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(.932f);
         Time.timeScale = 1f;
         Time.fixedDeltaTime = Time.timeScale * .02f;
-        SceneManager.LoadScene("Player1Win");
     }
 }

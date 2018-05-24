@@ -3878,7 +3878,7 @@ MonoBehaviour:
     smooth: 0
     smoothTime: 5
     lockCursor: 1
-  m_UseFovKick: 1
+  m_UseFovKick: 0
   m_FovKick:
     Camera: {fileID: 0}
     originalFov: 0
@@ -3903,7 +3903,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_UseHeadBob: 1
+  m_UseHeadBob: 0
   m_HeadBob:
     HorizontalBobRange: 0.1
     VerticalBobRange: 0.1
@@ -4086,6 +4086,11 @@ MonoBehaviour:
   updownrange: 80
   parentName: 
   parentTransform: {fileID: 0}
+  hipVertSensitivity: 2.4
+  hipHorizSensitivity: 4
+  adsVertSensitivity: 0.75
+  adsHorizSensitivity: 0.5
+  ads: 0
   playerNum: 0
 --- !u!114 &114852328280481334
 MonoBehaviour:
@@ -4212,12 +4217,15 @@ MonoBehaviour:
   infiniteAmmo: 0
   invincible: 0
   speedLoader: 0
+  rb: {fileID: 0}
   fpsCon: {fileID: 114569944698289902}
   camCon: {fileID: 114063426019285224}
   health: {fileID: 0}
   elims: {fileID: 0}
   playerSpawns: []
   playerNum: 0
+  damText: {fileID: 0}
+  textAnim: {fileID: 0}
 --- !u!124 &124135317724347820
 Behaviour:
   m_ObjectHideFlags: 1

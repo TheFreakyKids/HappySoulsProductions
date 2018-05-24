@@ -553,6 +553,18 @@ public class ArmControllerScript : MonoBehaviour
             {
                 return;
             }
+            if (this.gameObject.name == "arms@revolver_1" && revolverPool == 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@lever_action_rifle" && riflePool == 0)
+            {
+                return;
+            }
+            if (this.gameObject.name == "arms@sawn_off_shotgun" && shotgunPool == 0)
+            {
+                return;
+            }
             else
             {
                 Reload();
