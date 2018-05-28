@@ -29,8 +29,9 @@ public class Player : MonoBehaviour
     public MonoBehaviour fpsCon;
     public MonoBehaviour camCon;
     public Slider health;
-    public Text elims; //For elim count when we have that functionality
+    public Text elims; 
     public Transform[] playerSpawns;
+    public Transform OGCapTrans;
 
     public int playerNum;
 
@@ -43,36 +44,37 @@ public class Player : MonoBehaviour
         playerNum = int.Parse(numberOnly);
 
         FloatingTextController.Initialize();
+        OGCapTrans = transform.Find("Capsule").transform;
     }
 
     private void Update ()
     {
-        health.value = currentHealth / 100; //Divide by 100 because Slider goes from 0-1 so w/o this Slider doesn't slide properly
-         //Keeps health in appropriate range
+        health.value = currentHealth / 100;
+
         if (infiniteAmmo == true || invincible == true || speedLoader == true)
         {
             StartCoroutine("PowerUpTimer");
         }
 
-        if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) //For debugging purposes
+        if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) 
             Suicide();
-        if (Input.GetKeyDown(KeyCode.H) && isRespawning == false) //For debugging purposes
-            TakeDamage(25);
+        if (Input.GetKeyDown(KeyCode.H) && isRespawning == false) 
+            TakeDamage(25, playerNum);
         if (currentHealth == 0f && isRespawning == false)
         {
-            died = true;//If you have no health & you're not already respawning, then die
+            died = true;
             Die();
         }
-	}
+    }
 
-    public void TakeDamage(float dam)
+    public void TakeDamage(float dam, int playerNumWhoShot)
     {
         if (!died)
         {
             if (invincible == false)
             {
                 currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth);
-                FloatingTextController.CreateFloatingText(dam.ToString(), transform, playerNum);
+                FloatingTextController.CreateFloatingText(dam.ToString(), transform, playerNum, playerNumWhoShot);
             }
         }                                                                                                                                                                                                                                                   
     }
@@ -81,7 +83,7 @@ public class Player : MonoBehaviour
     {
         fpsCon.enabled = false;
         camCon.enabled = false;
-        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+        transform.Find("Capsule").GetComponent<Rigidbody>().isKinematic = false;
         StartCoroutine(Respawn());
     }
 
@@ -100,7 +102,10 @@ public class Player : MonoBehaviour
             currentHealth = 100f;
             fpsCon.enabled = true;
             camCon.enabled = true;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            transform.Find("Capsule").GetComponent<Rigidbody>().isKinematic = true;
+
+            transform.Find("Capsule").transform.localPosition = Vector3.zero;
+            transform.Find("Capsule").transform.rotation = Quaternion.identity;
         }
         isRespawning = false;
     }

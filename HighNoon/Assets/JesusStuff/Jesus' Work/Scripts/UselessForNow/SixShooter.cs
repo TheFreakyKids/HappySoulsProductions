@@ -136,7 +136,7 @@ public class SixShooter : MonoBehaviour
             }
             if(hit.transform.CompareTag("Player") == true)
             {
-                hit.transform.GetComponent<Player>().TakeDamage(damage);
+                hit.transform.GetComponent<Player>().TakeDamage(damage, 1);
             }
         }
     }

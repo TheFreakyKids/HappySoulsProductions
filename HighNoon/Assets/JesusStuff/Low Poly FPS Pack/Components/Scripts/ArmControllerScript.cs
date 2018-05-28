@@ -22,7 +22,7 @@ public class ArmControllerScript : MonoBehaviour
 	bool isDrawing;
 	bool isRunning;
 	bool isJumping;
-	bool isMeleeAttacking;
+	public bool isMeleeAttacking;
 
     #region ForGUIreference
     public Text loadedAmmo;
@@ -255,7 +255,12 @@ public class ArmControllerScript : MonoBehaviour
         shotgunDamage = 85;
         revolverDamage = 35;
         rifleDamage = 65;
-        loadedAmmo.text = currentAmmo.ToString();
+
+        if (!MeleeSettings.isMeleeWeapon)
+        {
+            loadedAmmo.text = currentAmmo.ToString();
+        }
+
         if(this.gameObject.name == "arms@revolver_1")
         {
             revolverPool = parentObject.GetComponent<Player>().revolverAmmoPool;
@@ -281,16 +286,18 @@ public class ArmControllerScript : MonoBehaviour
 		//Check which animation 
 		//is currently playing
 		AnimationCheck ();
-		
-		//Left click (if automatic fire is false)
-		if(parentName == "Player1")
-        {
-            Shooter1();
-        }
-        if (parentName == "Player2")
-        {
-            Shooter2();
-        }
+
+        //Left click (if automatic fire is false)
+        //if(parentName == "Player1")
+        //      {
+        //          Shooter1();
+        //      }
+        //      if (parentName == "Player2")
+        //      {
+        //          Shooter2();
+        //      }
+
+        NewShoot();
 
         //If out of ammo
         if (currentAmmo == 0)
@@ -386,7 +393,7 @@ public class ArmControllerScript : MonoBehaviour
         }
 
         //Run when holding down left shift and moving
-        if (Input.GetButton("LSBut" + playerNum) && Input.GetAxis("LSVert" + playerNum) > 0)
+        if (Input.GetButton("LSBut" + playerNum) && Input.GetAxis("LSVert" + playerNum) < 0)
         {
             this.anim.SetFloat("Run", 0.2f);
         }
@@ -394,6 +401,11 @@ public class ArmControllerScript : MonoBehaviour
         {
             //Stop running
             this.anim.SetFloat("Run", 0.0f);
+        }
+
+        if (Input.GetButton("A" + playerNum) && !isReloading && !isAiming)
+        {
+            anim.Play("Jump");
         }
     }
     void Shooter1()
@@ -718,7 +730,7 @@ public class ArmControllerScript : MonoBehaviour
                 }
                 if(hit.transform.CompareTag("Player")==true)
                 {
-                    hit.transform.GetComponent<Player>().TakeDamage(shotgunDamage);
+                    hit.transform.GetComponent<Player>().TakeDamage(shotgunDamage, playerNum);
                 }
 			}    
 		}
@@ -774,11 +786,11 @@ public class ArmControllerScript : MonoBehaviour
             }
             if (hit.transform.CompareTag("Player") == true && this.gameObject.name == "arms@revolver_1")
             {
-                hit.transform.GetComponent<Player>().TakeDamage(revolverDamage);
+                hit.transform.GetComponent<Player>().TakeDamage(revolverDamage, playerNum);
             }
             if (hit.transform.CompareTag("Player") == true && this.gameObject.name == "arms@lever_action_rifle")
             {
-                hit.transform.GetComponent<Player>().TakeDamage(rifleDamage);
+                hit.transform.GetComponent<Player>().TakeDamage(rifleDamage, playerNum);
             }
         }
 	}
