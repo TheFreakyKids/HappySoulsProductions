@@ -29,13 +29,11 @@ public class Player : MonoBehaviour
     public MonoBehaviour fpsCon;
     public MonoBehaviour camCon;
     public Slider health;
-    public Text elims; //For elim count when we have that functionality
+    public Text elims; 
     public Transform[] playerSpawns;
+    public Transform OGCapTrans;
 
     public int playerNum;
-    public Text damText;
-    public Animator textAnim;
-    public static GameObject canvas;
 
     private void Awake()
     {
@@ -45,44 +43,38 @@ public class Player : MonoBehaviour
         string numberOnly = Regex.Replace(gameObject.name, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
 
-        canvas = GameObject.Find("Canvas");
-        //damText = textAnim.GetComponent<Text>();
+        FloatingTextController.Initialize();
+        OGCapTrans = transform.Find("Capsule").transform;
     }
 
     private void Update ()
     {
-        health.value = currentHealth / 100; //Divide by 100 because Slider goes from 0-1 so w/o this Slider doesn't slide properly
-         //Keeps health in appropriate range
+        health.value = currentHealth / 100;
+
         if (infiniteAmmo == true || invincible == true || speedLoader == true)
         {
             StartCoroutine("PowerUpTimer");
         }
 
-        if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) //For debugging purposes
+        if (Input.GetKeyDown(KeyCode.K) && isRespawning == false) 
             Suicide();
-        if (Input.GetKeyDown(KeyCode.H) && isRespawning == false) //For debugging purposes
-            TakeDamage(25);
+        if (Input.GetKeyDown(KeyCode.H) && isRespawning == false) 
+            TakeDamage(25, playerNum);
         if (currentHealth == 0f && isRespawning == false)
         {
-            died = true;//If you have no health & you're not already respawning, then die
+            died = true;
             Die();
         }
-	}
+    }
 
-    public void TakeDamage(float dam)
+    public void TakeDamage(float dam, int playerNumWhoShot)
     {
         if (!died)
         {
             if (invincible == false)
             {
                 currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth);
-                //damText.text = dam.ToString();
-
-                Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-
-                var foo = Instantiate(damText, screenPosition, Quaternion.identity, canvas.transform);
-                AnimatorClipInfo[] clipInfo = textAnim.GetCurrentAnimatorClipInfo(0);
-                Destroy(foo, clipInfo[0].clip.length);
+                FloatingTextController.CreateFloatingText(dam.ToString(), transform, playerNum, playerNumWhoShot);
             }
         }                                                                                                                                                                                                                                                   
     }
@@ -91,7 +83,7 @@ public class Player : MonoBehaviour
     {
         fpsCon.enabled = false;
         camCon.enabled = false;
-        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+        transform.Find("Capsule").GetComponent<Rigidbody>().isKinematic = false;
         StartCoroutine(Respawn());
     }
 
@@ -110,7 +102,10 @@ public class Player : MonoBehaviour
             currentHealth = 100f;
             fpsCon.enabled = true;
             camCon.enabled = true;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            transform.Find("Capsule").GetComponent<Rigidbody>().isKinematic = true;
+
+            transform.Find("Capsule").transform.localPosition = Vector3.zero;
+            transform.Find("Capsule").transform.rotation = Quaternion.identity;
         }
         isRespawning = false;
     }
