@@ -740,9 +740,9 @@ public class ArmControllerScript : MonoBehaviour
                 {
                     hit.rigidbody.AddForce(direction * ShootSettings.bulletForce);
                 }
-                if(hit.transform.CompareTag("Player")==true)
+                if(hit.transform.root.CompareTag("Player")==true)
                 {
-                    hit.transform.GetComponent<Player>().TakeDamage(shotgunDamage, playerNum);
+                    hit.transform.root.GetComponent<Player>().TakeDamage(shotgunDamage, playerNum);
                 }
 			}    
 		}
@@ -790,19 +790,19 @@ public class ArmControllerScript : MonoBehaviour
 		//Send out the raycast from the "bulletSpawnPoint" position
 		if (Physics.Raycast (Spawnpoints.bulletSpawnPoint.transform.position, Spawnpoints.bulletSpawnPoint.transform.forward, out hit, ShootSettings.bulletDistance))
         {
-			
+
 			//If a rigibody is hit, add bullet force to it
 			if (hit.rigidbody != null)
             {
                 hit.rigidbody.AddForce(ray.direction * ShootSettings.bulletForce);
             }
-            if (hit.transform.CompareTag("Player") == true && this.gameObject.name == "arms@revolver_1")
+            if (hit.transform.root.CompareTag("Player") == true && this.gameObject.name == "arms@revolver_1")
             {
-                hit.transform.GetComponent<Player>().TakeDamage(revolverDamage, playerNum);
+                hit.transform.root.GetComponent<Player>().TakeDamage(revolverDamage, playerNum);
             }
-            if (hit.transform.CompareTag("Player") == true && this.gameObject.name == "arms@lever_action_rifle")
+            if (hit.transform.root.CompareTag("Player") == true && this.gameObject.name == "arms@lever_action_rifle")
             {
-                hit.transform.GetComponent<Player>().TakeDamage(rifleDamage, playerNum);
+                hit.transform.root.GetComponent<Player>().TakeDamage(rifleDamage, playerNum);
             }
         }
 	}

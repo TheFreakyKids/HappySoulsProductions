@@ -17,6 +17,8 @@ public class DoorOpening : MonoBehaviour
     public Material mat;
     public Image icon;
 
+    public AudioClip door;
+
     void Awake()
     {
         isClosed = true; //door is open, maybe change
@@ -56,6 +58,7 @@ public class DoorOpening : MonoBehaviour
                             }
                             else
                             { //open door
+                                SoundManager.instance.Play(door, "sfx");
                                 StartCoroutine(MoveDoor(doorClose));
                             }
                         }

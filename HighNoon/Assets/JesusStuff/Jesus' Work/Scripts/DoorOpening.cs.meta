@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: ec18f6b3343ad714bbb71a88cb85f520
-timeCreated: 1524352306
+timeCreated: 1527630296
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerTrans: {instanceID: 0}
+  - mat: {instanceID: 0}
+  - icon: {instanceID: 0}
+  - door: {fileID: 8300000, guid: 1de4b01010ccd6f4c938791ab1757092, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
