@@ -556,7 +556,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1745661142194794, guid: 9b8116741332d5441bb06087ca94ba8e, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b8116741332d5441bb06087ca94ba8e, type: 2}
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0b89e1595bb754cbc889d9ba9cfac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuMusic: {fileID: 8300000, guid: 7bc470e85e0cbce44bfc77e1c7b9c1c7, type: 3}
+  menuMusic: {fileID: 8300000, guid: 1129aa8bb45da2744a7d2983ab9281d9, type: 3}
 --- !u!1 &100085496
 GameObject:
   m_ObjectHideFlags: 0
