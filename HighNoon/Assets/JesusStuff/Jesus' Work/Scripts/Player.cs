@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     protected AudioClip[] grunts;
-    public AudioClip testGrunt;
+    public AudioClip grunt;
 
     private void Awake()
     {
@@ -79,7 +79,9 @@ public class Player : MonoBehaviour
             {
                 currentHealth = Mathf.Clamp(currentHealth - dam, 0, maxHealth);
                 FloatingTextController.CreateFloatingText(dam.ToString(), transform, playerNum, playerNumWhoShot);
-                SoundManager.instance.Play(testGrunt, "vfx");
+                int index = Random.Range(0, grunts.Length);
+                grunt = grunts[index];
+                SoundManager.instance.Play(grunt, "vfx");
             }
         }                                                                                                                                                                                                                                                   
     }

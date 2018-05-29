@@ -38,7 +38,7 @@ public class DoorOpening : MonoBehaviour
         {
             if (Vector3.Distance(players[i].transform.position, transform.position) < 3f)
             {
-                if (Input.GetButtonDown("X" + players[i].GetComponent<Player>().playerNum) && !doorIsMoving)
+                if (Input.GetButtonDown("X" + players[i].transform.root.GetComponent<Player>().playerNum) && !doorIsMoving)
                 {
                     RaycastHit hit;
                     if (Physics.Raycast(players[i].transform.position, players[i].transform.forward, out hit)) //Not complete
@@ -49,16 +49,17 @@ public class DoorOpening : MonoBehaviour
                             { //close door
                                 if (Vector3.Dot(players[i].transform.forward, transform.forward) > 0)
                                 {
+                                    SoundManager.instance.Play(door, "sfx");
                                     StartCoroutine(MoveDoor(doorOpen2));
                                 }
                                 else if (Vector3.Dot(players[i].transform.forward, transform.forward) < 0)
                                 {
+                                    SoundManager.instance.Play(door, "sfx");
                                     StartCoroutine(MoveDoor(doorOpen));
                                 }
                             }
                             else
                             { //open door
-                                SoundManager.instance.Play(door, "sfx");
                                 StartCoroutine(MoveDoor(doorClose));
                             }
                         }

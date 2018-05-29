@@ -25,7 +25,7 @@ public class WeaponSpawns : MonoBehaviour
                 {
                     meshRend[i].enabled = false;
                 }
-                other.GetComponent<Player>().revolverAmmoPool += 12;
+                other.transform.root.GetComponent<Player>().revolverAmmoPool += 12;
                 boxCol.enabled = false;
                 for (int i = 0; i < effects.Length; i++)
                 {
@@ -36,7 +36,7 @@ public class WeaponSpawns : MonoBehaviour
             }
             if (this.tag == "Shotgun")
             {
-                other.GetComponent<Player>().shotgunAmmoPool += 4;
+                other.transform.root.GetComponent<Player>().shotgunAmmoPool += 4;
                 for (int i = 0; i < meshRend.Length; i++)
                 {
                     meshRend[i].enabled = false;
@@ -51,7 +51,7 @@ public class WeaponSpawns : MonoBehaviour
             }
             if (this.tag == "Rifle")
             {
-                other.GetComponent<Player>().rifleAmmoPool += 6;
+                other.transform.root.GetComponent<Player>().rifleAmmoPool += 6;
                 for (int i = 0; i < meshRend.Length; i++)                
                 {
                     meshRend[i].enabled = false;
