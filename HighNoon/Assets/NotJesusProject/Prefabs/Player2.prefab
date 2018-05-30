@@ -1217,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1702866744165216
 GameObject:
   m_ObjectHideFlags: 1
@@ -4507,6 +4507,8 @@ MonoBehaviour:
     reloadSound: {fileID: 8300000, guid: aeae238690e25f846929b6e5ffe52701, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
     leverAction: {fileID: 0}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114510951035466090
 MonoBehaviour:
@@ -4729,6 +4731,8 @@ MonoBehaviour:
     reloadSound: {fileID: 0}
     dryFire: {fileID: 0}
     leverAction: {fileID: 0}
+    swoosh: {fileID: 8300000, guid: 0b04ca3b50c106847af321154da45146, type: 3}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114715258893994178
 MonoBehaviour:
@@ -4865,6 +4869,8 @@ MonoBehaviour:
     reloadSound: {fileID: 8300000, guid: f59ae693e8e150d4dbcdf3f87a023af9, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
     leverAction: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114747162243170540
 MonoBehaviour:
@@ -4884,6 +4890,7 @@ MonoBehaviour:
   stillStabbing: 0
   stabDowntime: 3
   parentObj: 
+  stab: {fileID: 8300000, guid: f6969f08dc9f6364d918545341b4ebd3, type: 3}
 --- !u!114 &114769120526174692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5021,6 +5028,8 @@ MonoBehaviour:
     reloadSound: {fileID: 8300000, guid: 90acce9233f59144a8c146fa0b01dc2b, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
     leverAction: {fileID: 0}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114998592843502664
 MonoBehaviour:
@@ -5065,7 +5074,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 043deee40fb2331438a6b12bd37d82a2, type: 3}
   - {fileID: 8300000, guid: 239453d4d51cc9646b4b7ae5749f87d1, type: 3}
   - {fileID: 8300000, guid: 48b5e3bd0d1773d4186faefcba14d362, type: 3}
-  testGrunt: {fileID: 8300000, guid: 4a85636bd704059498c27e12ea5f2a87, type: 3}
+  grunt: {fileID: 0}
 --- !u!124 &124135317724347820
 Behaviour:
   m_ObjectHideFlags: 1
