@@ -203,6 +203,8 @@ public class ArmControllerScript : MonoBehaviour
 		public AudioClip reloadSound;
         public AudioClip dryFire;
         public AudioClip leverAction;
+        public AudioClip swoosh;
+        public AudioClip stab;
 	}
 	public audioClips AudioClips;
 
@@ -442,19 +444,25 @@ public class ArmControllerScript : MonoBehaviour
                 //Play attack animation 1, if not currently attacking or drawing weapon
                 if (randomAttackAnim == 1 && !isMeleeAttacking && !isDrawing)
                 {
+                    SoundManager.instance.Play(AudioClips.swoosh, "sfx");
                     anim.SetTrigger("Attack 1");
+                    
                     //Play weapon sound
                 }
                 //Play attack animation 2, if not currently attacking or drawing weapon
                 if (randomAttackAnim == 2 && !isMeleeAttacking && !isDrawing)
                 {
+                    SoundManager.instance.Play(AudioClips.swoosh, "sfx");
                     anim.SetTrigger("Attack 2");
+                    
                     //Play weapon sound
                 }
                 //Play attack animation 3, if not currently attacking or drawing weapon
                 if (randomAttackAnim == 3 && !isMeleeAttacking && !isDrawing)
                 {
+                    SoundManager.instance.Play(AudioClips.swoosh, "sfx");
                     anim.SetTrigger("Attack 3");
+                    
                     //Play weapon sound
                 }
             }

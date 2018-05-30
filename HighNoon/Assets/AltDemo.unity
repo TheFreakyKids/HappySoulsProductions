@@ -6304,6 +6304,11 @@ Prefab:
       propertyPath: camToFace
       value: 
       objectReference: {fileID: 478673415}
+    - target: {fileID: 114257413586294900, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: AudioClips.swoosh
+      value: 
+      objectReference: {fileID: 8300000, guid: 0b04ca3b50c106847af321154da45146, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0
@@ -6485,6 +6490,11 @@ Prefab:
       propertyPath: ammoRes
       value: 
       objectReference: {fileID: 1507599352}
+    - target: {fileID: 114609233042198170, guid: cb61934175bfd4f488d9d9f620df74db,
+        type: 2}
+      propertyPath: AudioClips.swoosh
+      value: 
+      objectReference: {fileID: 8300000, guid: 0b04ca3b50c106847af321154da45146, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
   m_IsPrefabParent: 0

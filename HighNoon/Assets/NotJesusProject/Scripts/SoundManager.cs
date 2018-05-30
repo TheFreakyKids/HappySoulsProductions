@@ -47,7 +47,14 @@ public class SoundManager : MonoBehaviour
         src.clip = clip;
         RandomPitch();
         src.Play();
-        Destroy(go, clip.length);
+        if (go.gameObject.GetComponent<AudioSource>().loop == false)
+        {
+            Destroy(go, clip.length);
+        }
+        else
+        {
+            return;
+        }
     }
     
     public void RandomPitch()
