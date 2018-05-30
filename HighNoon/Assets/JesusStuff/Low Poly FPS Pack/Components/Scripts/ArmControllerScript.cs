@@ -23,6 +23,7 @@ public class ArmControllerScript : MonoBehaviour
 	bool isRunning;
 	bool isJumping;
 	public bool isMeleeAttacking;
+    public bool isGrenadeReloading;
 
     #region ForGUIreference
     public Text loadedAmmo;
@@ -89,8 +90,20 @@ public class ArmControllerScript : MonoBehaviour
 		public Transform currentProjectile;
 		
 		//How long after shooting the reload will start
-		public float reloadTime;	
-	}
+		public float reloadTime;
+
+        [Header("Grenade Settings")]
+
+        //If the current weapon is a grenade
+        public bool grenade;
+
+        //Delay when releasing left click to throw
+        public float throwDelay = 0.15f;
+        //Delay to hide grenade model
+        public float hideGrenadeTimer = 0.75f;
+        //Delay to show grenade model
+        public float showGrenadeTimer = 0.75f;
+    }
 	public shootSettings ShootSettings;
 	
 	[System.Serializable]
@@ -195,8 +208,12 @@ public class ArmControllerScript : MonoBehaviour
 	
 	[System.Serializable]
 	public class audioClips
-	{  
-		[Header("Audio Clips")]
+	{
+        [Header("Audio Source")]
+
+        public AudioSource mainAudioSource;
+
+        [Header("Audio Clips")]
 		
 		//All audio clips
 		public AudioClip shootSound;
@@ -225,9 +242,9 @@ public class ArmControllerScript : MonoBehaviour
         }
         //Set the ammo count
         RefillAmmo ();
-		
-		//Hide muzzleflash and light at start, disable for projectile, grenade, melee weapons, grenade launcher and flamethrower
-		if (!ShootSettings.projectileWeapon && !MeleeSettings.isMeleeWeapon)
+
+        //Hide muzzleflash and light at start, disable for projectile, grenade, melee weapons, grenade launcher and flamethrower
+        if (!ShootSettings.projectileWeapon && !MeleeSettings.isMeleeWeapon && !ShootSettings.grenade && transform.name != "Assault Rifle 2 - FPSController")
         { 			
 			Components.sideMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.topMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
@@ -235,7 +252,7 @@ public class ArmControllerScript : MonoBehaviour
 		}
 		
 		//Disable the light flash, disable for melee weapons and grenade
-		if (!MeleeSettings.isMeleeWeapon)
+		if (!MeleeSettings.isMeleeWeapon && !ShootSettings.grenade)
         {
 			Components.lightFlash.GetComponent<Light> ().enabled = false;
 		}
@@ -247,6 +264,11 @@ public class ArmControllerScript : MonoBehaviour
 			//Disable the weapon trail at start
 			Components.weaponTrail.GetComponent<TrailRenderer>().enabled = false;
 		}
+
+        if (ShootSettings.grenade == true)
+        {
+            isGrenadeReloading = true;
+        }
 
         string numberOnly = Regex.Replace(parentName, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
@@ -300,6 +322,23 @@ public class ArmControllerScript : MonoBehaviour
         //      }
 
         NewShoot();
+
+        if (Input.GetButtonDown("LB" + playerNum) && ShootSettings.grenade == true && !isRunning && !isJumping)
+        {
+            print("THROWING IS BEING CALLED");
+            //Disable grenade throwing
+            isGrenadeReloading = true;
+            //Play throwing animations
+            anim.SetTrigger("Throw");
+            //
+            transform.Find("Armature/hand_R/DynamitoModel/BombFuse2").gameObject.SetActive(true);
+
+            //Start throwing grenade
+            StartCoroutine(GrenadeThrow());
+            //
+            //Start hide grenade timer
+            StartCoroutine(HideGrenadeTimer());
+        }
 
         //If out of ammo
         if (currentAmmo == 0)
@@ -603,8 +642,38 @@ public class ArmControllerScript : MonoBehaviour
         }
     }
 
-	//Muzzleflash
-	IEnumerator MuzzleFlash () {
+    IEnumerator GrenadeThrow()
+    {
+        //Play grenade sound
+        SoundManager.instance.Play(AudioClips.shootSound, "sfx");
+
+        //Wait for set amount of time to throw grenade
+        yield return new WaitForSeconds(ShootSettings.throwDelay);
+        //Spawn the grenade projectile
+        Instantiate(ShootSettings.projectile,
+            Spawnpoints.bulletSpawnPoint.transform.position,
+            Spawnpoints.bulletSpawnPoint.transform.rotation);
+
+        transform.Find("Armature/hand_R/DynamitoModel/BombFuse2").gameObject.SetActive(false);
+    }
+
+    IEnumerator HideGrenadeTimer()
+    {
+        //Wait for set amount of time
+        yield return new WaitForSeconds(ShootSettings.hideGrenadeTimer);
+        //Hide the current grenade projectile mesh
+        ShootSettings.currentProjectile.GetComponent
+        <SkinnedMeshRenderer>().enabled = false;
+
+        //Wait for set amount of time, to show the grenade again
+        yield return new WaitForSeconds(ShootSettings.showGrenadeTimer);
+        //Show the current grenade projectile mesh
+        ShootSettings.currentProjectile.GetComponent
+        <SkinnedMeshRenderer>().enabled = true;
+    }
+
+    //Muzzleflash
+    IEnumerator MuzzleFlash () {
 		
 		//Show muzzleflash if useMuzzleFlash is true
 		if (!ShootSettings.projectileWeapon && Components.useMuzzleflash == true) {

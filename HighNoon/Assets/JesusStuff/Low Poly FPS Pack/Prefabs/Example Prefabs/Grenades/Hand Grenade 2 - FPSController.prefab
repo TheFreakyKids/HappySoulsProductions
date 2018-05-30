@@ -667,7 +667,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -691,7 +691,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &9578502
 Animator:
   serializedVersion: 3
@@ -806,16 +806,11 @@ MonoBehaviour:
     BobDuration: 0.2
     BobAmount: 0.1
   m_StepInterval: 2.75
-  m_FootstepSounds:
-  - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
-  - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
-  m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
-  m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
-  targetDashDirection: {x: 0, y: 0, z: 0}
-  rollDuration: 0
-  rb: {fileID: 0}
+  speed: 0
+  tempKill: {fileID: 0}
+  tempAnnouncerKillStreak: {fileID: 0}
   isClimbing: 0
-  isRolling: 0
+  playerNum: 0
 --- !u!114 &11463184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -827,6 +822,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307a0663c7b32844ca1c2f528aa9503f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotgunDamage: 85
+  revolverDamage: 35
+  rifleDamage: 65
+  isMeleeAttacking: 0
+  isGrenadeReloading: 0
+  loadedAmmo: {fileID: 0}
+  ammoRes: {fileID: 0}
+  parentObject: {fileID: 0}
+  playerNum: 0
   currentAmmo: 0
   MeleeSettings:
     isMeleeWeapon: 0
@@ -840,16 +844,13 @@ MonoBehaviour:
     spreadSize: 2
     pellets: 30
     projectileWeapon: 0
-    grenadeLauncher: 0
     projectile: {fileID: 499242, guid: 5818b081a090e624286f68f8e4544045, type: 2}
     currentProjectile: {fileID: 417610}
     reloadTime: 0
-    grenade: 1
-    throwDelay: 1.125
+    grenade: 0
+    throwDelay: 0.15
     hideGrenadeTimer: 0.75
     showGrenadeTimer: 0.75
-    flamethrower: 0
-    minigun: 0
   ReloadSettings:
     casingOnReload: 0
     casingDelay: 0
@@ -895,9 +896,13 @@ MonoBehaviour:
     casingSpawnPoints: []
     bulletSpawnPoint: {fileID: 468360}
   AudioClips:
-    mainAudioSource: {fileID: 8259058}
+    mainAudioSource: {fileID: 0}
     shootSound: {fileID: 8300000, guid: a640cc6972f037f4ca8f590635bb4f2a, type: 3}
     reloadSound: {fileID: 0}
+    dryFire: {fileID: 0}
+    leverAction: {fileID: 0}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!137 &13733746
 SkinnedMeshRenderer:
