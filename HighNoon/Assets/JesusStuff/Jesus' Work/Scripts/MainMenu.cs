@@ -12,8 +12,13 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
+        
+    }
+
+    public void LoadLevelOne()
+    {
         SoundManager.instance.StopClip();
-        SceneManager.LoadScene("AltDemo"/*SceneManager.GetActiveScene().buildIndex + 1*/);
+        SceneManager.LoadScene("map 3");
     }
 
     public void QuitGame()

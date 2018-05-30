@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Menu.unity
     guid: 35e93bd61d15ead46bada41f90add991
-  - enabled: 1
+  - enabled: 0
     path: Assets/AltDemo.unity
     guid: 5ec9e2e3fd3a53045b0035c77f23e675
-  - enabled: 1
+  - enabled: 0
     path: Assets/Player1Win.unity
     guid: 9c8871c884ff3924988fd9a76fd670d1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Player2Win.unity
     guid: e1c760fca86dd57459778a3651b46bc5
+  - enabled: 1
+    path: Assets/map 3.unity
+    guid: 6ab483ac9d00a2a4bafc39d638946881
