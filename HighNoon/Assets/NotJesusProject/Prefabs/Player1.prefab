@@ -2810,7 +2810,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969061916096156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -17.294825, y: 2.69, z: -0.65333104}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224150439333197116}
@@ -4038,7 +4038,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4062,7 +4062,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!82 &82517918546143832
 AudioSource:
   m_ObjectHideFlags: 1
@@ -4518,7 +4518,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4542,7 +4542,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95020817450338602
 Animator:
   serializedVersion: 3
@@ -4899,6 +4899,7 @@ MonoBehaviour:
   revolverDamage: 35
   rifleDamage: 65
   isMeleeAttacking: 0
+  isGrenadeReloading: 0
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
@@ -4919,6 +4920,10 @@ MonoBehaviour:
     projectile: {fileID: 499242, guid: 5818b081a090e624286f68f8e4544045, type: 2}
     currentProjectile: {fileID: 4153782382340884}
     reloadTime: 0
+    grenade: 0
+    throwDelay: 0.15
+    hideGrenadeTimer: 0.75
+    showGrenadeTimer: 0.75
   ReloadSettings:
     casingOnReload: 0
     casingDelay: 0
@@ -4964,10 +4969,13 @@ MonoBehaviour:
     casingSpawnPoints: []
     bulletSpawnPoint: {fileID: 4244423764717660}
   AudioClips:
+    mainAudioSource: {fileID: 0}
     shootSound: {fileID: 8300000, guid: a640cc6972f037f4ca8f590635bb4f2a, type: 3}
     reloadSound: {fileID: 0}
     dryFire: {fileID: 0}
     leverAction: {fileID: 0}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114166861366637358
 MonoBehaviour:
@@ -5018,6 +5026,7 @@ MonoBehaviour:
   revolverDamage: 35
   rifleDamage: 65
   isMeleeAttacking: 0
+  isGrenadeReloading: 0
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
@@ -5038,6 +5047,10 @@ MonoBehaviour:
     projectile: {fileID: 0}
     currentProjectile: {fileID: 0}
     reloadTime: 0
+    grenade: 0
+    throwDelay: 0.15
+    hideGrenadeTimer: 0.75
+    showGrenadeTimer: 0.75
   ReloadSettings:
     casingOnReload: 0
     casingDelay: 0
@@ -5083,10 +5096,13 @@ MonoBehaviour:
     casingSpawnPoints: []
     bulletSpawnPoint: {fileID: 0}
   AudioClips:
+    mainAudioSource: {fileID: 0}
     shootSound: {fileID: 8300000, guid: 36584c9624f0ddd41a1ffa2b0d8d6bd4, type: 3}
     reloadSound: {fileID: 0}
     dryFire: {fileID: 0}
     leverAction: {fileID: 0}
+    swoosh: {fileID: 8300000, guid: 0b04ca3b50c106847af321154da45146, type: 3}
+    stab: {fileID: 8300000, guid: f6969f08dc9f6364d918545341b4ebd3, type: 3}
   noSwitch: 0
 --- !u!114 &114510676302219074
 MonoBehaviour:
@@ -5153,7 +5169,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 043deee40fb2331438a6b12bd37d82a2, type: 3}
   - {fileID: 8300000, guid: 239453d4d51cc9646b4b7ae5749f87d1, type: 3}
   - {fileID: 8300000, guid: 48b5e3bd0d1773d4186faefcba14d362, type: 3}
-  testGrunt: {fileID: 0}
+  grunt: {fileID: 0}
 --- !u!114 &114615221041042872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5275,6 +5291,7 @@ MonoBehaviour:
   stillStabbing: 0
   stabDowntime: 3
   parentObj: 
+  stab: {fileID: 0}
 --- !u!114 &114664068997314802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5328,6 +5345,7 @@ MonoBehaviour:
   revolverDamage: 0
   rifleDamage: 0
   isMeleeAttacking: 0
+  isGrenadeReloading: 0
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
@@ -5348,6 +5366,10 @@ MonoBehaviour:
     projectile: {fileID: 0}
     currentProjectile: {fileID: 0}
     reloadTime: 0
+    grenade: 0
+    throwDelay: 0.15
+    hideGrenadeTimer: 0.75
+    showGrenadeTimer: 0.75
   ReloadSettings:
     casingOnReload: 0
     casingDelay: 0.3
@@ -5401,10 +5423,13 @@ MonoBehaviour:
     - {fileID: 4407429095896196}
     bulletSpawnPoint: {fileID: 4238380287755720}
   AudioClips:
+    mainAudioSource: {fileID: 0}
     shootSound: {fileID: 8300000, guid: 1d02448a7427533439eee92d63e2ddf3, type: 3}
     reloadSound: {fileID: 8300000, guid: f59ae693e8e150d4dbcdf3f87a023af9, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
     leverAction: {fileID: 8300000, guid: 9c253fa4ea9a1c04fa7aa87847ff21d2, type: 3}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114841772297281588
 MonoBehaviour:
@@ -5421,6 +5446,7 @@ MonoBehaviour:
   revolverDamage: 0
   rifleDamage: 0
   isMeleeAttacking: 0
+  isGrenadeReloading: 0
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
@@ -5441,6 +5467,10 @@ MonoBehaviour:
     projectile: {fileID: 0}
     currentProjectile: {fileID: 0}
     reloadTime: 0
+    grenade: 0
+    throwDelay: 0.15
+    hideGrenadeTimer: 0.75
+    showGrenadeTimer: 0.75
   ReloadSettings:
     casingOnReload: 1
     casingDelay: 1.025
@@ -5499,10 +5529,13 @@ MonoBehaviour:
     - {fileID: 4342610527020656}
     bulletSpawnPoint: {fileID: 4820774275592260}
   AudioClips:
+    mainAudioSource: {fileID: 0}
     shootSound: {fileID: 8300000, guid: d2f786326ae6a3243ad314ce08c17491, type: 3}
     reloadSound: {fileID: 8300000, guid: 90acce9233f59144a8c146fa0b01dc2b, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
     leverAction: {fileID: 0}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114911309790530946
 MonoBehaviour:
@@ -5543,6 +5576,7 @@ MonoBehaviour:
   revolverDamage: 0
   rifleDamage: 0
   isMeleeAttacking: 0
+  isGrenadeReloading: 0
   loadedAmmo: {fileID: 0}
   ammoRes: {fileID: 0}
   parentObject: {fileID: 0}
@@ -5563,6 +5597,10 @@ MonoBehaviour:
     projectile: {fileID: 0}
     currentProjectile: {fileID: 0}
     reloadTime: 0
+    grenade: 0
+    throwDelay: 0.15
+    hideGrenadeTimer: 0.75
+    showGrenadeTimer: 0.75
   ReloadSettings:
     casingOnReload: 1
     casingDelay: 0.4
@@ -5617,10 +5655,13 @@ MonoBehaviour:
     - {fileID: 4027715803228310}
     bulletSpawnPoint: {fileID: 4266674776237526}
   AudioClips:
+    mainAudioSource: {fileID: 0}
     shootSound: {fileID: 8300000, guid: c404c0f8d9b6df7458cb58da2c9af3b2, type: 3}
     reloadSound: {fileID: 8300000, guid: aeae238690e25f846929b6e5ffe52701, type: 3}
     dryFire: {fileID: 8300000, guid: c53f3c89d3ae1d14b862227c568f6afa, type: 3}
     leverAction: {fileID: 0}
+    swoosh: {fileID: 0}
+    stab: {fileID: 0}
   noSwitch: 0
 --- !u!114 &114930779886138514
 MonoBehaviour:
