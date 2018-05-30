@@ -6309,6 +6309,11 @@ Prefab:
       propertyPath: AudioClips.swoosh
       value: 
       objectReference: {fileID: 8300000, guid: 0b04ca3b50c106847af321154da45146, type: 3}
+    - target: {fileID: 114637311807285022, guid: 1297397763b0c4b4087efb895d3adc43,
+        type: 2}
+      propertyPath: stab
+      value: 
+      objectReference: {fileID: 8300000, guid: f6969f08dc9f6364d918545341b4ebd3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1297397763b0c4b4087efb895d3adc43, type: 2}
   m_IsPrefabParent: 0
