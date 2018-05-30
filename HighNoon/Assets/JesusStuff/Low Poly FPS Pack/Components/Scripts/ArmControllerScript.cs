@@ -386,19 +386,19 @@ public class ArmControllerScript : MonoBehaviour
                 if (randomAttackAnim == 1 && !isMeleeAttacking && !isDrawing)
                 {
                     anim.SetTrigger("Attack 1");
-                    //Play weapon sound
+                    SoundManager.instance.Play(AudioClips.swoosh, "sfx");
                 }
                 //Play attack animation 2, if not currently attacking or drawing weapon
                 if (randomAttackAnim == 2 && !isMeleeAttacking && !isDrawing)
                 {
                     anim.SetTrigger("Attack 2");
-                    //Play weapon sound
+                    SoundManager.instance.Play(AudioClips.swoosh, "sfx");
                 }
                 //Play attack animation 3, if not currently attacking or drawing weapon
                 if (randomAttackAnim == 3 && !isMeleeAttacking && !isDrawing)
                 {
                     anim.SetTrigger("Attack 3");
-                    //Play weapon sound
+                    SoundManager.instance.Play(AudioClips.swoosh, "sfx");
                 }
             }
             #endregion

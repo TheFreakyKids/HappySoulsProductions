@@ -12,6 +12,7 @@ public class Knife : MonoBehaviour
     public bool stillStabbing = false;
     public float stabDowntime = 3f;
     public string parentObj;
+    public AudioClip stab;
 
 	public void Awake ()
     {
@@ -26,7 +27,7 @@ public class Knife : MonoBehaviour
     {
         if (!stillStabbing && arms.isMeleeAttacking)
         {
-            if (collision.transform.CompareTag("Player") && collision.transform.name != parentObj)
+            if (collision.transform.CompareTag("Player") && collision.transform.root.name != parentObj)
             {
                 StartCoroutine(Stab(collision));
             }
@@ -37,7 +38,7 @@ public class Knife : MonoBehaviour
     {
         if (!stillStabbing && arms.isMeleeAttacking)
         {
-            if (collision.transform.CompareTag("Player") && collision.transform.name != parentObj)
+            if (collision.transform.CompareTag("Player") && collision.transform.root.name != parentObj)
             {
                 StartCoroutine(Stab(collision));
             }
@@ -48,8 +49,8 @@ public class Knife : MonoBehaviour
     {
         stillStabbing = true;
 
-        collsion.transform.GetComponent<Player>().TakeDamage(damage, playerNum);
-
+        collsion.transform.root.GetComponent<Player>().TakeDamage(damage, playerNum);
+        SoundManager.instance.Play(stab, "sfx");
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
         stillStabbing = false;
