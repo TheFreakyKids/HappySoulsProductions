@@ -21,6 +21,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("map 3");
     }
 
+    public void LoadLevelTwo()
+    {
+        SoundManager.instance.StopClip();
+        SceneManager.LoadScene("High Noon Map (2)");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
