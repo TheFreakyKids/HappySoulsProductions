@@ -244,7 +244,7 @@ public class ArmControllerScript : MonoBehaviour
         RefillAmmo ();
 
         //Hide muzzleflash and light at start, disable for projectile, grenade, melee weapons, grenade launcher and flamethrower
-        if (!ShootSettings.projectileWeapon && !MeleeSettings.isMeleeWeapon && !ShootSettings.grenade && transform.name != "Assault Rifle 2 - FPSController")
+        if (!ShootSettings.projectileWeapon && !MeleeSettings.isMeleeWeapon && !ShootSettings.grenade)
         { 			
 			Components.sideMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
 			Components.topMuzzle.GetComponent<SpriteRenderer> ().enabled = false;
@@ -265,13 +265,17 @@ public class ArmControllerScript : MonoBehaviour
 			Components.weaponTrail.GetComponent<TrailRenderer>().enabled = false;
 		}
 
-        if (ShootSettings.grenade == true)
-        {
-            isGrenadeReloading = true;
-        }
+        //if (ShootSettings.grenade == true)
+        //{
+        //    isGrenadeReloading = true;
+        //}
 
         string numberOnly = Regex.Replace(parentName, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
+
+        //if(gameObject.name == "arms@hand_grenade_2")
+           // ShootSettings.
+        
     }
 	
 	void Update ()
@@ -279,6 +283,10 @@ public class ArmControllerScript : MonoBehaviour
         shotgunDamage = 85;
         revolverDamage = 35;
         rifleDamage = 65;
+
+        //Check which animation 
+        //is currently playing
+        AnimationCheck();
 
         if (!MeleeSettings.isMeleeWeapon)
         {
@@ -307,25 +315,9 @@ public class ArmControllerScript : MonoBehaviour
 			randomAttackAnim = Random.Range (1, 4);
 		}
 
-		//Check which animation 
-		//is currently playing
-		AnimationCheck ();
-
-        //Left click (if automatic fire is false)
-        //if(parentName == "Player1")
-        //      {
-        //          Shooter1();
-        //      }
-        //      if (parentName == "Player2")
-        //      {
-        //          Shooter2();
-        //      }
-
-        NewShoot();
-
-        if (Input.GetButtonDown("LB" + playerNum) && ShootSettings.grenade == true && !isRunning && !isJumping)
+        if (Input.GetButtonDown("LB" + playerNum) && ShootSettings.grenade == true &&
+        !isGrenadeReloading && !isRunning && !isJumping)
         {
-            print("THROWING IS BEING CALLED");
             //Disable grenade throwing
             isGrenadeReloading = true;
             //Play throwing animations
@@ -339,6 +331,18 @@ public class ArmControllerScript : MonoBehaviour
             //Start hide grenade timer
             StartCoroutine(HideGrenadeTimer());
         }
+
+        //Left click (if automatic fire is false)
+        //if(parentName == "Player1")
+        //      {
+        //          Shooter1();
+        //      }
+        //      if (parentName == "Player2")
+        //      {
+        //          Shooter2();
+        //      }
+
+        NewShoot();
 
         //If out of ammo
         if (currentAmmo == 0)
@@ -1055,9 +1059,17 @@ public class ArmControllerScript : MonoBehaviour
 			}
 		}
 
-		//Check if melee weapon animation is playing
-		//To make sure melee animations cant be played at same time
-		if (MeleeSettings.isMeleeWeapon == true) {
+        if (ShootSettings.grenade == true &&
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            isGrenadeReloading = false;
+            //Used in the demo scnes
+            noSwitch = false;
+        }
+
+        //Check if melee weapon animation is playing
+        //To make sure melee animations cant be played at same time
+        if (MeleeSettings.isMeleeWeapon == true) {
 			//Check if any melee attack animation is playing
 			if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Attack 1") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Attack 2") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Attack 3"))
             {

@@ -61,6 +61,8 @@ public class GrenadeScript : MonoBehaviour {
 	//grenade is exploding on
 	string groundTag;
 
+    public int playerNum;
+
 	void Awake () {
 		//Create random throw force
 		//based on min and max values
@@ -72,6 +74,8 @@ public class GrenadeScript : MonoBehaviour {
 			Random.Range(0,0), //Y Axis
 			Random.Range(0,0)  //Z Axis
 			* Time.deltaTime * 5000);
+
+        print(playerNum);
 	}
 
 	void Start () {
@@ -81,7 +85,7 @@ public class GrenadeScript : MonoBehaviour {
 		//Start the explosion timer
 		//Disable for smoke grenade
 		if (!isSmokeGrenade) {
-			StartCoroutine (ExplosionTimer ());
+			//StartCoroutine (ExplosionTimer ());
 		}
 
 		if (isSmokeGrenade == true) {
@@ -92,7 +96,9 @@ public class GrenadeScript : MonoBehaviour {
 	void OnCollisionEnter (Collision collision) {
 		//Play the impact sound on every collision
 		impactSound.Play ();
-	}
+        if (!collision.transform.CompareTag("Player"))
+            StartCoroutine(ExplosionTimer());
+    }
 
 	IEnumerator SmokeGrenadeTimer () {
 
@@ -160,8 +166,15 @@ public class GrenadeScript : MonoBehaviour {
 		{
 			//Instantiate metal explosion prefab
 			Instantiate (explosionMetalPrefab, checkGround.point, 
-				Quaternion.FromToRotation (Vector3.forward, checkGround.normal)); 
-		}
+				Quaternion.FromToRotation (Vector3.forward, checkGround.normal));
+
+         if (groundTag == null) //Apparently sometimes the raycast picks up nothing so this should solve it
+         {
+                //Instantiate metal explosion prefab
+                Instantiate(explosionMetalPrefab, transform.position,
+                    Quaternion.identity);
+         }
+        }
 
 		//Explosion force
 		Vector3 explosionPos = transform.position;
@@ -172,6 +185,11 @@ public class GrenadeScript : MonoBehaviour {
 			//Add force to nearby rigidbodies
 			if (rb != null)
 				rb.AddExplosionForce (power, explosionPos, radius, 3.0F);
+
+            if (hit.transform.root.tag == "Player")
+            {
+                hit.transform.root.GetComponent<Player>().TakeDamage(100f , playerNum);
+            }
 			
 			//********** USED IN THE DEMO SCENES **********
 			//If the explosion hit the tags "Target", and if "isHit" 

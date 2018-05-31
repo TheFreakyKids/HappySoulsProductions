@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65128137956305560}
   - component: {fileID: 54765694386929662}
   - component: {fileID: 114910812744647778}
+  - component: {fileID: 82102036182947464}
   m_Layer: 0
   m_Name: Dynamito
   m_TagString: Untagged
@@ -37,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995049910400426}
-  m_LocalRotation: {x: 0.39579433, y: -0.7153733, z: -0.3669128, w: 0.44380504}
-  m_LocalPosition: {x: 0.1927, y: 1.3427, z: 0.8886}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.167, y: 1.323, z: 1.040264}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -10, y: -110, z: -64.92}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33554118911601004
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -72,12 +73,92 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995049910400426}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 98422cde6324dcf4c8ad2c756e0516c0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 12.210152, y: 7.2601266, z: 36.71585}
   m_Center: {x: -0.039076146, y: 3.6001685, z: 3.600502}
+--- !u!82 &82102036182947464
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1995049910400426}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 171f19f289bd1564792c7d100541362c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114910812744647778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,10 +171,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeTimer: 5
-  explosionMetalPrefab: {fileID: 0}
-  explosionConcretePrefab: {fileID: 0}
-  explosionDirtPrefab: {fileID: 0}
-  explosionWoodPrefab: {fileID: 0}
+  explosionMetalPrefab: {fileID: 407600, guid: e6ea0c2b13012484ba2f5dc1054e6d75, type: 2}
+  explosionConcretePrefab: {fileID: 407600, guid: e6ea0c2b13012484ba2f5dc1054e6d75,
+    type: 2}
+  explosionDirtPrefab: {fileID: 407600, guid: e6ea0c2b13012484ba2f5dc1054e6d75, type: 2}
+  explosionWoodPrefab: {fileID: 407600, guid: e6ea0c2b13012484ba2f5dc1054e6d75, type: 2}
   metalImpactStaticTag: Metal (Static)
   metalImpactTag: Metal
   woodImpactStaticTag: Wood (Static)
@@ -102,17 +184,18 @@ MonoBehaviour:
   concreteImpactTag: Concrete
   dirtImpactStaticTag: Dirt (Static)
   dirtImpactTag: Dirt
-  radius: 25
-  power: 350
-  minimumForce: 350
-  maximumForce: 850
+  radius: 5
+  power: 1000
+  minimumForce: 700
+  maximumForce: 900
   isSmokeGrenade: 0
   startSmokeTime: 0
   stopSmokeTime: 0
   destroyTimer: 0
   smokeParticles: {fileID: 0}
   isFlashbang: 0
-  impactSound: {fileID: 0}
+  impactSound: {fileID: 82102036182947464}
+  playerNum: 0
 --- !u!137 &137242601661379470
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
