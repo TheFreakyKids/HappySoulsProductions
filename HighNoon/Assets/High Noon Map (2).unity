@@ -235,6 +235,35 @@ Transform:
   m_PrefabParentObject: {fileID: 4867645178850748, guid: c933db8b77a3dbf41bbfbdf437dfaf8e,
     type: 2}
   m_PrefabInternal: {fileID: 2318788}
+--- !u!1 &6149729 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1763189944688872, guid: b2213dbd7f01e2b4d977c73685dea38e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2027616777}
+--- !u!114 &6149733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6149729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
+  players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
+  door: {fileID: 8300000, guid: 1de4b01010ccd6f4c938791ab1757092, type: 3}
 --- !u!1001 &6534147
 Prefab:
   m_ObjectHideFlags: 0
@@ -3614,30 +3643,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1130908925558842, guid: bb18f51fec771554d96d59fff5e6fb3d,
     type: 2}
   m_PrefabInternal: {fileID: 140141191}
---- !u!114 &140141200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 140141197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorOpenAngle: -90
-  doorCloseAngle: 0
-  doorAnimSpeed: 4
-  doorOpen: {x: 0, y: 0, z: 0, w: 0}
-  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
-  doorClose: {x: 0, y: 0, z: 0, w: 0}
-  playerTrans: {fileID: 0}
-  isClosed: 1
-  doorIsMoving: 0
-  players: []
-  mat: {fileID: 0}
-  icon: {fileID: 0}
-  door: {fileID: 8300000, guid: 1de4b01010ccd6f4c938791ab1757092, type: 3}
 --- !u!114 &140141201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3676,6 +3681,30 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 86dc5dbfc3d7c2347bde608d51a7d2dc, type: 3}
+--- !u!114 &140141218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 140141197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
+  players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
+  door: {fileID: 8300000, guid: 1de4b01010ccd6f4c938791ab1757092, type: 3}
 --- !u!1001 &143058658
 Prefab:
   m_ObjectHideFlags: 0
@@ -4596,7 +4625,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 693189899}
-  m_RootOrder: 268
+  m_RootOrder: 249
   m_LocalEulerAnglesHint: {x: 134.418, y: -61.330994, z: 412.198}
 --- !u!64 &171848631
 MeshCollider:
@@ -5366,7 +5395,7 @@ Transform:
   m_LocalScale: {x: 178.46646, y: 118.59073, z: 6.5813503}
   m_Children: []
   m_Father: {fileID: 693189899}
-  m_RootOrder: 761
+  m_RootOrder: 751
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &195745057
 Prefab:
@@ -5438,6 +5467,25 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 3b4c5e3654c28dc45a10b8198accd7b6, type: 3}
+--- !u!1 &201559633 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1498486200081144, guid: 13785c27c2ab78d45bc9ac99a12ea6af,
+    type: 2}
+  m_PrefabInternal: {fileID: 372299057}
+--- !u!64 &201559634
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 201559633}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a91fbe7de8e685944a7ef29bbd5d1739, type: 3}
 --- !u!1001 &202032638
 Prefab:
   m_ObjectHideFlags: 0
@@ -20310,6 +20358,7 @@ Transform:
   - {fileID: 1874517850}
   - {fileID: 1704331563}
   - {fileID: 1401364568}
+  - {fileID: 171848630}
   - {fileID: 21277977}
   - {fileID: 2022746641}
   - {fileID: 834664723}
@@ -20329,7 +20378,6 @@ Transform:
   - {fileID: 804999922}
   - {fileID: 1573875873}
   - {fileID: 1209074184}
-  - {fileID: 171848630}
   - {fileID: 44416624}
   - {fileID: 2023591360}
   - {fileID: 745433969}
@@ -20812,6 +20860,7 @@ Transform:
   - {fileID: 436184676}
   - {fileID: 987247354}
   - {fileID: 1059242590}
+  - {fileID: 185054924}
   - {fileID: 362556946}
   - {fileID: 1265775150}
   - {fileID: 1461901695}
@@ -20822,7 +20871,6 @@ Transform:
   - {fileID: 2027830048}
   - {fileID: 1711537229}
   - {fileID: 1030071261}
-  - {fileID: 185054924}
   - {fileID: 251863738}
   - {fileID: 956982833}
   - {fileID: 1770701203}
@@ -25800,6 +25848,25 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 2557e0bb927d76745a066db6c577ee0a, type: 3}
+--- !u!1 &893354646 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1607269105168272, guid: afc78ae17d5637e47834b329300d6e9a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1211362543}
+--- !u!64 &893354647
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 893354646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300006, guid: 34dcde4421f1c3f4d8017b9c37b6007c, type: 3}
 --- !u!1001 &897951987
 Prefab:
   m_ObjectHideFlags: 0
@@ -33007,6 +33074,25 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: dd1af73b7e54b7943a9e04e88d7872d4, type: 3}
+--- !u!1 &1159871130 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1183028758044342, guid: eebdb6adb5dbe6749b8434a5f2d2c23a,
+    type: 2}
+  m_PrefabInternal: {fileID: 40052140}
+--- !u!64 &1159871131
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159871130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 07e59c9a5c57460418a991b28a67e3fb, type: 3}
 --- !u!1001 &1163415903
 Prefab:
   m_ObjectHideFlags: 0
@@ -36076,6 +36162,25 @@ Transform:
   m_PrefabParentObject: {fileID: 4867645178850748, guid: c933db8b77a3dbf41bbfbdf437dfaf8e,
     type: 2}
   m_PrefabInternal: {fileID: 1280201119}
+--- !u!1 &1281122287 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1632639134954948, guid: 56e432c910d24244ab87776752805396,
+    type: 2}
+  m_PrefabInternal: {fileID: 713841051}
+--- !u!64 &1281122288
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1281122287}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a91fbe7de8e685944a7ef29bbd5d1739, type: 3}
 --- !u!1001 &1281536984
 Prefab:
   m_ObjectHideFlags: 0
@@ -42656,6 +42761,35 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: aaec7d7d11c440e4fbd6bd2c1c27d7df, type: 3}
+--- !u!1 &1499626375 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1836762475796642, guid: b2213dbd7f01e2b4d977c73685dea38e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2027616777}
+--- !u!114 &1499626379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1499626375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec18f6b3343ad714bbb71a88cb85f520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -90
+  doorCloseAngle: 0
+  doorAnimSpeed: 4
+  doorOpen: {x: 0, y: 0, z: 0, w: 0}
+  doorOpen2: {x: 0, y: 0, z: 0, w: 0}
+  doorClose: {x: 0, y: 0, z: 0, w: 0}
+  playerTrans: {fileID: 0}
+  isClosed: 1
+  doorIsMoving: 0
+  players: []
+  mat: {fileID: 0}
+  icon: {fileID: 0}
+  door: {fileID: 8300000, guid: 1de4b01010ccd6f4c938791ab1757092, type: 3}
 --- !u!1001 &1500410543
 Prefab:
   m_ObjectHideFlags: 0
