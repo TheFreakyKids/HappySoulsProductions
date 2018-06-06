@@ -91,6 +91,9 @@ public class Player : MonoBehaviour
         fpsCon.enabled = false;
         camCon.enabled = false;
         transform.Find("Capsule").GetComponent<Rigidbody>().isKinematic = false;
+        transform.Find("FirstPersonCharacter").GetComponentInChildren<CameraController>().enabled = false;
+        transform.Find("FirstPersonCharacter").GetComponentInChildren<WeaponSwapping>().enabled = false;
+        transform.Find("FirstPersonCharacter").GetComponentInChildren<ArmControllerScript>().enabled = false;
         StartCoroutine(Respawn());
     }
 
@@ -110,7 +113,9 @@ public class Player : MonoBehaviour
             fpsCon.enabled = true;
             camCon.enabled = true;
             transform.Find("Capsule").GetComponent<Rigidbody>().isKinematic = true;
-
+            transform.Find("FirstPersonCharacter").GetComponentInChildren<ArmControllerScript>().enabled = true;
+            transform.Find("FirstPersonCharacter").GetComponentInChildren<CameraController>().enabled = true;
+            transform.Find("FirstPersonCharacter").GetComponentInChildren<WeaponSwapping>().enabled = true;
             transform.Find("Capsule").transform.localPosition = Vector3.zero;
             transform.Find("Capsule").transform.rotation = Quaternion.identity;
         }
