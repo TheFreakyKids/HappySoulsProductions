@@ -18402,6 +18402,10 @@ Prefab:
       propertyPath: ammoRes
       value: 
       objectReference: {fileID: 1488737452}
+    - target: {fileID: 1418391980202888, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb61934175bfd4f488d9d9f620df74db, type: 2}
   m_IsPrefabParent: 0
@@ -32273,7 +32277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1510255435
 AudioListener:
   m_ObjectHideFlags: 0

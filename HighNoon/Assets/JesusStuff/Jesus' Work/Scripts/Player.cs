@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     public Transform[] playerSpawns;
     public Transform OGCapTrans;
 
+    public SkinnedMeshRenderer[] rends;
+
     public int playerNum;
 
     [SerializeField]
@@ -46,7 +48,7 @@ public class Player : MonoBehaviour
         rb = this.gameObject.GetComponent<Rigidbody>();
         string numberOnly = Regex.Replace(gameObject.name, "[^0-9]", "");
         playerNum = int.Parse(numberOnly);
-
+        rends = transform.Find("FirstPersonCharacter").GetComponentsInChildren<SkinnedMeshRenderer>();
         FloatingTextController.Initialize();
         OGCapTrans = transform.Find("Capsule").transform;
     }
@@ -94,6 +96,10 @@ public class Player : MonoBehaviour
         transform.Find("FirstPersonCharacter").GetComponentInChildren<CameraController>().enabled = false;
         transform.Find("FirstPersonCharacter").GetComponentInChildren<WeaponSwapping>().enabled = false;
         transform.Find("FirstPersonCharacter").GetComponentInChildren<ArmControllerScript>().enabled = false;
+        foreach (SkinnedMeshRenderer rend in rends)
+        {
+            rend.enabled = false;
+        }
         StartCoroutine(Respawn());
     }
 
@@ -116,6 +122,10 @@ public class Player : MonoBehaviour
             transform.Find("FirstPersonCharacter").GetComponentInChildren<ArmControllerScript>().enabled = true;
             transform.Find("FirstPersonCharacter").GetComponentInChildren<CameraController>().enabled = true;
             transform.Find("FirstPersonCharacter").GetComponentInChildren<WeaponSwapping>().enabled = true;
+            foreach (SkinnedMeshRenderer rend in rends)
+            {
+                rend.enabled = true;
+            }
             transform.Find("Capsule").transform.localPosition = Vector3.zero;
             transform.Find("Capsule").transform.rotation = Quaternion.identity;
         }
