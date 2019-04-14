@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/map 3.unity
+- path: Assets/AltDemo.unity
   isLoaded: 1
   isActive: 1
